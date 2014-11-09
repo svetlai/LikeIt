@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNet.Identity
+@if (User.IsInRole("administrator"))
+{
+    <div class="panel panel-default">
+        <div class="navbar-header">
+            <span class="navbar-brand">Admin Panel</span>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <span class="navbar-brand">Manage: </span>
+            <li>@Html.ActionLink("Users", "Index", "Users", new { area = "Administration" }, new { })</li>
+            <li>@Html.ActionLink("Likes", "Index", "Likes", new { area = "Administration" }, new { })</li>
+            <li>@Html.ActionLink("Comments", "Index", "Comments", new { area = "Administration" }, new { })</li>
+        </ul>
+
+    </div>
+}

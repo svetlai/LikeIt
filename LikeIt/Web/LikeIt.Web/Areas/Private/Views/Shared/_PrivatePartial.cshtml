@@ -1,0 +1,6 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    <li>@Html.ActionLink("My Likes", "Index", "MyLikes", new { area = "Private" }, new { })</li>
+    <li>@Html.ActionLink("My Comments", "Index", "MyComments", new { area = "Private" }, new { })</li>
+}
