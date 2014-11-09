@@ -101,6 +101,10 @@
                     LastName = model.LastName
                 };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+                var userRole = "user";
+                UserManager.AddToRole(user.Id, userRole);
+     
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);

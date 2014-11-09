@@ -3,10 +3,11 @@
     using System;
     using System.Collections.Generic;
 
+    using Microsoft.AspNet.Identity.EntityFramework;
+
     using LikeIt.Data.Contracts;
     using LikeIt.Data.Common.Repositories;
     using LikeIt.Models;
-
 
     public class LikeItData : ILikeItData
     {
@@ -72,6 +73,14 @@
             get
             {
                 return this.GetRepository<Image>();
+            }
+        }
+
+        public IRepository<IdentityRole> IdentityRoles
+        {
+            get
+            {
+                return this.GetRepository<IdentityRole>();
             }
         }
 
