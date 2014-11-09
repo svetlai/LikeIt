@@ -1,0 +1,21 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+
+    <h1 class="text-danger">Oops!</h1>
+    <h2 class="text-danger">An error has occured while processing your request. </h2>
+    <h3 class="text-danger">Please don't give up on us and try again in a second!</h3>
+
+
+@if (User.IsInRole("administrator"))
+{
+    <hr />
+    <p><strong>Controller: </strong>@Model.ControllerName</p>
+    <p><strong>Action: </strong>@Model.ActionName</p>
+    <hr />
+    <p>@Model.Exception.Message</p>
+    <p>@Model.Exception.StackTrace</p>
+}
+

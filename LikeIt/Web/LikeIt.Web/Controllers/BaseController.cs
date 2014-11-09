@@ -4,6 +4,7 @@
 
     using LikeIt.Data.Contracts;
 
+    [HandleError]
     public abstract class BaseController : Controller
     {
         protected ILikeItData data;
