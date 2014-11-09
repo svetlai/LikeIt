@@ -47,9 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\AuditInfo.cs" />
-    <Compile Include="Models\DeletableEntity.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Models\IAuditInfo.cs" />
     <Compile Include="Models\IDeletableEntity.cs" />
     <Compile Include="Repositories\DeletableEntityRepository.cs" />
