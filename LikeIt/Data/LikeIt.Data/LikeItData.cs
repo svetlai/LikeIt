@@ -8,6 +8,7 @@
     using LikeIt.Data.Contracts;
     using LikeIt.Data.Common.Repositories;
     using LikeIt.Models;
+    using LikeIt.Data.Common.Models;
 
     public class LikeItData : ILikeItData
     {
@@ -20,59 +21,59 @@
             this.repositories = new Dictionary<Type, object>();
         }
 
-        public IRepository<User> Users
+        public IDeletableEntityRepository<User> Users
         {
             get
             {
-                return this.GetRepository<User>();
+                return this.GetDeletableEntityRepository<User>();
             }
         }
 
-        public IRepository<Like> Likes
+        public IDeletableEntityRepository<Like> Likes
         {
             get
             {
-                return this.GetRepository<Like>();
+                return this.GetDeletableEntityRepository<Like>();
             }
         }
 
-        public IRepository<Category> Categories
+        public IDeletableEntityRepository<Category> Categories
         {
             get
             {
-                return this.GetRepository<Category>();
+                return this.GetDeletableEntityRepository<Category>();
             }
         }
 
-        public IRepository<Tag> Tags
+        public IDeletableEntityRepository<Tag> Tags
         {
             get
             {
-                return this.GetRepository<Tag>();
+                return this.GetDeletableEntityRepository<Tag>();
             }
         }
 
-        public IRepository<Comment> Comments
+        public IDeletableEntityRepository<Comment> Comments
         {
             get
             {
-                return this.GetRepository<Comment>();
+                return this.GetDeletableEntityRepository<Comment>();
             }
         }
 
-        public IRepository<Rating> Ratings
+        public IDeletableEntityRepository<Rating> Ratings
         {
             get
             {
-                return this.GetRepository<Rating>();
+                return this.GetDeletableEntityRepository<Rating>();
             }
         }
 
-        public IRepository<Image> Images
+        public IDeletableEntityRepository<Image> Images
         {
             get
             {
-                return this.GetRepository<Image>();
+                return this.GetDeletableEntityRepository<Image>();
             }
         }
 
@@ -101,6 +102,18 @@
             }
 
             return (IRepository<T>)this.repositories[typeOfRepository];
+        }
+
+        private IDeletableEntityRepository<T> GetDeletableEntityRepository<T>() where T : class, IDeletableEntity
+        {
+            if (!this.repositories.ContainsKey(typeof(T)))
+            {
+                var type = typeof(DeletableEntityRepository<T>);
+                var newRepository = Activator.CreateInstance(type, this.db);
+                this.repositories.Add(typeof(T), newRepository);
+            }
+
+            return (IDeletableEntityRepository<T>)this.repositories[typeof(T)];
         }
     }
 }

@@ -93,39 +93,65 @@
         {
             if (ModelState.IsValid)
             {
-                var user = new User() 
+                //TODO: Improve
+                var existingUserName = await UserManager.FindByNameAsync(model.Username);
+                var existingEmail = await UserManager.FindByEmailAsync(model.Email);
+
+                if (existingUserName != null)
                 {
-                    UserName = model.Username, 
-                    Email = model.Email, 
-                    FirstName = model.FirstName,
-                    LastName = model.LastName
-                };
-                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
-                var userRole = "user";
-                UserManager.AddToRole(user.Id, userRole);
-     
-                if (result.Succeeded)
+                    ModelState.AddModelError("", "Username already exists.");
+                }
+                else if (existingEmail != null)
                 {
-                    await SignInAsync(user, isPersistent: false);
-
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
+                    ModelState.AddModelError("", "Email already exists.");
                 }
                 else
                 {
-                    AddErrors(result);
+                    var user = new User()
+                    {
+                        UserName = model.Username,
+                        Email = model.Email,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName
+                    };
+                    IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+                    var userRole = "user";
+                    UserManager.AddToRole(user.Id, userRole);
+
+                    if (result.Succeeded)
+                    {
+                        await SignInAsync(user, isPersistent: false);
+
+                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
                 }
+                
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+        //Remote validation
+        //[HttpPost]
+        //public JsonResult doesUserNameExist(string UserName)
+        //{
+
+        //    var user = UserManager.FindByName(UserName);
+
+        //    return Json(user == null);
+        //}
 
         //
         // GET: /Account/ConfirmEmail

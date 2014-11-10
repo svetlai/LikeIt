@@ -7,19 +7,19 @@
 
     public interface ILikeItData
     {
-        IRepository<User> Users { get; }
+        IDeletableEntityRepository<User> Users { get; }
 
-        IRepository<Like> Likes { get; }
+        IDeletableEntityRepository<Like> Likes { get; }
 
-        IRepository<Category> Categories { get; }
+        IDeletableEntityRepository<Category> Categories { get; }
 
-        IRepository<Tag> Tags { get; }
+        IDeletableEntityRepository<Tag> Tags { get; }
 
-        IRepository<Comment> Comments { get; }
+        IDeletableEntityRepository<Comment> Comments { get; }
 
-        IRepository<Rating> Ratings { get; }
+        IDeletableEntityRepository<Rating> Ratings { get; }
 
-        IRepository<Image> Images { get; }
+        IDeletableEntityRepository<Image> Images { get; }
 
         IRepository<IdentityRole> IdentityRoles { get; }
 

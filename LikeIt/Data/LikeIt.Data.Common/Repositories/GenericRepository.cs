@@ -67,7 +67,7 @@
             this.db.Dispose();
         }
 
-        private void ChangeEntityState(T entity, EntityState state)
+        protected void ChangeEntityState(T entity, EntityState state)
         {
             var entry = this.db.Entry(entity);
 
