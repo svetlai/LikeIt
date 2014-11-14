@@ -4,17 +4,17 @@
 
     using LikeIt.Data.Common.Models;
 
-    public class Rating : AuditInfo, IDeletableEntity
+    public class Dislike : AuditInfo, IDeletableEntity
     {
-        public Rating()
+        public Dislike()
         {
         }
 
         public int Id { get; set; }
 
-        public int LikeId { get; set; }
+        public int PageId { get; set; }
 
-        public virtual Like Like { get; set; }
+        public virtual Page Page { get; set; }
 
         public string UserId { get; set; }
 

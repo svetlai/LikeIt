@@ -1,0 +1,75 @@
+﻿@model LikeIt.Web.ViewModels.Page.AddPageViewModel
+
+@{
+    ViewBag.Title = "Add Like";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Create", "Page", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal",  enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Add a new like</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">       
+                @Html.LabelFor(model => model.Name, "I Like", new { @class = "col-md-1 control-label" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Page title" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, new { @class = "col-md-1 control-label" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", rows="6", placeholder = "Short description" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*@Html.EditorFor(m => m.CategoryId, new { ListItem = Model.Categories })*@
+
+            <div class="form-group">
+                    @Html.LabelFor(model => model.CategoryId, "Categories", htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(m => m.CategoryId, Model.Categories, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CategoryId)
+                    </div>
+                </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TagsString, new { @class = "col-md-1 control-label" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.TagsString, new { htmlAttributes = new { @class = "form-control", placeholder = "Add tags, separated by space" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-1">@Html.LabelFor(model => model.IsLike, "", new { @class = "col-md-1 control-label" })</div>
+                <div class="col-md-6">
+                    @Html.RadioButtonFor(m => m.IsLike, true, new { @class = "", selected = "selected" }) Like
+                    @Html.RadioButtonFor(m => m.IsLike, false, new { @class = "" }) Dislike           
+                </div>
+            </div>
+          
+            <div class="form-group">
+                <div class="col-md-1">
+                    @Html.LabelFor(model => model.UploadedImage, "Image", htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-md-6">
+                        <input type="file" name="UploadedImage" />
+                    </div>
+                </div>
+
+            <div class="form-group text-center">
+                <input type="submit" value="I Like/Dislike" class="btn btn-primary btn-lg" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace LikeIt.Web.Areas.Private.Controllers
+namespace LikeIt.Web.Controllers
 {
-    public class MyCommentsController : Controller
+    public class TagController : Controller
     {
-        // GET: Private/MyComments
+        // GET: Tag
         public ActionResult Index()
         {
             return View();

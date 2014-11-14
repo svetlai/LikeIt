@@ -29,11 +29,11 @@
             }
         }
 
-        public IDeletableEntityRepository<Like> Likes
+        public IDeletableEntityRepository<Page> Pages
         {
             get
             {
-                return this.GetDeletableEntityRepository<Like>();
+                return this.GetDeletableEntityRepository<Page>();
             }
         }
 
@@ -61,11 +61,19 @@
             }
         }
 
-        public IDeletableEntityRepository<Rating> Ratings
+        public IDeletableEntityRepository<Like> Likes
         {
             get
             {
-                return this.GetDeletableEntityRepository<Rating>();
+                return this.GetDeletableEntityRepository<Like>();
+            }
+        }
+
+        public IDeletableEntityRepository<Dislike> Dislikes
+        {
+            get
+            {
+                return this.GetDeletableEntityRepository<Dislike>();
             }
         }
 

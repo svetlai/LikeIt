@@ -13,5 +13,74 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-width: 280px;*/
+}
+
+.details-panel-img {
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+}
+
+/*img.like-details {
+    max-width: 100%;
+}*/
+
+.details-panel-title {
+    background-color:rgba(255,255,255, 0.3);
+    position: absolute;
+    bottom: 0;
+}
+
+.details-panel-title h1,
+.details-panel-title h4 {
+    color:white;
+}
+
+.tab-pane {
+    padding: 10px;
+}
+
+.page-creator-info {
+    padding: 10px;
+    border-left: 1px solid #ddd;
+}
+
+.comment-info {
+    font-size: 0.8em;
+    border-right: 1px solid #ddd;
+}
+
+.comment-content {
+
+}
+
+.likes-count {
+    font-size: 2em;
+    color: grey;
+    padding: 10px;
+}
+
+.transparent-background {
+    background-color:rgba(255,255,255, 0.3);
+    padding:10px;
+    min-height: 200px;
+    position:relative;
+}
+
+.votes-container {
+    max-width:240px;
+    padding:0 10px;
+}
+
+.bottom-right-corner {
+    bottom:0;
+    right:0;
+    position: absolute;
+}
+
+.bottom-left-corner {
+    bottom:0;
+    left:0;
+    position: absolute;
 }

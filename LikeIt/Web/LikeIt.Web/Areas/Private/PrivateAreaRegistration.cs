@@ -17,7 +17,8 @@ namespace LikeIt.Web.Areas.Private
             context.MapRoute(
                 "Private_default",
                 "Private/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", id = UrlParameter.Optional },
+                new[] { "LikeIt.Web.Areas.Private.Controllers" }
             );
         }
     }

@@ -6,7 +6,8 @@ using System.Web.Mvc;
 
 namespace LikeIt.Web.Areas.Administration.Controllers
 {
-    public class CommentsController : Controller
+    //TODO: Fix duplicated controller names issue
+    public class CommentsAdminController : Controller
     {
         // GET: Administration/Comments
         public ActionResult Index()

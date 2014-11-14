@@ -17,11 +17,12 @@
         {
         }
 
+        [OutputCache(Duration = 60 * 15)]
         public ActionResult Index()
         {
-            var likes = this.data.Likes.All()
+            var likes = this.data.Pages.All()
                 .Project()
-                .To<IndexLikesViewModel>();
+                .To<IndexPagesViewModel>();
 
             return View(likes);
         }

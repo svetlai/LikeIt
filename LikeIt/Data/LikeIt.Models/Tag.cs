@@ -8,11 +8,11 @@
 
     public class Tag : AuditInfo, IDeletableEntity
     {
-        private ICollection<Like> likes;
+        private ICollection<Page> pages;
 
         public Tag()
         {
-            this.likes = new HashSet<Like>();
+            this.pages = new HashSet<Page>();
         }
 
         [Key]
@@ -21,16 +21,16 @@
         [Required]
         public string Name { get; set; }
 
-        public ICollection<Like> Likes
+        public ICollection<Page> Pages
         {
             get
             {
-                return this.likes;
+                return this.pages;
 
             }
             set
             {
-                this.likes = value;
+                this.pages = value;
             }
         }
 

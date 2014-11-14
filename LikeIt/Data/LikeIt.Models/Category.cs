@@ -8,11 +8,11 @@
 
     public class Category : AuditInfo, IDeletableEntity
     {
-        private ICollection<Like> likes;
+        private ICollection<Page> pages;
 
         public Category()
         {
-            this.likes = new HashSet<Like>();
+            this.pages = new HashSet<Page>();
         }
 
         public int Id { get; set; }
@@ -20,15 +20,15 @@
         [Required]
         public string Name { get; set; }
 
-        public virtual ICollection<Like> Likes
+        public virtual ICollection<Page> Page
         {
             get
             {
-                return this.likes;
+                return this.pages;
             }
             set
             {
-                this.likes = value;
+                this.pages = value;
             }
         }
 

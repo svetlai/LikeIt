@@ -12,13 +12,13 @@
 
     public class User : IdentityUser, IAuditInfo, IDeletableEntity
     {
-        private ICollection<Like> likes;
-        private ICollection<Rating> ratings;
+        private ICollection<Page> pages;
+        private ICollection<Like> ratings;
 
         public User()
         {
-            this.likes = new HashSet<Like>();
-            this.ratings = new HashSet<Rating>();
+            this.pages = new HashSet<Page>();
+            this.ratings = new HashSet<Like>();
             this.CreatedOn = DateTime.Now;
         }
 
@@ -26,19 +26,19 @@
 
         public string LastName { get; set; }
 
-        public virtual ICollection<Like> Likes
+        public virtual ICollection<Page> Pages
         {
             get
             {
-                return this.likes;
+                return this.pages;
             }
             set
             {
-                this.likes = value;
+                this.pages = value;
             }
         }
 
-        public virtual ICollection<Rating> Ratings
+        public virtual ICollection<Like> Ratings
         {
             get
             {

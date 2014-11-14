@@ -1,0 +1,10 @@
+﻿@model IEnumerable<LikeIt.Web.ViewModels.Tag.TagViewModel>
+
+<div class="row pull-left">
+    <div class="col-md-12 ">
+        @foreach (var tag in Model)
+        {
+            <span class="label label-primary">@tag.Name</span>
+        }
+    </div>
+</div>

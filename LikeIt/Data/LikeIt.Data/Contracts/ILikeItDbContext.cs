@@ -10,7 +10,7 @@
     {
         IDbSet<User> Users { get; set; }
 
-        IDbSet<Like> Likes { get; set; }
+        IDbSet<Page> Pages { get; set; }
 
         IDbSet<Category> Categories { get; set; }
 
@@ -18,7 +18,9 @@
 
         IDbSet<Comment> Comments { get; set; }
 
-        IDbSet<Rating> Ratings { get; set; }
+        IDbSet<Like> Likes { get; set; }
+
+        IDbSet<Dislike> Dislikes { get; set; }
 
         IDbSet<Image> Images { get; set; }
 

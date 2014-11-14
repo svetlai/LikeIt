@@ -199,20 +199,32 @@
     <Compile Include="Areas\Administration\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Administration\Controllers\LikesController.cs" />
     <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
-    <Compile Include="Areas\Private\Controllers\MyCommentsController.cs" />
+    <Compile Include="Areas\Private\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Private\Controllers\MyLikesController.cs" />
     <Compile Include="Areas\Private\PrivateAreaRegistration.cs" />
+    <Compile Include="Areas\Private\ViewModels\Comments\CommentViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Infrastructure\Caching\ICacheService.cs" />
+    <Compile Include="Infrastructure\Caching\InMemoryCache.cs" />
+    <Compile Include="Infrastructure\Populators\DropDownListPopulator.cs" />
+    <Compile Include="Infrastructure\Populators\IDropDownListPopulator.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\Home\IndexLikesViewModel.cs" />
+    <Compile Include="Areas\Private\ViewModels\Comments\AddCommentViewModel.cs" />
+    <Compile Include="ViewModels\Home\IndexPagesViewModel.cs" />
+    <Compile Include="ViewModels\Page\ListPagesViewModel.cs" />
+    <Compile Include="ViewModels\Page\DetailsPageViewModel.cs" />
+    <Compile Include="ViewModels\Page\AddPageViewModel.cs" />
+    <Compile Include="ViewModels\Tag\TagViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -241,13 +253,18 @@
     <Content Include="Areas\Administration\Views\Shared\_AdminPartial.cshtml" />
     <Content Include="Areas\Administration\Views\Likes\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Comments\Index.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\_CommentsPartial.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\_AddCommentPartial.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Images\default.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -289,11 +306,18 @@
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />
+    <Content Include="Views\Page\Details.cshtml" />
+    <Content Include="Views\Page\Create.cshtml" />
+    <Content Include="Views\Page\Index.cshtml" />
+    <Content Include="Views\Shared\_TagsPartial.cshtml" />
+    <Content Include="Views\Tag\Index.cshtml" />
+    <Content Include="Views\Shared\_VotePartial.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DromDownList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administration\Models\" />
-    <Folder Include="Areas\Private\Models\" />
+    <Folder Include="Helpers\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

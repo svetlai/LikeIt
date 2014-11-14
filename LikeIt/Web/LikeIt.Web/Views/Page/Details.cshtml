@@ -1,0 +1,84 @@
+﻿@using LikeIt.Web.ViewModels.Comment
+@model LikeIt.Web.ViewModels.Page.DetailsPageViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="container">
+    <div class="panel panel-default ">
+        <div class="panel-body details-panel-img" style="background-image: url('@(Model.Image != null ? @Url.Action("Image", "Page", new { id = Model.Image.Id }) : Url.Content("~/Images/default.png"))')">
+            <div class="panel panel-default details-panel-title">
+                <div class="panel-body">
+                    <h1>@Model.Name</h1>
+                    <h4>@Model.CategoryName</h4>
+                    @*@Html.Partial("~/Views/Shared/_VotePartial.cshtml", Model)*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default ">
+        <div class="panel-body">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#about" data-toggle="tab">About</a></li>
+                <li><a href="#likedBy" data-toggle="tab">Liked By</a></li>
+                <li><a href="#dislikedBy" data-toggle="tab">Disliked By</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="about">
+                    <p>@Model.Description</p>
+                    @Html.Partial("~/Views/Shared/_TagsPartial.cshtml", Model.Tags)
+                    <div class="page-creator-info pull-right">
+                        <p><span>Created by: </span><strong>@Model.AuthorName</strong></p>
+                        <p><span>on </span> <strong>@Model.CreatedOn</strong></p>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="likedBy">
+                    <p>
+                        <div class="row">
+                            @foreach (var like in Model.Likes)
+                            {
+                                <div class="col-md-4">@like.User.UserName</div>
+                            }
+                        </div>
+                    </p>
+                </div>
+                <div class="tab-pane fade" id="dislikedBy">
+                    <p>
+                        <div class="row">
+                            @foreach (var like in Model.Dislikes)
+                            {
+                                <div class="col-md-4">@like.User.UserName</div>
+                            }
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Request.IsAuthenticated)
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.Partial("~/Areas/Private/Views/Shared/_AddCommentPartial.cshtml", new AddCommentViewModel(Model.Id))
+                    </div>
+                </div>
+                
+                <div class="row" id="comments">
+                    <div class="col-md-12">
+                        @foreach (var comment in Model.Comments)
+                        {
+                            @Html.Partial("~/Areas/Private/Views/Shared/_CommentsPartial.cshtml", comment)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+    @Scripts.Render("~/bundles/jqueryval")
+}

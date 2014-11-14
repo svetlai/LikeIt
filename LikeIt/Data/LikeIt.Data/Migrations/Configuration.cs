@@ -10,6 +10,8 @@ namespace LikeIt.Data.Migrations
 
     using LikeIt.Models;
     using LikeIt.Data.Contracts;
+    using System.Collections.Generic;
+    using System.IO;
 
     public sealed class Configuration : DbMigrationsConfiguration<LikeItDbContext>
     {
@@ -26,29 +28,139 @@ namespace LikeIt.Data.Migrations
                 return;
             }
 
-            //Create roles
-            string[] roles = new string[]
+            //TODO : refactor 
+            var roles = new List<IdentityRole>
             {
-                "user", 
-                "administrator"
+                new IdentityRole("user"), 
+                new IdentityRole("administrator")
             };
 
-            foreach (var role in roles)
-            {
-                this.CreateRole(context, role);
-            }
+            context.Roles.AddOrUpdate(roles.ToArray());
+            context.SaveChanges();
 
-            //Add initial admin
+            User user = new User()
+            {
+                UserName = "Anonymous"
+            };
+
             this.CreateInitialAdmin(context);
-        }
 
-        private void CreateRole(LikeItDbContext context, string roleName)
-        {
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            if (!roleManager.RoleExists(roleName))
+            context.Users.AddOrUpdate(user);
+            context.SaveChanges();
+
+            var categories = new List<Category>
             {
-                roleManager.Create(new IdentityRole(roleName));
-            }
+                new Category { Name = "Food"},
+                new Category { Name = "People"},
+                new Category { Name = "Books"},
+                new Category { Name = "Movies"},
+                new Category { Name = "Fun"},
+                new Category { Name = "Hobby"},
+            };
+
+            context.Categories.AddOrUpdate(categories.ToArray());
+            context.SaveChanges();
+
+            var tags = new List<Tag>
+            {
+                new Tag
+                {
+                    Name = "tag"
+                },
+                new Tag
+                {
+                    Name = "another"
+                }
+            };
+
+            context.Tags.AddOrUpdate(tags.ToArray());
+            context.SaveChanges();
+
+            //var images = new List<Image>
+            //{
+            //    new Image 
+            //    { 
+            //        Content = File.ReadAllBytes(""),
+            //        FileExtension = "png",
+            //        Path = "http://www.metalcuttingtools.eu/sites/default/files/default_images/thumbnail-default.jpg",
+            //    }
+            //};
+
+            //context.Images.AddOrUpdate(images.ToArray());
+            //context.SaveChanges();
+
+            var pages = new List<Page>
+            {
+                new Page 
+                {
+                    Name = "Apple",
+                    Category = categories[0],
+                    Description = "Best fruit ever!",
+                    User = user,
+                },
+                                new Page 
+                {
+                    Name = "Apple",
+                    Category = categories[0],
+                    Description = "Best fruit ever!",
+                    User = user,
+                },
+                                new Page 
+                {
+                    Name = "Orange",
+                    Category = categories[0],
+                    Description = "Best fruit ever!",
+                    User = user,
+                },
+                                new Page 
+                {
+                    Name = "Banana",
+                    Category = categories[0],
+                    Description = "Best fruit ever!",
+                    User = user,
+                },
+                                new Page 
+                {
+                    Name = "Dancing",
+                    Category = categories[5],
+                    Description = "Best fruit ever!",
+                    User = user,
+                },
+
+            };
+
+            context.Pages.AddOrUpdate(pages.ToArray());
+            context.SaveChanges();
+
+            var comments = new List<Comment>
+            {
+                new Comment
+                {
+                    Content = "khahslh lhaljlkajlhl nkh lnlanl lajls jlaldnasldhl na,lhlajlj jlajsld",
+                    Author = user,
+                },
+                         new Comment
+                {
+                    Content = "khahslh lhaljlkajlhl nkh lnlanl lajls jlaldnasldhl na,lhlajlj jlajsld",
+                    Author = user,
+                },
+                         new Comment
+                {
+                    Content = "khahslh lhaljlkajlhl nkh lnlanl lajls jlaldnasldhl na,lhlajlj jlajsld",
+                    Author = user,
+                }
+            };
+
+            context.Comments.AddOrUpdate(comments.ToArray());
+            context.SaveChanges();
+
+            var detailedPage = context.Pages.FirstOrDefault(p => p.Id == 2);
+            detailedPage.Tags.Add(tags[0]);
+            detailedPage.Tags.Add(tags[1]);
+            detailedPage.Comments.Add(comments[0]);
+            detailedPage.Comments.Add(comments[1]);
+            detailedPage.Comments.Add(comments[2]);
+            context.SaveChanges();
         }
 
         private void CreateInitialAdmin(LikeItDbContext context)
@@ -62,7 +174,7 @@ namespace LikeIt.Data.Migrations
             {
                 UserName = username,
                 Email = email,
-            };         
+            };
 
             var userManager = new UserManager<User>(new UserStore<User>(context));
 

@@ -9,7 +9,7 @@
     {
         IDeletableEntityRepository<User> Users { get; }
 
-        IDeletableEntityRepository<Like> Likes { get; }
+        IDeletableEntityRepository<Page> Pages { get; }
 
         IDeletableEntityRepository<Category> Categories { get; }
 
@@ -17,7 +17,9 @@
 
         IDeletableEntityRepository<Comment> Comments { get; }
 
-        IDeletableEntityRepository<Rating> Ratings { get; }
+        IDeletableEntityRepository<Like> Likes { get; }
+
+        IDeletableEntityRepository<Dislike> Dislikes { get; }
 
         IDeletableEntityRepository<Image> Images { get; }
 

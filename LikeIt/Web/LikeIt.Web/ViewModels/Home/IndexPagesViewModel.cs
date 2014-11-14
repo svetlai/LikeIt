@@ -8,7 +8,7 @@
     using LikeIt.Models;
     using LikeIt.Web.Infrastructure.Mapping;
 
-    public class IndexLikesViewModel : IMapFrom<Like>
+    public class IndexPagesViewModel : IMapFrom<Page>
     {
         public string Name { get; set; }
     }

@@ -29,7 +29,7 @@
             return base.Set<T>();
         }
 
-        public IDbSet<Like> Likes { get; set; }
+        public IDbSet<Page> Pages { get; set; }
 
         public IDbSet<Category> Categories { get; set; }
 
@@ -37,14 +37,16 @@
 
         public IDbSet<Comment> Comments { get; set; }
 
-        public IDbSet<Rating> Ratings { get; set; }
+        public IDbSet<Like> Likes { get; set; }
+
+        public IDbSet<Dislike> Dislikes { get; set; }
 
         public IDbSet<Image> Images { get; set; }
 
         public override int SaveChanges()
         {
             this.ApplyAuditInfoRules();
-            this.ApplyDeletableEntityRules();
+           // this.ApplyDeletableEntityRules();
             return base.SaveChanges();
         }
 

@@ -15,6 +15,8 @@ namespace LikeIt.Web.App_Start
     using LikeIt.Data.Contracts;
     using LikeIt.Data;
     using LikeIt.Data.Common.Repositories;
+    using LikeIt.Web.Infrastructure.Populators;
+    using LikeIt.Web.Infrastructure.Caching;
 
     public static class NinjectWebCommon 
     {
@@ -74,6 +76,9 @@ namespace LikeIt.Web.App_Start
                 .To(typeof(DeletableEntityRepository<>));
 
             kernel.Bind<ILikeItData>().To<LikeItData>();
+
+            kernel.Bind<IDropDownListPopulator>().To<DropDownListPopulator>();
+            kernel.Bind<ICacheService>().To<InMemoryCache>();
         }        
     }
 }

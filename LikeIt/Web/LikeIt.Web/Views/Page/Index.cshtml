@@ -1,0 +1,33 @@
+﻿@model IEnumerable<LikeIt.Web.ViewModels.Page.ListPagesViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Likes</h2>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <div class="row">
+            @foreach (var page in Model)
+            {
+                <div class="col-md-12">
+                    <div class="thumbnail" style="background-image: url('@(page.Image != null ? @Url.Action("Image", "Page", new { id = page.Image.Id }) : Url.Content("~/Images/default.png"))')">
+                        <div class="transparent-background">
+                            <h2><a href="~/Page/Details/@page.Id">@page.Name</a></h2>
+                            <h4>@page.CategoryName</h4>
+                            <div class="bottom-right-corner">
+                                @*@Html.Partial("~/Views/Shared/_VotePartial.cshtml", page)*@
+                            </div>
+                            <div class="bottom-left-corner">
+                                @Html.Partial("~/Views/Shared/_TagsPartial.cshtml", page.Tags)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
