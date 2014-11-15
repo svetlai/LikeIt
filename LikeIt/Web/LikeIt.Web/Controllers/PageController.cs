@@ -17,6 +17,8 @@
     using LikeIt.Data.Contracts;
     using LikeIt.Web.ViewModels.Home;
     using LikeIt.Web.Infrastructure.Populators;
+    using LikeIt.Web.ViewModels;
+    using AutoMapper;
 
     public class PageController : BaseController
     {
@@ -127,9 +129,9 @@
                     {
                         UserId = page.UserId
                     });
-                }                
+                }
 
-                page.Rating = page.Likes.Count - page.Dislikes.Count;
+                page.Rating = page.Likes.Where(l => !l.IsDeleted).Count() - page.Dislikes.Where(l => !l.IsDeleted).Count();
 
                 this.data.SaveChanges();
 
@@ -137,6 +139,16 @@
             }
 
             return View(model);
+        }
+
+        //[ChildActionOnly]
+        public ActionResult GetVotesPartial(int id)
+        {
+            var page = this.data.Pages.Find(id);
+
+            var viewModel = Mapper.Map<VotesViewModel>(page);
+
+            return PartialView("~/Views/Shared/_VotePartial.cshtml", viewModel);
         }
 
         public ActionResult Image (int id)

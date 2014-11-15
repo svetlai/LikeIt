@@ -17,15 +17,44 @@
         {
         }
 
-        [OutputCache(Duration = 60 * 15)]
+        //[OutputCache(Duration = 60 * 15)]
         public ActionResult Index()
         {
             var likes = this.data.Pages.All()
+                .OrderByDescending(p => p.Rating)
+                .Take(10)
                 .Project()
                 .To<IndexPagesViewModel>();
 
             return View(likes);
         }
+        
+        [ChildActionOnly]
+        //[OutputCache(Duration = 60 * 15)]
+        public ActionResult GetTrendingLikes()
+        {
+            var trendingLikes = this.data.Pages.All()
+                .OrderByDescending(p => p.Rating)
+                .Take(6)
+                .Project()
+                .To<IndexPagesViewModel>();
+
+            return PartialView("_TrendingLikes", trendingLikes);
+        }
+
+        [ChildActionOnly]
+        //[OutputCache(Duration = 60 * 15)]
+        public ActionResult GetTrendingDislikes()
+        {
+            var trendingDislikes = this.data.Pages.All()
+               .OrderBy(p => p.Rating)
+               .Take(6)
+               .Project()
+               .To<IndexPagesViewModel>();
+
+            return PartialView("_TrendingDislikes", trendingDislikes);
+        }
+
 
         public ActionResult About()
         {

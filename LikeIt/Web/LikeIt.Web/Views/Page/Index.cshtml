@@ -1,4 +1,5 @@
-﻿@model IEnumerable<LikeIt.Web.ViewModels.Page.ListPagesViewModel>
+﻿@using LikeIt.Web.ViewModels
+@model IEnumerable<LikeIt.Web.ViewModels.Page.ListPagesViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -8,23 +9,32 @@
 <div class="panel panel-default">
     <div class="panel-body">
         <p>
-            @Html.ActionLink("Create New", "Create")
+            @Html.ActionLink("Add New Like", "Create")
         </p>
         <div class="row">
             @foreach (var page in Model)
             {
                 <div class="col-md-12">
                     <div class="thumbnail" style="background-image: url('@(page.Image != null ? @Url.Action("Image", "Page", new { id = page.Image.Id }) : Url.Content("~/Images/default.png"))')">
-                        <div class="transparent-background">
-                            <h2><a href="~/Page/Details/@page.Id">@page.Name</a></h2>
-                            <h4>@page.CategoryName</h4>
-                            <div class="bottom-right-corner">
-                                @*@Html.Partial("~/Views/Shared/_VotePartial.cshtml", page)*@
+                        <a href="~/Page/Details/@page.Id">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h1>@page.Name</h1>
+                                    <h4>@page.CategoryName</h4>
+                                </div>
+                                <div class="col-md-2 votes-container">
+                                    @{Html.RenderAction("GetVotesPartial", new { id = page.Id });}
+                                </div>
+                           
                             </div>
-                            <div class="bottom-left-corner">
-                                @Html.Partial("~/Views/Shared/_TagsPartial.cshtml", page.Tags)
+                            <div class="row">
+                                <div class="col-md-12 pull-left">
+                                    <div class="bottom">
+                                        @Html.Partial("~/Views/Shared/_TagsPartial.cshtml", page.Tags)
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             }

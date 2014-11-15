@@ -44,32 +44,5 @@ namespace LikeIt.Web.Areas.Private.Controllers
 
             throw new HttpException(400, "Invalid comment");
         }
-
-        //[HttpPost]
-        //[NonAction]
-        //public ActionResult Create(int id, CommentViewModel comment)
-        //{
-        //    //if (ModelState.IsValid)
-        //    //{
-        //    //    var newComment = new Comment
-        //    //    {
-        //    //        Content = comment.Content,
-        //    //        PageId = id,
-        //    //        User = 
-        //    //    };
-
-        //    //    this.commentsData.Add(newComment);
-        //    //    this.commentsData.SaveChanges();
-
-        //    //    comment.User = this.currentUser.Get().UserName;
-        //    //    comment.CommentedOn = DateTime.Now;
-
-        //    //    return this.PartialView("_CommentDetail", comment);
-        //    //}
-        //    //else
-        //    //{
-        //    //    return this.JsonError("Content is required");
-        //    //}
-        //}
     }
 }

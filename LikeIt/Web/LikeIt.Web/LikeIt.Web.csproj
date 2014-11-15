@@ -203,6 +203,7 @@
     <Compile Include="Areas\Private\Controllers\MyLikesController.cs" />
     <Compile Include="Areas\Private\PrivateAreaRegistration.cs" />
     <Compile Include="Areas\Private\ViewModels\Comments\CommentViewModel.cs" />
+    <Compile Include="Controllers\VotesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="ViewModels\Page\DetailsPageViewModel.cs" />
     <Compile Include="ViewModels\Page\AddPageViewModel.cs" />
     <Compile Include="ViewModels\Tag\TagViewModel.cs" />
+    <Compile Include="ViewModels\Votes\VotesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -313,12 +315,17 @@
     <Content Include="Views\Tag\Index.cshtml" />
     <Content Include="Views\Shared\_VotePartial.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DromDownList.cshtml" />
+    <Content Include="Views\Shared\_TrendingLikes.cshtml" />
+    <Content Include="Views\Shared\_TrendingDislikes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administration\Models\" />
+    <Folder Include="Areas\Private\ViewModels\Votes\" />
+    <Folder Include="Areas\Private\Views\Votes\" />
     <Folder Include="Helpers\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Votes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

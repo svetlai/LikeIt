@@ -20,6 +20,7 @@ textarea {
     height: 300px;
     overflow: hidden;
     position: relative;
+    padding: 10px;
 }
 
 /*img.like-details {
@@ -30,11 +31,12 @@ textarea {
     background-color:rgba(255,255,255, 0.3);
     position: absolute;
     bottom: 0;
+    min-width: 200px;
 }
 
 .details-panel-title h1,
 .details-panel-title h4 {
-    color:white;
+    color:#666;
 }
 
 .tab-pane {
@@ -55,32 +57,45 @@ textarea {
 
 }
 
-.likes-count {
-    font-size: 2em;
-    color: grey;
-    padding: 10px;
-}
-
 .transparent-background {
     background-color:rgba(255,255,255, 0.3);
     padding:10px;
-    min-height: 200px;
-    position:relative;
 }
 
-.votes-container {
-    max-width:240px;
-    padding:0 10px;
-}
 
-.bottom-right-corner {
-    bottom:0;
-    right:0;
+/*.bottom-right-corner {
+    bottom:0px;
+    right:0px;
     position: absolute;
 }
 
 .bottom-left-corner {
-    bottom:0;
-    left:0;
+    bottom:0px;
+    left:0px;
     position: absolute;
+}*/
+/*Votes*/
+.votes-container {
+    padding:0 10px;
+
+}
+
+.likes-count {
+    font-size: 3em;
+    color: #666;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.votes-container .glyphicon-thumbs-up,
+.votes-container .glyphicon-thumbs-down {
+    font-size: 2em;
+    text-decoration: none;
+}
+.glyphicon-thumbs-up {
+    color: green;
+}
+
+.glyphicon-thumbs-down {
+        color: red;
 }

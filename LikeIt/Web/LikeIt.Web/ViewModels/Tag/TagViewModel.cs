@@ -6,7 +6,6 @@
 
     public class TagViewModel : IMapFrom<LikeIt.Models.Tag>
     {
-
         [Key]
         [HiddenInput()]
         public int Id { get; set; }

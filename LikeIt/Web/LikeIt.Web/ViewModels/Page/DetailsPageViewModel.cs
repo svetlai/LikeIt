@@ -45,6 +45,7 @@
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<LikeIt.Models.Page, DetailsPageViewModel>()
+                .ForMember(m => m.Rating, opt => opt.MapFrom(x => x.Rating))
                 .ForMember(m => m.CreatedOn, opt => opt.MapFrom(x => x.CreatedOn))
                 .ForMember(m => m.CategoryName, opt => opt.MapFrom(x => x.Category.Name))
                 .ForMember(m => m.AuthorName, opt => opt.MapFrom(x => x.User.UserName))

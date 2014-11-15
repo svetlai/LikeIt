@@ -11,6 +11,7 @@
         }
 
         public int Id { get; set; }
+
         [ForeignKey("Page")]
         public int PageId { get; set; }
         public virtual Page Page { get; set; }

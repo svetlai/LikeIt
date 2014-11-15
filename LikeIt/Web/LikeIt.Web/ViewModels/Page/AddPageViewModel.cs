@@ -38,7 +38,7 @@
 
         public HttpPostedFileBase UploadedImage { get; set; }
 
-        //[Display("Tags")]
+        [Display(Name = "Tags")]
         public string TagsString { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
