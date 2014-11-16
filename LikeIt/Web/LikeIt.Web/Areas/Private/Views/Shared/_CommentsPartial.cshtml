@@ -2,8 +2,8 @@
 
         <div class="panel panel-default ">
             <div class="panel-body">
-                <p><strong>@Model.AuthorName</strong></p>
-                <p>@Model.Content</p>
-                <span class="pull-right">@Model.CreatedOn</span>
+                @Html.DisplayFor(m => m.AuthorName, "CommentAuthor")
+                @Html.DisplayFor(m => m.AuthorName, "CommentContent")
+                @Html.DisplayFor(m => m.CreatedOn, "CommentDateCreated")
             </div>
         </div>

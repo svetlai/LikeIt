@@ -238,7 +238,7 @@
     <Compile Include="Infrastructure\HtmlHelpers\KendoHelpers.cs" />
     <Compile Include="Infrastructure\Populators\DropDownListPopulator.cs" />
     <Compile Include="Infrastructure\Populators\IDropDownListPopulator.cs" />
-    <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\Account\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Areas\Private\ViewModels\Comments\AddCommentViewModel.cs" />
@@ -356,6 +356,7 @@
     <Content Include="Areas\Administration\Views\Likes\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Dislikes\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Roles\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CommentAuthor.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Images\default.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -416,12 +417,23 @@
     <Content Include="Views\Shared\_TagsPartial.cshtml" />
     <Content Include="Views\Tag\Index.cshtml" />
     <Content Include="Views\Shared\_VotePartial.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DromDownList.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DropDownList.cshtml" />
     <Content Include="Views\Shared\_TrendingLikes.cshtml" />
     <Content Include="Views\Shared\_TrendingDislikes.cshtml" />
     <Content Include="Scripts\Kendo\jquery.min.map" />
     <Content Include="Scripts\Kendo\kendo.all.min.js.map" />
     <Content Include="Scripts\Kendo\kendo.aspnetmvc.min.js.map" />
+    <Content Include="Views\Shared\DisplayTemplates\PageHeading.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CategoryName.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\LikesCount.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DislikesCount.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PageRating.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\TagName.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PageAuthor.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PageDateCreated.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CommentDateCreated.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CommentContent.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PageDescription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

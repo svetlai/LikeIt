@@ -20,6 +20,7 @@
         [HiddenInput()]
         public int Id { get; set; }
 
+        [UIHint("PageName")]
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -30,6 +31,7 @@
 
         public string AuthorName { get; set; }
 
+         [UIHint("CategoryName")]
         public string CategoryName { get; set; }
 
         public virtual IEnumerable<TagViewModel> Tags { get; set; }

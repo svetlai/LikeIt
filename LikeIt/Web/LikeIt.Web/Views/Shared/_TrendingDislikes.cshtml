@@ -12,8 +12,8 @@
                 <a href="~/Page/Details/@page.Id">
                     <div class="row">
                         <div class="col-md-7">
-                            <h1>@page.Name</h1>
-                            <h4>@page.CategoryName</h4>
+                            @Html.DisplayFor(p => page.Name, "PageHeading")
+                            @Html.DisplayFor(p => page.CategoryName, "CategoryName")
                         </div>
                         <div class="col-md-5 votes-container">
                             @{Html.RenderAction("GetVotesPartial", "Page", new { id = page.Id });}

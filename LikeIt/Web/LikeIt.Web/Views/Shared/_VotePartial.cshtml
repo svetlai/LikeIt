@@ -1,11 +1,8 @@
 ﻿@model LikeIt.Web.ViewModels.VotesViewModel
 <div id="page-rating">
-    <div class="panel panel-default pull-right transparent-background votes-container">
-        <div class="panel-body bottom-right">
-
             <div class="row">
                 <div class="col-md-8">
-                    <div class="likes-count">@Model.Rating</div>
+                    @Html.DisplayFor(m => m.Rating, "PageRating")
                 </div>
                 <div class="col-md-4 right-padding">
 
@@ -28,10 +25,9 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <span class="pull-left">@Model.LikesCount Likes </span>
-                    <span class="pull-right">@Model.DislikesCount Dislikes</span>
+                    @Html.DisplayFor(m => m.LikesCount, "LikesCount")
+                    @Html.DisplayFor(m => m.DislikesCount, "DislikesCount")
                 </div>
             </div>
-        </div>
-    </div>
+     
 </div>

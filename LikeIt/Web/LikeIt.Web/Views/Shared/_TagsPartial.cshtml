@@ -4,7 +4,7 @@
     <div class="col-md-12 ">
         @foreach (var tag in Model)
         {
-            <span class="label label-primary">@tag.Name</span>
+            @Html.DisplayFor(t => tag.Name, "TagName")
         }
     </div>
 </div>

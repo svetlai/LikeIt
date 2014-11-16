@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            @*@Html.EditorFor(m => m.CategoryId, new { ListItem = Model.Categories })*@
+            @Html.EditorFor(m => m.CategoryId, new { ListItem = Model.Categories })
 
             <div class="form-group">
                     @Html.LabelFor(model => model.CategoryId, "Categories", htmlAttributes: new { @class = "control-label col-md-1" })

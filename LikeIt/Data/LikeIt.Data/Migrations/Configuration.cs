@@ -4,22 +4,22 @@ namespace LikeIt.Data.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using System.Collections.Generic;
+    using System.IO;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
     using LikeIt.Models;
     using LikeIt.Data.Contracts;
-    using System.Collections.Generic;
-    using System.IO;
     using LikeIt.Common;
 
     public sealed class Configuration : DbMigrationsConfiguration<LikeItDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            this.AutomaticMigrationsEnabled = true;
+            this.AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(LikeItDbContext context)
