@@ -32,14 +32,6 @@
             @Html.EditorFor(m => m.CategoryId, new { ListItem = Model.Categories })
 
             <div class="form-group">
-                    @Html.LabelFor(model => model.CategoryId, "Categories", htmlAttributes: new { @class = "control-label col-md-1" })
-                    <div class="col-md-6">
-                        @Html.DropDownListFor(m => m.CategoryId, Model.Categories, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.CategoryId)
-                    </div>
-                </div>
-
-            <div class="form-group">
                 @Html.LabelFor(model => model.TagsString, new { @class = "col-md-1 control-label" })
                 <div class="col-md-6">
                     @Html.EditorFor(model => model.TagsString, new { htmlAttributes = new { @class = "form-control", placeholder = "Add tags, separated by space" } })

@@ -61,14 +61,7 @@
         {
             var model = new AddPageViewModel
                 {
-                    //Categories = this.populator.GetCategories()
-                    Categories = this.data.Categories
-                    .All()
-                    .Select(c => new SelectListItem
-                    {
-                        Value = c.Id.ToString(),
-                        Text = c.Name
-                    }).ToList()
+                    Categories = this.populator.GetCategories()
                 };
 
             return this.View(model);
