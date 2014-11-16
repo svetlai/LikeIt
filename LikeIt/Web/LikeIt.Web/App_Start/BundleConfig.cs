@@ -40,6 +40,9 @@ namespace LikeIt.Web
                 "~/Content/Kendo/kendo.common-bootstrap.min.css",
                 "~/Content/Kendo/kendo.flat.min.css"));
 
+            bundles.Add(new StyleBundle("~/Content/pagedlist").Include(
+                     "~/Content/PagedList.css"));
+
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = false;

@@ -3,7 +3,7 @@
 <div class="form-group">
         @Html.LabelFor(m => m, "Categories", htmlAttributes: new { @class = "control-label col-md-1" })
         <div class="col-md-6">
-            @Html.DropDownListFor(m => m, (IEnumerable<SelectListItem>)ViewBag.ListItem, new { @class = "form-control" })
+            @Html.DropDownListFor(m => m, (IEnumerable<SelectListItem>)ViewBag.ListItem, new { @class = "form-control", id="categories" })
             @Html.ValidationMessageFor(m => m)
         </div>
     </div>

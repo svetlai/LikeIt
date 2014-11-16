@@ -10,7 +10,10 @@
 
     using Microsoft.AspNet.Identity;
 
+    using AutoMapper;
     using AutoMapper.QueryableExtensions;
+
+    using PagedList;
 
     using LikeIt.Web.ViewModels.Page;
     using LikeIt.Models;
@@ -18,7 +21,7 @@
     using LikeIt.Web.ViewModels.Home;
     using LikeIt.Web.Infrastructure.Populators;
     using LikeIt.Web.ViewModels;
-    using AutoMapper;
+    using LikeIt.Web.ViewModels.Categories;
 
     public class PageController : BaseController
     {
@@ -30,13 +33,34 @@
             this.populator = populator;   
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string searchString, int? page)
         {
-            var pages = this.data.Pages.All()
-               .Project()
-               .To<ListPagesViewModel>();
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
 
-            return View(pages);
+            ViewBag.CurrentFilter = searchString;
+
+            var pages = this.data.Pages.All()
+                .OrderBy(p => p.Rating)
+                .Project()
+                .To<ListPagesViewModel>();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                pages = pages
+                    .Where(p => p.Name.ToLower().Contains(searchString.ToLower()));                   
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            return View(pages.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Details(int? id)
@@ -134,6 +158,18 @@
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult FilterByCategory(int categoryId)
+        {
+            var pages = this.data.Pages
+                .All().Where(p => p.CategoryId == categoryId)
+                .Project()
+                .To<ListPagesViewModel>();
+
+            return PartialView("~/Views/Shared/_PagesListPartial.cshtml", pages);
+            //return this.View(pages);
+        }
+
         //[ChildActionOnly]
         public ActionResult GetVotesPartial(int id)
         {
@@ -142,6 +178,16 @@
             var viewModel = Mapper.Map<VotesViewModel>(page);
 
             return PartialView("~/Views/Shared/_VotePartial.cshtml", viewModel);
+        }
+
+        public ActionResult GetCategoriesPartial()
+        {
+            var viewModel = new ListCategoriesViewModel
+            {
+                Categories = this.populator.GetCategories()
+            };
+
+            return PartialView("~/Views/Shared/_CategoriesPartial.cshtml", viewModel);
         }
 
         public ActionResult Image (int id)

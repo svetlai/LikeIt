@@ -1,5 +1,10 @@
 ﻿@using LikeIt.Web.ViewModels
-@model IEnumerable<LikeIt.Web.ViewModels.Page.ListPagesViewModel>
+@using PagedList.Mvc;
+@model PagedList.IPagedList<LikeIt.Web.ViewModels.Page.ListPagesViewModel>
+
+@section styles {
+    @Styles.Render("~/Content/pagedlist")
+    }
 
 @{
     ViewBag.Title = "Index";
@@ -9,34 +14,29 @@
 <div class="panel panel-default">
     <div class="panel-body">
         <p>
-            @Html.ActionLink("Add New Like", "Create")
+            @Html.ActionLink("Add New Like", "Create", new { }, new { @class = "btn btn-primary btn-lg pull-right" })
+            <div class="row">
+                @Html.Partial("~/Views/Shared/_SearchPartial.cshtml")
+            </div>
+            <div class="row">
+                @*<div class="col-md-1">Sort by:</div>*@
+                @{Html.RenderAction("GetCategoriesPartial");}
+            </div>
+         
+            <br/>
         </p>
-        <div class="row">
-            @foreach (var page in Model)
-            {
-                <div class="col-md-12">
-                    <div class="thumbnail" style="background-image: url('@(page.Image != null ? @Url.Action("Image", "Page", new { id = page.Image.Id }) : Url.Content("~/Images/default.png"))')">
-                        <a href="~/Page/Details/@page.Id">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    @Html.DisplayFor(p => page.Name, "PageHeading")
-                                    @Html.DisplayFor(p => page.CategoryName, "CategoryName")
-                                </div>
-                                <div class="col-md-2 votes-container">
-                                    @{Html.RenderAction("GetVotesPartial", new { id = page.Id });}
-                                </div>              
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 pull-left">
-                                    <div class="bottom">
-                                        @Html.Partial("~/Views/Shared/_TagsPartial.cshtml", page.Tags)
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            }
-        </div>
+@using (Ajax.BeginForm("Index", "Page", new AjaxOptions
+{
+    HttpMethod = "GET",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "all-pages",
+}))
+{
+        @Html.Partial("~/Views/Shared/_PagesListPartial.cshtml")
+}
     </div>
 </div>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, currentFilter = ViewBag.CurrentFilter }))

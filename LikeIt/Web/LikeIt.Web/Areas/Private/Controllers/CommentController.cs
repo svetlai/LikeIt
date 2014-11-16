@@ -12,9 +12,9 @@ using System.Web.Mvc;
 
 namespace LikeIt.Web.Areas.Private.Controllers
 {
-    public class CommentsController : BaseController
+    public class CommentController : BaseController
     {
-        public CommentsController(ILikeItData data)
+        public CommentController(ILikeItData data)
             : base(data)
         {
         }

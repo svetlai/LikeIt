@@ -15,6 +15,7 @@
             this.pages = new HashSet<Page>();
         }
 
+        [Key]
         public int Id { get; set; }
 
         [Required]

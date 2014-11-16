@@ -1,0 +1,24 @@
+﻿@model LikeIt.Web.ViewModels.Categories.ListCategoriesViewModel
+
+@using (Ajax.BeginForm("FilterByCategory", "Page",
+        new AjaxOptions
+        {
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "all-pages",
+            //OnFailure = "showCommentRequiredError"
+        }))
+{
+
+@Html.EditorFor(m => m.Id, new { ListItem = Model.Categories })
+@*@Html.Hidden("categoryId", 2)*@
+}
+
+@*<script language="JavaScript">
+    $('#categories').on('change', function () {
+        var data = { categoryId: $('#categories').val() };
+        this.form.submit(data);
+        //$.post('Page/SortByCategory', data, function (responseData) {
+        //});
+    });
+</script>*@

@@ -91,11 +91,9 @@ textarea {
 .votes-container .glyphicon-thumbs-down {
     font-size: 2em;
     text-decoration: none;
-}
-.glyphicon-thumbs-up {
-    color: green;
-}
 
-.glyphicon-thumbs-down {
-        color: red;
+}
+.glyphicon-thumbs-up:hover,
+ .glyphicon-thumbs-down:hover{
+    color: #6d94bf;
 }
