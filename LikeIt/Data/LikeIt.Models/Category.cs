@@ -20,7 +20,7 @@
         [Required]
         public string Name { get; set; }
 
-        public virtual ICollection<Page> Page
+        public virtual ICollection<Page> Pages
         {
             get
             {

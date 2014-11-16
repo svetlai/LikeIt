@@ -21,6 +21,14 @@
             this.repositories = new Dictionary<Type, object>();
         }
 
+        public ILikeItDbContext Db
+        {
+            get 
+            { 
+                return this.db;
+            }
+        }
+
         public IDeletableEntityRepository<User> Users
         {
             get

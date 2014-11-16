@@ -16,6 +16,7 @@
 
     using LikeIt.Web.Models;
     using LikeIt.Models;
+    using LikeIt.Common;
 
     [Authorize]
     public class AccountController : Controller
@@ -116,7 +117,7 @@
                     };
                     IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
-                    var userRole = "user";
+                    var userRole = GlobalConstants.UserRole;
                     UserManager.AddToRole(user.Id, userRole);
 
                     if (result.Succeeded)

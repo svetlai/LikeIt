@@ -1,7 +1,9 @@
-﻿
+﻿@using LikeIt.Web.Infrastructure.HtmlHelpers﻿
+@using LikeIt.Web.Areas.Administration.ViewModels.Likes;
 @{
-    ViewBag.Title = "Index";
+    const string ControllerName = "Likes";
+    ViewBag.Title = ControllerName;
 }
 
-<h2>Admin Likes Index</h2>
-
+<h2>@ViewBag.Title</h2>
+@(Html.FullFeaturedGrid<LikesViewModel>(ControllerName, m => m.Id))

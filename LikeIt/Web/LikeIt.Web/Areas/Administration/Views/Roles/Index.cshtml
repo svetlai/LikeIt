@@ -1,0 +1,11 @@
+﻿@using LikeIt.Web.Infrastructure.HtmlHelpers﻿
+@using LikeIt.Web.Areas.Administration.ViewModels.Users;
+@{
+    const string ControllerName = "Roles";
+    ViewBag.Title = ControllerName;
+}
+
+<h2>@ViewBag.Title</h2>
+@(Html.FullFeaturedGrid<RolesViewModel>(ControllerName, m => m.Id))
+
+

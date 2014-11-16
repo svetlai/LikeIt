@@ -1,0 +1,10 @@
+﻿@model IEnumerable<LikeIt.Web.Areas.Administration.ViewModels.Pages.PagesViewModel>
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+@foreach (var page in Model)
+{
+    @page.Name
+}

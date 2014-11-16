@@ -1,0 +1,9 @@
+﻿@using LikeIt.Web.Infrastructure.HtmlHelpers﻿
+@using LikeIt.Web.Areas.Administration.ViewModels.Dislikes;
+@{
+    const string ControllerName = "Dislikes";
+    ViewBag.Title = ControllerName;
+}
+
+<h2>@ViewBag.Title</h2>
+@(Html.FullFeaturedGrid<DislikesViewModel>(ControllerName, m => m.Id))

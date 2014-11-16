@@ -7,6 +7,8 @@
 
     public interface ILikeItData
     {
+        ILikeItDbContext Db { get; }
+
         IDeletableEntityRepository<User> Users { get; }
 
         IDeletableEntityRepository<Page> Pages { get; }

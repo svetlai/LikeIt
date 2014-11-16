@@ -113,6 +113,10 @@
     <Content Include="Scripts\jquery-2.1.1.min.js" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\LikeIt.Common\LikeIt.Common.csproj">
+      <Project>{b1669cfb-719a-4520-b721-97c7bce43a83}</Project>
+      <Name>LikeIt.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LikeIt.Data.Common\LikeIt.Data.Common.csproj">
       <Project>{16c3e891-3dd2-403c-b3a7-13035bccd549}</Project>
       <Name>LikeIt.Data.Common</Name>

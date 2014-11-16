@@ -1,7 +1,10 @@
-﻿
+﻿@using LikeIt.Web.Infrastructure.HtmlHelpers﻿
+@using LikeIt.Web.Areas.Administration.ViewModels.Users;
 @{
-    ViewBag.Title = "Index";
+    const string ControllerName = "Users";
+    ViewBag.Title = ControllerName;
 }
 
-<h2>Admin Users Index</h2>
+<h2>@ViewBag.Title</h2>
+@(Html.FullFeaturedGrid<UsersViewModel>(ControllerName, m => m.Id))
 

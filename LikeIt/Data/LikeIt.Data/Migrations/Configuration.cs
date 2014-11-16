@@ -12,6 +12,7 @@ namespace LikeIt.Data.Migrations
     using LikeIt.Data.Contracts;
     using System.Collections.Generic;
     using System.IO;
+    using LikeIt.Common;
 
     public sealed class Configuration : DbMigrationsConfiguration<LikeItDbContext>
     {
@@ -31,8 +32,8 @@ namespace LikeIt.Data.Migrations
             //TODO : refactor 
             var roles = new List<IdentityRole>
             {
-                new IdentityRole("user"), 
-                new IdentityRole("administrator")
+                new IdentityRole(GlobalConstants.UserRole), 
+                new IdentityRole(GlobalConstants.AdminRole)
             };
 
             context.Roles.AddOrUpdate(roles.ToArray());

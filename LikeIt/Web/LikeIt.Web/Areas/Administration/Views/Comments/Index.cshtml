@@ -1,7 +1,9 @@
-﻿
+﻿@using LikeIt.Web.Infrastructure.HtmlHelpers﻿
+@using LikeIt.Web.Areas.Administration.ViewModels.Comments;
 @{
-    ViewBag.Title = "Index";
+    const string ControllerName = "Comments";
+    ViewBag.Title = ControllerName;
 }
 
-<h2>Admin Comments Index</h2>
-
+<h2>@ViewBag.Title</h2>
+@(Html.FullFeaturedGrid<CommentsViewModel>(ControllerName, m => m.Id))

@@ -1,0 +1,9 @@
+﻿@using LikeIt.Web.Infrastructure.HtmlHelpers﻿
+@using LikeIt.Web.Areas.Administration.ViewModels.Pages;
+@{
+    const string ControllerName = "Pages";
+    ViewBag.Title = ControllerName;
+}
+
+<h2>@ViewBag.Title</h2>
+@(Html.FullFeaturedGrid<PagesViewModel>(ControllerName, m => m.Id))
