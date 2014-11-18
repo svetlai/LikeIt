@@ -27,10 +27,13 @@
     {
         private IDropDownListPopulator populator;
 
+        private Random random;
+
         public PageController(ILikeItData data, IDropDownListPopulator populator)
             : base(data)
         {
-            this.populator = populator;   
+            this.populator = populator;
+            this.random = new Random();
         }
 
         public ActionResult Index(string currentFilter, string searchString, int? page)
@@ -47,7 +50,7 @@
             ViewBag.CurrentFilter = searchString;
 
             var pages = this.data.Pages.All()
-                .OrderBy(p => p.Rating)
+                .OrderByDescending(p => p.Rating)
                 .Project()
                 .To<ListPagesViewModel>();
 
@@ -57,7 +60,7 @@
                     .Where(p => p.Name.ToLower().Contains(searchString.ToLower()));                   
             }
 
-            int pageSize = 5;
+            int pageSize = 6;
             int pageNumber = (page ?? 1);
 
             return View(pages.ToPagedList(pageNumber, pageSize));
@@ -112,13 +115,7 @@
 
                 model.Id = page.Id;
 
-                //model.Categories = this.data.Categories
-                //    .All()
-                //    .Select(c => new SelectListItem
-                //    {
-                //        Value = c.Id.ToString(),
-                //        Text = c.Name
-                //    });
+                model.Categories = this.populator.GetCategories();
 
                 if (model.TagsString != null)
                 {
@@ -158,6 +155,21 @@
             return View(model);
         }
 
+        public ActionResult Random()
+        {
+            this.random = new Random();
+
+            var pages = this.data.Pages
+                .All()
+                .Project()
+                .To<DetailsPageViewModel>()
+                .ToList();
+
+            var page = pages[random.Next(0, pages.Count())];
+
+            return View(page);
+        }
+
         [HttpPost]
         public ActionResult FilterByCategory(int categoryId)
         {
@@ -170,7 +182,7 @@
             //return this.View(pages);
         }
 
-        //[ChildActionOnly]
+        [ChildActionOnly]
         public ActionResult GetVotesPartial(int id)
         {
             var page = this.data.Pages.Find(id);
@@ -180,6 +192,7 @@
             return PartialView("~/Views/Shared/_VotePartial.cshtml", viewModel);
         }
 
+        [ChildActionOnly]
         public ActionResult GetCategoriesPartial()
         {
             var viewModel = new ListCategoriesViewModel

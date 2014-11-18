@@ -32,8 +32,10 @@ namespace LikeIt.Web
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.spacelab.css",
-                      "~/Content/site.css"));
+                      "~/Content/bootstrap.spacelab.css"));
+
+            bundles.Add(new StyleBundle("~/Content/custom").Include(
+                    "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/kendo").Include(
                 "~/Content/Kendo/kendo.common.min.css",

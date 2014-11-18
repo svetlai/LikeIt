@@ -2,18 +2,25 @@
 @{
     ViewBag.Title = "Home Page";
 }
-
-<div class="jumbotron">
-    <h1>Like It!</h1>
-    <p class="lead">Add your likes and see what's trending now!</p>
+<div class="jumbotron" id="main-slide" >
+    <h1 class="text-shadow">Like It!</h1>
+    <p class="lead">Like something? Add it here!</p>
     @Html.ActionLink("Add New Like", "Create", "Page", new { area = "" }, new { @class = "btn btn-primary btn-lg" })
 </div>
-<div class="row">
-    <div class="col-md-6">
-        @Html.Action("GetTrendingLikes", "Home", routeValues: new { area = "", count = Model })
+    <div class="panel panel-default ">
+        <div class="panel-body">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#trendingLikes" data-toggle="tab">Trending Likes</a></li>
+                <li><a href="#trendingDislikes" data-toggle="tab">Trending Dislikes</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="trendingLikes">
+                    @Html.Action("GetTrendingLikes", "Home", routeValues: new { area = "", count = Model })
+                </div>
+                <div class="tab-pane fade" id="trendingDislikes">
+                    @Html.Action("GetTrendingDislikes", "Home", routeValues: new { area = "", count = Model })
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-6">
-        @Html.Action("GetTrendingDislikes", "Home", routeValues: new { area = "", count = Model })
-    </div>
-</div>
 

@@ -9,6 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/kendo")
     @RenderSection("styles", required: false)
+    @Styles.Render("~/Content/custom")
 
 </head>
 <body>
@@ -25,9 +26,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { })</li>
-                    <li>@Html.ActionLink("Likes", "Index", "Page", new { area = "" }, new { })</li>
-                    @Html.Partial("~/Areas/Private/Views/Shared/_PrivatePartial.cshtml")
+                    @*<li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { })</li>*@
+                    <li>@Html.ActionLink("Browse Likes", "Index", "Page", new { area = "" }, new { })</li>
+                    <li>@Html.ActionLink("Like a Random", "Random", "Page", new { area = "" }, new { })</li>
                 </ul>           
                 @Html.Partial("_LoginPartial")
             </div>
@@ -35,10 +36,15 @@
         </div>
     </div>
     <div class="container body-content">
+        <div class="sidebar">
+          
+        </div>
         @RenderBody()
+        @RenderSection("footer", required: false)
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+           
+            <p class="text-center">&copy; @DateTime.Now.Year - LikeIt - An ASP.NET Application Project for Telerik Academy</p>
         </footer>
     </div>
     @Scripts.Render("~/bundles/bootstrap")

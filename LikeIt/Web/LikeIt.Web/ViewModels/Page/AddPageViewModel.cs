@@ -19,7 +19,7 @@
         [StringLength(100), MinLength(3)]
         public string Name { get; set; }
 
-        [UIHint("MultilineText")]
+        [UIHint("MultiLineText")]
         [StringLength(500), MinLength(20)]
         public string Description { get; set; }
 

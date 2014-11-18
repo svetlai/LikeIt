@@ -4,11 +4,14 @@
     ViewBag.Title = "Error";
 }
 
-    <h1 class="text-danger">Oops!</h1>
+    @*<h1 class="text-danger">Oops!</h1>
     <h2 class="text-danger">An error has occured while processing your request. </h2>
-    <h3 class="text-danger">Please don't give up on us and try again in a second!</h3>
+    <h3 class="text-danger">Please don't give up on us and try again in a second!</h3>*@
 
+<div class="text-center">
 
+    <img src="~/Images/error.png" />
+</div>
 @if (User.IsInRole("administrator"))
 {
     <hr />

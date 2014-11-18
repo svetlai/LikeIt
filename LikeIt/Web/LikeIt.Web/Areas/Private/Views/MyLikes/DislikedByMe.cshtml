@@ -15,16 +15,16 @@
 <div class="panel panel-default">
     <div class="panel-body">
         @Html.ActionLink("Add New Like", "Create", new { }, new { @class = "btn btn-primary btn-lg pull-right" })
-        <h4>Added by Me</h4>     
-        @Html.ActionLink("Liked By Me", "LikedByMe", "MyLikes", new { }, new { @class = "" }) | 
-        @Html.ActionLink("Disliked By Me", "DislikedByMe", "MyLikes", new { }, new { @class = "" })
+        <h4>Disliked by Me</h4>
+        @Html.ActionLink("Added By Me", "Index", "MyLikes", new { }, new { @class = "" }) | 
+        @Html.ActionLink("Liked By Me", "LikedByMe", "MyLikes", new { }, new { @class = "" })
         <p>
             <div class="row">
                 @Html.Partial("~/Views/Shared/_SearchPartial.cshtml")
             </div>
             <br />
         </p>
-        @using (Ajax.BeginForm("Index", "MyLikes", new AjaxOptions
+        @using (Ajax.BeginForm("DislikedByMe", "MyLikes", new AjaxOptions
 {
     HttpMethod = "GET",
     InsertionMode = InsertionMode.Replace,
@@ -43,9 +43,8 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
 @section footer {
     <div class="row">
         <div class="col-md-12">
-            @Html.ActionLink("Liked By Me", "LikedByMe", "MyLikes", new { }, new { @class = "" }) |
-            @Html.ActionLink("Disliked By Me", "DislikedByMe", "MyLikes", new { }, new { @class = "" })
+            @Html.ActionLink("Added By Me", "Index", "MyLikes", new { }, new { @class = "" }) |
+            @Html.ActionLink("Liked By Me", "LikedByMe", "MyLikes", new { }, new { @class = "" })
         </div>
     </div>
-
 }

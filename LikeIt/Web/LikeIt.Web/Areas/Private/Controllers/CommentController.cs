@@ -1,17 +1,19 @@
-﻿using AutoMapper;
-using LikeIt.Data.Contracts;
-using LikeIt.Models;
-using LikeIt.Web.Areas.Private.ViewModels.Comments;
-using LikeIt.Web.Controllers;
-using LikeIt.Web.ViewModels.Comment;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace LikeIt.Web.Areas.Private.Controllers
+﻿namespace LikeIt.Web.Areas.Private.Controllers
 {
+    using System.Linq;
+    using System.Web;
+    using System.Web.Mvc;
+
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+
+    using LikeIt.Data.Contracts;
+    using LikeIt.Models;
+    using LikeIt.Web.Areas.Private.ViewModels.Comments;
+    using LikeIt.Web.Controllers;
+    using LikeIt.Web.ViewModels.Comment;
+
+    [Authorize]
     public class CommentController : BaseController
     {
         public CommentController(ILikeItData data)
@@ -43,6 +45,18 @@ namespace LikeIt.Web.Areas.Private.Controllers
             }
 
             throw new HttpException(400, "Invalid comment");
+        }
+
+        public ActionResult MyComments()
+        {
+            var comments = this.data.Comments.All()
+                .Where(c => c.AuthorId == this.CurrentUser.Id)
+                .OrderBy(c => c.PageId)
+                .ThenByDescending(c => c.CreatedOn)
+                .Project()
+                .To<CommentViewModel>();
+
+            return View(comments);
         }
     }
 }

@@ -1,33 +1,29 @@
 ﻿@model LikeIt.Web.ViewModels.VotesViewModel
 <div id="page-rating">
-            <div class="row">
-                <div class="col-md-8">
-                    @Html.DisplayFor(m => m.Rating, "PageRating")
-                </div>
-                <div class="col-md-4 right-padding">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            @Html.DisplayFor(m => m.Rating, "PageRating")
 
-                    @Ajax.ActionLink(" ", "Like", "Votes", new { id = Model.PageId },
+                @Ajax.ActionLink(" ", "Like", "Votes", new { id = Model.PageId },
             new AjaxOptions
            {
                HttpMethod = "POST",
                InsertionMode = InsertionMode.Replace,
                UpdateTargetId = "page-rating"
-           }, new { @class = "glyphicon glyphicon-thumbs-up" })
-                    @Ajax.ActionLink(" ", "Dislike", "Votes", new { id = Model.PageId },
+           }, new { @class = "glyphicon glyphicon-thumbs-up pull-left" })
+                @Ajax.ActionLink(" ", "Dislike", "Votes", new { id = Model.PageId },
             new AjaxOptions
            {
                HttpMethod = "POST",
                InsertionMode = InsertionMode.Replace,
                UpdateTargetId = "page-rating"
-           }, new { @class = "glyphicon glyphicon-thumbs-down" })
-                </div>
+           }, new { @class = "glyphicon glyphicon-thumbs-down pull-right" })
+            </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-12">
+       
                     @Html.DisplayFor(m => m.LikesCount, "LikesCount")
                     @Html.DisplayFor(m => m.DislikesCount, "DislikesCount")
-                </div>
-            </div>
-     
-</div>
+    
+
+        </div>

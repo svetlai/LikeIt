@@ -9,9 +9,11 @@
 
     using LikeIt.Data.Contracts;
     using LikeIt.Web.ViewModels.Home;
+    using LikeIt.Web.ViewModels.Page;
 
     public class HomeController : BaseController
     {
+        private const int likesCount = 3;
         public HomeController(ILikeItData data)
             : base(data)
         {
@@ -35,9 +37,9 @@
         {
             var trendingLikes = this.data.Pages.All()
                 .OrderByDescending(p => p.Rating)
-                .Take(6)
+                .Take(likesCount)
                 .Project()
-                .To<IndexPagesViewModel>();
+                .To<ListPagesViewModel>();
 
             return PartialView("_TrendingLikes", trendingLikes);
         }
@@ -48,9 +50,9 @@
         {
             var trendingDislikes = this.data.Pages.All()
                .OrderBy(p => p.Rating)
-               .Take(6)
+               .Take(likesCount)
                .Project()
-               .To<IndexPagesViewModel>();
+               .To<ListPagesViewModel>();
 
             return PartialView("_TrendingDislikes", trendingDislikes);
         }

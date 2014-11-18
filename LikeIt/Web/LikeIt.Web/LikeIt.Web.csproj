@@ -338,7 +338,7 @@
     <Content Include="Areas\Private\Views\web.config" />
     <Content Include="Areas\Private\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Private\Views\MyLikes\Index.cshtml" />
-    <Content Include="Areas\Private\Views\MyComments\Index.cshtml" />
+    <Content Include="Areas\Private\Views\Comment\Index.cshtml" />
     <Content Include="Areas\Private\Views\Shared\_PrivatePartial.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_AdminPartial.cshtml" />
     <Content Include="Areas\Administration\Views\Pages\Index.cshtml" />
@@ -364,7 +364,14 @@
     <Content Include="Areas\Administration\Views\Likes\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Dislikes\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Roles\Index.cshtml" />
+    <Content Include="Images\404.jpg" />
+    <Content Include="Images\500.jpg" />
+    <Content Include="Images\error.png" />
+    <Content Include="Images\like-hashtag.jpg" />
     <Content Include="Views\Shared\DisplayTemplates\CommentAuthor.cshtml" />
+    <Content Include="Areas\Private\Views\MyLikes\LikedByMe.cshtml" />
+    <Content Include="Areas\Private\Views\MyLikes\DislikedByMe.cshtml" />
+    <Content Include="Areas\Private\Views\Comment\MyComments.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Images\default.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -445,8 +452,11 @@
     <Content Include="Views\Shared\DisplayTemplates\CommentContent.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PageDescription.cshtml" />
     <Content Include="Views\Shared\_CategoriesPartial.cshtml" />
-    <Content Include="Views\Shared\_PagesListPartial.cshtml" />
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ListPages.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ImageUpload.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SearchInput.cshtml" />
+    <Content Include="Views\Page\Random.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

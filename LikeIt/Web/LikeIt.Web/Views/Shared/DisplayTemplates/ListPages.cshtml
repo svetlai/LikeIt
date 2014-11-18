@@ -1,0 +1,28 @@
+﻿@using LikeIt.Web.ViewModels
+@model IEnumerable<LikeIt.Web.ViewModels.Page.ListPagesViewModel>
+
+<div class="row text-center" id="all-pages">
+    @foreach (var page in Model)
+    {
+        <a href="~/Page/Details/@page.Id" title="@page.Name">
+            <div class="single-page">
+                <div class="circle">
+                    <span class="rating-count">
+                        @page.Rating
+                    </span>
+                </div>
+                <div class="ratio page-main-content" style="background-image: url('@(page.Image != null ? @Url.Action("Image", "Page", new { id = page.Image.Id }) : Url.Content("~/Images/default.png"))')">
+
+                    <div class="page-heading">
+                        @Html.DisplayFor(p => page.Name, "PageHeading")
+                        @Html.DisplayFor(p => page.CategoryName, "CategoryName")
+                    </div>
+
+                </div>
+            </div>
+        </a>
+    }
+</div>
+
+
+

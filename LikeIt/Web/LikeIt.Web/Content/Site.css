@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 0px;
     padding-bottom: 0px;
+    background-color: rgba(219,233,247, 0.3);
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -9,13 +10,15 @@
     padding-right: 15px;
 }
 
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     /*max-width: 280px;*/
 }
-
+/*Details Page*/
 .details-panel-img {
     height: 300px;
     overflow: hidden;
@@ -28,16 +31,16 @@ textarea {
 }*/
 
 .details-panel-title {
-    background-color:rgba(255,255,255, 0.3);
+    background-color: rgba(255,255,255, 0.3);
     position: absolute;
     bottom: 0;
     min-width: 200px;
 }
 
-.details-panel-title h1,
-.details-panel-title h4 {
-    color:#666;
-}
+    .details-panel-title h1,
+    .details-panel-title h4 {
+        color: #666;
+    }
 
 .tab-pane {
     padding: 10px;
@@ -54,46 +57,100 @@ textarea {
 }
 
 .comment-content {
-
 }
 
 .transparent-background {
-    background-color:rgba(255,255,255, 0.3);
-    padding:10px;
+    background-color: rgba(255,255,255, 0.3);
+    padding: 10px;
 }
 
-
-/*.bottom-right-corner {
-    bottom:0px;
-    right:0px;
-    position: absolute;
-}
-
-.bottom-left-corner {
-    bottom:0px;
-    left:0px;
-    position: absolute;
-}*/
 /*Votes*/
 .votes-container {
-    padding:0 10px;
-
+    padding: 0 10px;
+        width: 170px;
+    height: 170px;
+        border-radius: 50%;
+    border: 1px solid #ddd;
 }
 
 .likes-count {
-    font-size: 3em;
+    font-size: 3.5em;
     color: #666;
     font-weight: bold;
-    padding: 10px 20px;
+
 }
 
 .votes-container .glyphicon-thumbs-up,
 .votes-container .glyphicon-thumbs-down {
-    font-size: 2em;
+    font-size: 2.5em;
     text-decoration: none;
-
 }
+
 .glyphicon-thumbs-up:hover,
- .glyphicon-thumbs-down:hover{
+.glyphicon-thumbs-down:hover {
     color: #6d94bf;
+}
+
+/*Single page*/
+.rating-count {
+    font-size: 5em;
+    color: #666;
+    font-weight: bold;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    width: 200px;
+}
+
+.circle {
+    width: 200px;
+    height: 200px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    z-index: 3;
+    position: absolute;
+    left: 75px;
+    top: -75px;
+    padding-top: 35px;
+    background-color: rgba(255,255,255, 0.8);
+}
+
+#all-pages {
+    position: relative;
+    text-align: center;
+    margin-top: 75px;
+}
+
+.single-page {
+    display: inline-block;
+    position: relative;
+    margin: 10px 10px;
+    margin-bottom: 70px;
+    min-width: 350px;
+}
+
+    .single-page .page-heading {
+        padding-top: 120px;
+    }
+
+    .single-page .page-main-content {
+        min-height: 350px;
+        border: 1px solid #ddd;
+        opacity: 0.8;
+        border-radius: 20px;
+        box-shadow: 10px 10px 5px #888888;
+    }
+
+.page-main-content:hover {
+    opacity: 1;
+}
+/*Home Page*/
+#main-slide {
+    background-image: url('/Images/like-hashtag.jpg');
+}
+
+.text-shadow {
+    text-shadow: 5px 5px 5px #888888;
 }

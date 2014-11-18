@@ -3,7 +3,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m, "Search", htmlAttributes: new { @class = "control-label col-md-1" })
         <div class="col-md-4">
-            @Html.TextBox("SearchString", "", new { @class = "form-control", placeholder="Search pages by name..." })
+            @Html.EditorFor(m => m, "SearchInput")
         </div>
         <div class="col-md-2">
             <input type="submit" value="Search" class="btn btn-primary" />

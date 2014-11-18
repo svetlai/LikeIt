@@ -1,26 +1,5 @@
 ﻿@using LikeIt.Web.ViewModels
-@model IEnumerable<LikeIt.Web.ViewModels.Home.IndexPagesViewModel>
+@model IEnumerable<LikeIt.Web.ViewModels.Page.ListPagesViewModel>
 
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title text-center">Trending Likes</h3>
-            </div>
-            <div class="panel-body">
-                @foreach (var page in Model)
-                {
-                    <div class="thumbnail" style="background-image: url('@(page.Image != null ? @Url.Action("Image", "Page", new { id = page.Image.Id }) : Url.Content("~/Images/default.png"))')">
-                        <a href="~/Page/Details/@page.Id">
-                            <div class="row">
-                                <div class="col-md-7">
-                                    @Html.DisplayFor(p => page.Name, "PageHeading")
-                                    @Html.DisplayFor(p => page.CategoryName, "CategoryName")
-                                </div>
-                                <div class="col-md-5 votes-container">
-                                    @{Html.RenderAction("GetVotesPartial", "Page", new { id = page.Id });}
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                }
-            </div>
-        </div>
+
+@Html.DisplayFor(p => p, "ListPages")

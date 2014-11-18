@@ -19,10 +19,15 @@
 
         public DateTime CreatedOn { get; set; }
 
+        public int PageId { get; set; }
+
+        public string PageTitle { get; set; }
+
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<Comment, CommentViewModel>()
                 .ForMember(m => m.AuthorName, opt => opt.MapFrom(x => x.Author.UserName))
+                .ForMember(m => m.PageTitle, opt => opt.MapFrom(x => x.Page.Name))
                 .ForMember(m => m.CreatedOn, opt => opt.MapFrom(x => x.CreatedOn))
                 .ReverseMap();
         }
