@@ -1,6 +1,7 @@
 ﻿namespace LikeIt.Models
 {
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.ComponentModel.DataAnnotations;
 
     using LikeIt.Data.Common.Models;
 
@@ -10,12 +11,16 @@
         {
         }
 
+        [Key]
         public int Id { get; set; }
 
+        [Required]
         [ForeignKey("Page")]
         public int PageId { get; set; }
+
         public virtual Page Page { get; set; }
 
+        [ForeignKey("User")]
         public string UserId { get; set; }
 
         public virtual User User { get; set; }

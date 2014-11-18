@@ -48,7 +48,7 @@
         [HttpPost]
         public ActionResult Update([DataSourceRequest]DataSourceRequest request, ViewModel model)
         {
-            base.Update<Model, ViewModel>(model, model.Id.Value);
+            base.Update<Model, ViewModel>(model, model.Id);
             return this.GridOperation(model, request);
         }
 
@@ -57,7 +57,7 @@
         {
             if (model != null && ModelState.IsValid)
             {
-                this.data.Pages.Delete(model.Id.Value);
+                this.data.Pages.Delete(model.Id);
                 this.data.SaveChanges();
             }
 

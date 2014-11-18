@@ -7,10 +7,11 @@
 
     using LikeIt.Models;
     using LikeIt.Web.Infrastructure.Mapping;
+    using System.ComponentModel.DataAnnotations;
 
     public class CommentViewModel : IMapFrom<Comment>, IHaveCustomMappings
     {
-        [HiddenInput()]
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
         public string Content { get; set; }

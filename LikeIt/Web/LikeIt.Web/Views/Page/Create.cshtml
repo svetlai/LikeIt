@@ -6,7 +6,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Create", "Page", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal",  enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "Page", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <h4>Add a new like</h4>
@@ -14,7 +14,7 @@
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="row">
         <div class="col-md-12">
-            <div class="form-group">       
+            <div class="form-group">
                 @Html.LabelFor(model => model.Name, "I Like", new { @class = "col-md-1 control-label" })
                 <div class="col-md-6">
                     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Page title" } })
@@ -25,7 +25,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Description, new { @class = "col-md-1 control-label" })
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", rows="6", placeholder = "Short description" } })
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", rows = "6", placeholder = "Short description" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -36,7 +36,7 @@
                 @Html.LabelFor(model => model.TagsString, new { @class = "col-md-1 control-label" })
                 <div class="col-md-6">
                     @Html.EditorFor(model => model.TagsString, new { htmlAttributes = new { @class = "form-control", placeholder = "Add tags, separated by space" } })
-                    @Html.ValidationMessageFor(model => model.TagsString, "", new { @class = "text-danger" })                
+                    @Html.ValidationMessageFor(model => model.TagsString, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -44,10 +44,10 @@
                 <div class="col-md-1">@Html.LabelFor(model => model.IsLike, "", new { @class = "col-md-1 control-label" })</div>
                 <div class="col-md-6">
                     @Html.RadioButtonFor(m => m.IsLike, true, new { @class = "" }) Like
-                    @Html.RadioButtonFor(m => m.IsLike, false, new { @class = "" }) Dislike           
+                    @Html.RadioButtonFor(m => m.IsLike, false, new { @class = "" }) Dislike
                 </div>
             </div>
-          
+
             @Html.EditorFor(model => model.UploadedImage, "ImageUpload")
 
             <div class="form-group text-center">

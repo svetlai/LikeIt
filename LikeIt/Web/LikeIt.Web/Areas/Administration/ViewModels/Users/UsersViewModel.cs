@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using System.Web.Mvc;
+    using System.ComponentModel.DataAnnotations;
 
     using AutoMapper;
 
@@ -14,17 +15,28 @@
         [HiddenInput(DisplayValue = false)]
         public string Id { get; set; }
 
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
+        [Required]
+        [StringLength(50), MinLength(2)]
         public string UserName { get; set; }
 
-        //public string Role { get; set; }
+        [Required]
+        [StringLength(50), MinLength(2)]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [StringLength(50), MinLength(2)]
+        public string FirstName { get; set; }
+
+        [StringLength(50), MinLength(2)]
+        public string LastName { get; set; }
 
         public string PhoneNumber { get; set; }
 
-        public string Email { get; set; }
+        //public string Role { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {

@@ -17,6 +17,7 @@ namespace LikeIt.Web.App_Start
     using LikeIt.Data.Common.Repositories;
     using LikeIt.Web.Infrastructure.Populators;
     using LikeIt.Web.Infrastructure.Caching;
+    using LikeIt.Web.Infrastructure;
 
     public static class NinjectWebCommon 
     {
@@ -79,6 +80,8 @@ namespace LikeIt.Web.App_Start
 
             kernel.Bind<IDropDownListPopulator>().To<DropDownListPopulator>();
             kernel.Bind<ICacheService>().To<InMemoryCache>();
+
+            kernel.Bind<ISanitizer>().To<HtmlSanitizerAdapter>();
         }        
     }
 }

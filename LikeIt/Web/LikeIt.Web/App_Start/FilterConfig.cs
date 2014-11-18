@@ -1,8 +1,8 @@
-﻿using System.Web;
-using System.Web.Mvc;
-
-namespace LikeIt.Web
+﻿namespace LikeIt.Web
 {
+    using System.Web;
+    using System.Web.Mvc;
+
     public class FilterConfig
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)

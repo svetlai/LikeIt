@@ -22,21 +22,26 @@
             this.dislikes = new HashSet<Dislike>();
         }
 
+        [Key]
         public int Id { get; set; }
         
         [Required]
+        [StringLength(150), MinLength(2)]
         public string Name { get; set; }
 
+        [Required]
+        [StringLength(1000), MinLength(2)]
         public string Description { get; set; }
 
         public int Rating { get; set; }
 
-        //[Required]
+        [ForeignKey("User")]
         public string UserId { get; set; }
 
         public virtual User User { get; set; }
 
-        //[Required]
+        [Required]
+        [ForeignKey("Category")]
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
@@ -91,7 +96,7 @@
             }
         }
 
-        //[Index]
+        [Index]
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }

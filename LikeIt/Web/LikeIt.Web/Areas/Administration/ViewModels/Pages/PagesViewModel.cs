@@ -10,15 +10,20 @@
     public class PagesViewModel : AdministrationViewModel, IMapFrom<Page>
     {
         [HiddenInput(DisplayValue = false)]
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(100), MinLength(3)]
         public string Name { get; set; }
 
+        [Required]
         [UIHint("MultilineText")]
         [StringLength(500), MinLength(20)]
         public string Description { get; set; }
+
+        [Required]
+        [UIHint("DropDownList")]
+        public int CategoryId { get; set; }
 
         //public int Rating { get; set; }
     }

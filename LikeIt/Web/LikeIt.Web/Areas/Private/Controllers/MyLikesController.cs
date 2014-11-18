@@ -1,11 +1,7 @@
-﻿
-
-namespace LikeIt.Web.Areas.Private.Controllers
+﻿namespace LikeIt.Web.Areas.Private.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
@@ -15,14 +11,15 @@ namespace LikeIt.Web.Areas.Private.Controllers
     using LikeIt.Data.Contracts;
     using LikeIt.Web.Controllers;
     using LikeIt.Web.ViewModels.Page;
-    public class MyLikesController : BaseController
+    using LikeIt.Web.Areas.Private.Controllers.Base;
+
+    public class MyLikesController : PrivateController
     {
         public MyLikesController(ILikeItData data)
             : base(data)
         {
         }
-
-        [Authorize]
+   
         public ActionResult Index(string currentFilter, string searchString, int? page)
         {
             if (searchString != null)
@@ -56,7 +53,6 @@ namespace LikeIt.Web.Areas.Private.Controllers
 
         }
 
-        [Authorize]
         public ActionResult LikedByMe(string currentFilter, string searchString, int? page)
         {
             if (searchString != null)
@@ -89,7 +85,6 @@ namespace LikeIt.Web.Areas.Private.Controllers
             return View(pages.ToPagedList(pageNumber, pageSize));
         }
 
-        [Authorize]
         public ActionResult DislikedByMe(string currentFilter, string searchString, int? page)
         {
             if (searchString != null)

@@ -12,6 +12,7 @@
         public string Id { get; set; }
 
         [Required]
+        [StringLength(20), MinLength(2)]
         public string Name { get; set; }
     }
 }

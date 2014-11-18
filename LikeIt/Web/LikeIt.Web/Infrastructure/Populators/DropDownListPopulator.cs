@@ -7,7 +7,6 @@
     using LikeIt.Data.Contracts;
     using LikeIt.Web.Infrastructure.Caching;
 
-
     public class DropDownListPopulator : IDropDownListPopulator
     {
         private ILikeItData data;

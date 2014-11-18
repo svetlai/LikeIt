@@ -4,10 +4,10 @@
 
 @section styles {
     @Styles.Render("~/Content/pagedlist")
-    }
+}
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pages";
 }
 
 <h2>Likes</h2>
@@ -22,18 +22,18 @@
                 @*<div class="col-md-1">Sort by:</div>*@
                 @{Html.RenderAction("GetCategoriesPartial");}
             </div>
-         
-            <br/>
+
+            <br />
         </p>
-@using (Ajax.BeginForm("Index", "Page", new AjaxOptions
+        @using (Ajax.BeginForm("Index", "Page", new AjaxOptions
 {
     HttpMethod = "GET",
     InsertionMode = InsertionMode.Replace,
     UpdateTargetId = "all-pages",
 }))
-{
-    @Html.DisplayFor(p => p, "ListPages")
-}
+        {
+            @Html.DisplayFor(p => p, "ListPages")
+        }
     </div>
 </div>
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount

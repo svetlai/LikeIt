@@ -22,20 +22,23 @@
     using LikeIt.Web.Infrastructure.Populators;
     using LikeIt.Web.ViewModels;
     using LikeIt.Web.ViewModels.Categories;
+    using LikeIt.Web.Infrastructure;
 
     public class PageController : BaseController
     {
         private IDropDownListPopulator populator;
-
+        private readonly ISanitizer sanitizer;
         private Random random;
 
-        public PageController(ILikeItData data, IDropDownListPopulator populator)
+        public PageController(ILikeItData data, IDropDownListPopulator populator, ISanitizer sanitizer)
             : base(data)
         {
             this.populator = populator;
             this.random = new Random();
+            this.sanitizer = sanitizer;
         }
 
+        [HttpGet]
         public ActionResult Index(string currentFilter, string searchString, int? page)
         {
             if (searchString != null)
@@ -66,6 +69,7 @@
             return View(pages.ToPagedList(pageNumber, pageSize));
         }
 
+        [HttpGet]
         public ActionResult Details(int? id)
         {
             var page = this.data.Pages.All()
@@ -102,6 +106,7 @@
             if (model != null && ModelState.IsValid)
             {
                 var page = AutoMapper.Mapper.Map<Page>(model);
+                page.Description = this.sanitizer.Sanitize(model.Description);
                 page.UserId = base.CurrentUser.Id;
                 page.CreatedOn = DateTime.Now;
 
@@ -155,6 +160,7 @@
             return View(model);
         }
 
+        [HttpGet]
         public ActionResult Random()
         {
             this.random = new Random();
@@ -182,7 +188,8 @@
             //return this.View(pages);
         }
 
-        [ChildActionOnly]
+        [HttpGet]
+        [ChildActionOnly]     
         public ActionResult GetVotesPartial(int id)
         {
             var page = this.data.Pages.Find(id);
@@ -192,6 +199,7 @@
             return PartialView("~/Views/Shared/_VotePartial.cshtml", viewModel);
         }
 
+        [HttpGet]
         [ChildActionOnly]
         public ActionResult GetCategoriesPartial()
         {
@@ -203,6 +211,7 @@
             return PartialView("~/Views/Shared/_CategoriesPartial.cshtml", viewModel);
         }
 
+        [HttpGet]
         public ActionResult Image (int id)
         {
             var image = this.data.Images.Find(id);
@@ -224,6 +233,7 @@
             return File(image.Content, contentType);
         }
 
+        [HttpGet]
         private Image GetUploadedImage(AddPageViewModel model)
         {
             using (var memory = new MemoryStream())

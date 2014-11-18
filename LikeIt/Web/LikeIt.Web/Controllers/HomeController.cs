@@ -19,7 +19,7 @@
         {
         }
 
-        //[OutputCache(Duration = 60 * 15)]
+        [OutputCache(Duration = 60 * 15)]
         public ActionResult Index()
         {
             var likes = this.data.Pages.All()
@@ -32,7 +32,7 @@
         }
         
         [ChildActionOnly]
-        //[OutputCache(Duration = 60 * 15)]
+        [OutputCache(Duration = 60 * 15)]
         public ActionResult GetTrendingLikes()
         {
             var trendingLikes = this.data.Pages.All()
@@ -45,7 +45,7 @@
         }
 
         [ChildActionOnly]
-        //[OutputCache(Duration = 60 * 15)]
+        [OutputCache(Duration = 60 * 15)]
         public ActionResult GetTrendingDislikes()
         {
             var trendingDislikes = this.data.Pages.All()
@@ -56,7 +56,6 @@
 
             return PartialView("_TrendingDislikes", trendingDislikes);
         }
-
 
         public ActionResult About()
         {

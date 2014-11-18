@@ -4,26 +4,22 @@
         <div class="col-md-12 text-center">
             @Html.DisplayFor(m => m.Rating, "PageRating")
 
-                @Ajax.ActionLink(" ", "Like", "Votes", new { id = Model.PageId },
+            @Ajax.ActionLink(" ", "Like", "Votes", new { id = Model.PageId },
             new AjaxOptions
            {
                HttpMethod = "POST",
                InsertionMode = InsertionMode.Replace,
                UpdateTargetId = "page-rating"
            }, new { @class = "glyphicon glyphicon-thumbs-up pull-left" })
-                @Ajax.ActionLink(" ", "Dislike", "Votes", new { id = Model.PageId },
+            @Ajax.ActionLink(" ", "Dislike", "Votes", new { id = Model.PageId },
             new AjaxOptions
            {
                HttpMethod = "POST",
                InsertionMode = InsertionMode.Replace,
                UpdateTargetId = "page-rating"
            }, new { @class = "glyphicon glyphicon-thumbs-down pull-right" })
-            </div>
-            </div>
-
-       
-                    @Html.DisplayFor(m => m.LikesCount, "LikesCount")
-                    @Html.DisplayFor(m => m.DislikesCount, "DislikesCount")
-    
-
         </div>
+    </div>
+    @Html.DisplayFor(m => m.LikesCount, "LikesCount")
+    @Html.DisplayFor(m => m.DislikesCount, "DislikesCount")
+</div>

@@ -9,10 +9,10 @@
     <h3 class="text-danger">Please don't give up on us and try again in a second!</h3>*@
 
 <div class="text-center">
-
     <img src="~/Images/error.png" />
 </div>
-@if (User.IsInRole("administrator"))
+
+@if (User.IsInRole(LikeIt.Common.GlobalConstants.AdminRole))
 {
     <hr />
     <p><strong>Controller: </strong>@Model.ControllerName</p>

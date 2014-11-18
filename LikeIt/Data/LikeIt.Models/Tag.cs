@@ -19,7 +19,7 @@
         public int Id { get; set; }
 
         [Required]
-        [StringLength(20), MinLength(3)]
+        [StringLength(20), MinLength(2)]
         public string Name { get; set; }
 
         public ICollection<Page> Pages

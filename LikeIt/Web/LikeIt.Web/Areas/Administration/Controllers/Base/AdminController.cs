@@ -6,7 +6,7 @@
     using LikeIt.Web.Controllers;
     using LikeIt.Common;
 
-    //[Authorize(Roles = GlobalConstants.AdminRole)]
+    [Authorize(Roles = GlobalConstants.AdminRole)]
     public abstract class AdminController : BaseController
     {
         public AdminController(ILikeItData data)

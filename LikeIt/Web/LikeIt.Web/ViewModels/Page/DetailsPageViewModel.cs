@@ -31,7 +31,7 @@
 
         public string AuthorName { get; set; }
 
-         [UIHint("CategoryName")]
+        [UIHint("CategoryName")]
         public string CategoryName { get; set; }
 
         public virtual IEnumerable<TagViewModel> Tags { get; set; }

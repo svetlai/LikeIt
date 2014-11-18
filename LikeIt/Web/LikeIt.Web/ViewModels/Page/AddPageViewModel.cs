@@ -15,12 +15,14 @@
         [HiddenInput()]
         public int Id { get; set; }
 
+        [AllowHtml]
         [Required]
-        [StringLength(100), MinLength(3)]
+        [StringLength(150), MinLength(2)]
         public string Name { get; set; }
 
+        [AllowHtml]
         [UIHint("MultiLineText")]
-        [StringLength(500), MinLength(20)]
+        [StringLength(100), MinLength(2)]
         public string Description { get; set; }
 
         public DateTime CreatedOn { get; set; }
@@ -38,6 +40,7 @@
 
         public HttpPostedFileBase UploadedImage { get; set; }
 
+        [AllowHtml]
         [Display(Name = "Tags")]
         public string TagsString { get; set; }
 

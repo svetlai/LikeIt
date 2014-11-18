@@ -10,15 +10,15 @@
         }))
 {
 
-@Html.EditorFor(m => m.Id, new { ListItem = Model.Categories })
-@*@Html.Hidden("categoryId", 2)*@
+    @Html.EditorFor(m => m.Id, new { ListItem = Model.Categories })
+    @*@Html.Hidden("categoryId", 2)*@
 }
 
 @*<script language="JavaScript">
-    $('#categories').on('change', function () {
-        var data = { categoryId: $('#categories').val() };
-        this.form.submit(data);
-        //$.post('Page/SortByCategory', data, function (responseData) {
-        //});
-    });
-</script>*@
+        $('#categories').on('change', function () {
+            var data = { categoryId: $('#categories').val() };
+            this.form.submit(data);
+            //$.post('Page/SortByCategory', data, function (responseData) {
+            //});
+        });
+    </script>*@

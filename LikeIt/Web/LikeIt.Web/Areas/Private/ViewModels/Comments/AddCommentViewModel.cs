@@ -19,10 +19,11 @@
             this.PageId = pageId;
         }
 
-        [HiddenInput()]
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
         [Required]
+        [AllowHtml]
         [UIHint("MultiLineText")]
         [StringLength(150), MinLength(3)]
         public string Content { get; set; }

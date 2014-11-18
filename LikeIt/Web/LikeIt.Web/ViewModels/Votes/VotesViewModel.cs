@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Web.Mvc;
 
     using LikeIt.Models;
     using LikeIt.Web.Infrastructure.Mapping;
@@ -17,6 +18,7 @@
             this.PageId = pageId;
         }
 
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
         public int PageId { get; set; }

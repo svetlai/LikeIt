@@ -4,11 +4,13 @@
     using System.Threading.Tasks;
     using System.Security.Claims;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using LikeIt.Data.Common.Models;
+
 
     public class User : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -22,8 +24,10 @@
             this.CreatedOn = DateTime.Now;
         }
 
+        [StringLength(50), MinLength(2)]
         public string FirstName { get; set; }
 
+        [StringLength(50), MinLength(2)]
         public string LastName { get; set; }
 
         public virtual ICollection<Page> Pages

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace LikeIt.Web.Areas.Administration.ViewModels.Base
+﻿namespace LikeIt.Web.Areas.Administration.ViewModels.Base
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Web;
+    using System.Web.Mvc;
+
     public abstract class AdministrationViewModel
     {
         [Display(Name = "Added on")]

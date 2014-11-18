@@ -12,7 +12,7 @@
 
     public class ListPagesViewModel : IMapFrom<Page>, IHaveCustomMappings
     {
-        [HiddenInput()]
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
         public string Name { get; set; }

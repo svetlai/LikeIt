@@ -14,6 +14,7 @@
             this.pages = new HashSet<Page>();
         }
 
+        [Key]
         public int Id { get; set; }
 
         public byte[] Content { get; set; }

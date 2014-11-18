@@ -40,8 +40,12 @@
         [HttpPost]
         public ActionResult Create([DataSourceRequest]DataSourceRequest request, ViewModel model)
         {
-            var dbModel = base.Create<Model>(model);
-            if (dbModel != null) model.Id = dbModel.Id;
+            var dbModel = base.Create<Model>(model);          
+            if (dbModel != null)
+            {
+                dbModel.UserId = base.CurrentUser.Id;
+                model.Id = dbModel.Id;
+            }
             return this.GridOperation(model, request);
         }
 

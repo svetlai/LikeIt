@@ -20,6 +20,7 @@
         [StringLength(150), MinLength(3)]
         public string Content { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         public string AuthorName { get; set; }
 
         public void CreateMappings(IConfiguration configuration)

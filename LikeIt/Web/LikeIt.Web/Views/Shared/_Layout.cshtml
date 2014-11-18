@@ -29,7 +29,7 @@
                     @*<li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { })</li>*@
                     <li>@Html.ActionLink("Browse Likes", "Index", "Page", new { area = "" }, new { })</li>
                     <li>@Html.ActionLink("Like a Random", "Random", "Page", new { area = "" }, new { })</li>
-                </ul>           
+                </ul>
                 @Html.Partial("_LoginPartial")
             </div>
             @Html.Partial("~/Areas/Administration/Views/Shared/_AdminPartial.cshtml")
@@ -37,13 +37,13 @@
     </div>
     <div class="container body-content">
         <div class="sidebar">
-          
+
         </div>
         @RenderBody()
         @RenderSection("footer", required: false)
         <hr />
         <footer>
-           
+
             <p class="text-center">&copy; @DateTime.Now.Year - LikeIt - An ASP.NET Application Project for Telerik Academy</p>
         </footer>
     </div>

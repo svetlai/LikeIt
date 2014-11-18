@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (User.IsInRole("administrator"))
+@if (User.IsInRole(LikeIt.Common.GlobalConstants.AdminRole))
 {
     <div class="panel panel-default">
         <div class="navbar-header">
@@ -16,6 +16,5 @@
             <li>@Html.ActionLink("Users", "Index", "Users", new { area = "Administration" }, new { })</li>
             <li>@Html.ActionLink("Roles", "Index", "Roles", new { area = "Administration" }, new { })</li>
         </ul>
-
     </div>
 }

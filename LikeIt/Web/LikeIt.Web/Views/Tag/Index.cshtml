@@ -1,7 +1,10 @@
-﻿
+﻿@model IEnumerable<LikeIt.Web.ViewModels.Tag.TagViewModel>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tags";
 }
 
-<h2>Tag Index</h2>
+<h2>All Tags</h2>
+
+@Html.Partial("~/Views/Shared/_TagsPartial.cshtml", Model)
+
 

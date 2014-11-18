@@ -12,9 +12,9 @@
     using LikeIt.Web.Areas.Private.ViewModels.Comments;
     using LikeIt.Web.Controllers;
     using LikeIt.Web.ViewModels.Comment;
+    using LikeIt.Web.Areas.Private.Controllers.Base;
 
-    [Authorize]
-    public class CommentController : BaseController
+    public class CommentController : PrivateController
     {
         public CommentController(ILikeItData data)
             : base(data)

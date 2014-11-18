@@ -1,17 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace LikeIt.Web.Controllers
+﻿namespace LikeIt.Web.Controllers
 {
-    public class TagController : Controller
+    using System.Web.Mvc;
+
+    using AutoMapper.QueryableExtensions;
+
+    using LikeIt.Data.Contracts;
+    using LikeIt.Web.ViewModels.Tag;
+
+    //TODO
+    public class TagController : BaseController
     {
-        // GET: Tag
+        public TagController(ILikeItData data)
+            : base(data)
+        {
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var tags = this.data.Tags.All()
+                .Project()
+                .To<TagViewModel>();
+
+            return View(tags);
+        }
+
+        public ActionResult GetByTag(string tag)
+        {
+            return this.Content(tag);
         }
     }
 }
