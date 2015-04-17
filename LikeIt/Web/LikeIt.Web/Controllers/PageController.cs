@@ -26,6 +26,8 @@
 
     public class PageController : BaseController
     {
+        private readonly char[] TagSeparators = new char[] { ' ', ',', ';' };
+
         private IDropDownListPopulator populator;
         private readonly ISanitizer sanitizer;
         private Random random;
@@ -60,7 +62,7 @@
             if (!String.IsNullOrEmpty(searchString))
             {
                 pages = pages
-                    .Where(p => p.Name.ToLower().Contains(searchString.ToLower()));                   
+                    .Where(p => p.Name.ToLower().Contains(searchString.ToLower()));
             }
 
             int pageSize = 6;
@@ -124,7 +126,7 @@
 
                 if (model.TagsString != null)
                 {
-                    var tags = model.TagsString.Split(' ');
+                    var tags = model.TagsString.Split(TagSeparators, StringSplitOptions.RemoveEmptyEntries);
 
                     foreach (var tag in tags)
                     {
@@ -163,19 +165,18 @@
         [HttpGet]
         public ActionResult Random()
         {
-            this.random = new Random();
-
             var pages = this.data.Pages
                 .All()
                 .Project()
                 .To<DetailsPageViewModel>()
                 .ToList();
 
-            var page = pages[random.Next(0, pages.Count())];
+            var page = pages[this.random.Next(0, pages.Count())];
 
             return View(page);
         }
 
+        // TODO : Fix
         [HttpPost]
         public ActionResult FilterByCategory(int categoryId)
         {
@@ -189,7 +190,7 @@
         }
 
         [HttpGet]
-        [ChildActionOnly]     
+        [ChildActionOnly]
         public ActionResult GetVotesPartial(int id)
         {
             var page = this.data.Pages.Find(id);
@@ -212,7 +213,7 @@
         }
 
         [HttpGet]
-        public ActionResult Image (int id)
+        public ActionResult Image(int id)
         {
             var image = this.data.Images.Find(id);
             if (image == null)

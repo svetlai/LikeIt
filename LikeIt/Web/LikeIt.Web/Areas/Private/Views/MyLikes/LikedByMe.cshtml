@@ -14,13 +14,18 @@
 
 <div class="panel panel-default">
     <div class="panel-body">
-        @Html.ActionLink("Add New Like", "Create", new { }, new { @class = "btn btn-primary btn-lg pull-right" })
+        <div class="pull-right">
+            @Html.DisplayFor(b => b, "CreatePageButton")
+        </div>
         <h4>Liked by Me</h4>
-        @Html.ActionLink("Added By Me", "Index", "MyLikes", new { }, new { @class = "" }) | 
+        @Html.ActionLink("Added By Me", "Index", "MyLikes", new { }, new { @class = "" }) |
         @Html.ActionLink("Disliked By Me", "DislikedByMe", "MyLikes", new { }, new { @class = "" })
         <p>
             <div class="row">
-                @Html.Partial("~/Views/Shared/_SearchPartial.cshtml")
+                @using (Html.BeginForm("LikedByMe", "MyLikes", FormMethod.Get))
+                {
+                    @Html.Partial("~/Views/Shared/_SearchPartial.cshtml")
+                }
             </div>
             <br />
         </p>

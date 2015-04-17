@@ -14,26 +14,31 @@
 
 <div class="panel panel-default">
     <div class="panel-body">
-        @Html.ActionLink("Add New Like", "Create", new { }, new { @class = "btn btn-primary btn-lg pull-right" })
-        <h4>Added by Me</h4>     
-        @Html.ActionLink("Liked By Me", "LikedByMe", "MyLikes", new { }, new { @class = "" }) | 
-        @Html.ActionLink("Disliked By Me", "DislikedByMe", "MyLikes", new { }, new { @class = "" })
-        <p>
-            <div class="row">
-                @Html.Partial("~/Views/Shared/_SearchPartial.cshtml")
-            </div>
-            <br />
-        </p>
-        @using (Ajax.BeginForm("Index", "MyLikes", new AjaxOptions
+        <div class="pull-right">
+            @Html.DisplayFor(b => b, "CreatePageButton")
+        </div>         
+            <h4>Added by Me</h4>
+            @Html.ActionLink("Liked By Me", "LikedByMe", "MyLikes", new { }, new { @class = "" }) |
+            @Html.ActionLink("Disliked By Me", "DislikedByMe", "MyLikes", new { }, new { @class = "" })
+            <p>
+                <div class="row">
+                    @using (Html.BeginForm("Index", "MyLikes", FormMethod.Get))
+                    {
+                        @Html.Partial("~/Views/Shared/_SearchPartial.cshtml")
+                    }
+                </div>
+                <br />
+            </p>
+            @using (Ajax.BeginForm("Index", "MyLikes", new AjaxOptions
 {
     HttpMethod = "GET",
     InsertionMode = InsertionMode.Replace,
     UpdateTargetId = "all-pages",
 }))
-        {
-            @Html.DisplayFor(p => p, "ListPages")
-        }
-    </div>
+            {
+                @Html.DisplayFor(p => p, "ListPages")
+            }
+        </div>
 </div>
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 

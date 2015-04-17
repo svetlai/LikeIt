@@ -3,7 +3,16 @@
     <div class="row">
         <div class="col-md-12 text-center">
             @Html.DisplayFor(m => m.Rating, "PageRating")
-
+            @if (!Request.IsAuthenticated)
+            {
+                <div class="unauthenticated glyphicon glyphicon-thumbs-up"></div>
+            }
+        </div>
+    </div>
+@if (Request.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-md-12 text-center">
             @Ajax.ActionLink(" ", "Like", "Votes", new { id = Model.PageId },
             new AjaxOptions
            {
@@ -22,4 +31,6 @@
     </div>
     @Html.DisplayFor(m => m.LikesCount, "LikesCount")
     @Html.DisplayFor(m => m.DislikesCount, "DislikesCount")
+}
 </div>
+

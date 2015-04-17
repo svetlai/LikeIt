@@ -22,6 +22,7 @@
 
         [AllowHtml]
         [UIHint("MultiLineText")]
+        [Required]
         [StringLength(100), MinLength(2)]
         public string Description { get; set; }
 

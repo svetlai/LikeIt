@@ -4,6 +4,8 @@
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
 
+    using Microsoft.AspNet.Identity.EntityFramework;
+
     using LikeIt.Models;
 
     public interface ILikeItDbContext : IDisposable

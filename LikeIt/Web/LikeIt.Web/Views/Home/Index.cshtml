@@ -5,7 +5,7 @@
 <div class="jumbotron" id="main-slide">
     <h1 class="text-shadow">Like It!</h1>
     <p class="lead">Like something? Share with the world!</p>
-    @Html.ActionLink("Add New Like", "Create", "Page", new { area = "" }, new { @class = "btn btn-primary btn-lg" })
+    @Html.DisplayFor(b => b, "CreatePageButton")
 </div>
 <div class="panel panel-default ">
     <div class="panel-body">

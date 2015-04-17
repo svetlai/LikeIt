@@ -10,7 +10,7 @@
     public class PagesViewModel : AdministrationViewModel, IMapFrom<Page>
     {
         [HiddenInput(DisplayValue = false)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Required]
         [StringLength(100), MinLength(3)]
