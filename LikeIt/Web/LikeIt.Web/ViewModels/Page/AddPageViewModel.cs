@@ -23,7 +23,7 @@
         [AllowHtml]
         [UIHint("MultiLineText")]
         [Required]
-        [StringLength(100), MinLength(2)]
+        [StringLength(100), MinLength(10)]
         public string Description { get; set; }
 
         public DateTime CreatedOn { get; set; }

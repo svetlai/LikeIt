@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - LikeIt</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/kendo")
+    @RenderSection("styles", required: false)
+    @Styles.Render("~/Content/custom")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("LikeIt", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { })</li>
+                    @*<li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { })</li>*@
+                    <li>@Html.ActionLink("Browse Likes", "Index", "Page", new { area = "" }, new { })</li>
+                    <li>@Html.ActionLink("Like a Random", "Random", "Page", new { area = "" }, new { })</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+            @Html.Partial("~/Areas/Administration/Views/Shared/_AdminPartial.cshtml")
+        </div>
+    </div>
+    <div class="body-content">
+        <div class="sidebar">
+        </div>
+        @RenderBody()
+        @RenderSection("footer", required: false)
+        <hr />
+        <footer>
+
+            <p class="text-center">&copy; @DateTime.Now.Year - LikeIt - An ASP.NET Application Project for Telerik Academy</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/kendo")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

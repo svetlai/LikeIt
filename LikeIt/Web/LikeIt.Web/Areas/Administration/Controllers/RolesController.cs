@@ -55,7 +55,7 @@
         [HttpPost]
         public ActionResult Destroy([DataSourceRequest]DataSourceRequest request, ViewModel model)
         {
-            if (model != null && ModelState.IsValid)
+            if (model != null) // && ModelState.IsValid
             {
                 this.data.IdentityRoles.Delete(model.Id);
                 this.data.SaveChanges();

@@ -6,9 +6,9 @@
     using Microsoft.AspNet.Identity.EntityFramework;
 
     using LikeIt.Data.Contracts;
+    using LikeIt.Data.Common.Models;
     using LikeIt.Data.Common.Repositories;
     using LikeIt.Models;
-    using LikeIt.Data.Common.Models;
 
     public class LikeItData : ILikeItData
     {

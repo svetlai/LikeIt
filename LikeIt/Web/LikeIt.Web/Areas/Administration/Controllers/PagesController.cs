@@ -12,6 +12,7 @@
 
     using Model = LikeIt.Models.Page;
     using ViewModel = LikeIt.Web.Areas.Administration.ViewModels.Pages.PagesViewModel;
+    using AutoMapper;
 
     public class PagesController : KendoGridAdministrationController
     {
@@ -48,14 +49,22 @@
         [HttpPost]
         public ActionResult Update([DataSourceRequest]DataSourceRequest request, ViewModel model)
         {
-            base.Update<Model, ViewModel>(model, model.Id.Value);
+            if (model != null)
+            {
+                var dbModel = this.Find<Model>(model.Id);
+                Mapper.Map(model, dbModel);
+                this.data.SaveChanges();
+                model.Id = dbModel.Id;
+            }
+     
+            //base.Update<Model, ViewModel>(model, model.Id.Value);
             return this.GridOperation(model, request);
         }
 
         [HttpPost]
         public ActionResult Destroy([DataSourceRequest]DataSourceRequest request, ViewModel model)
         {
-            if (model != null && ModelState.IsValid)
+            if (model != null) // && ModelState.IsValid
             {
                 this.data.Pages.Delete(model.Id.Value);
                 this.data.SaveChanges();

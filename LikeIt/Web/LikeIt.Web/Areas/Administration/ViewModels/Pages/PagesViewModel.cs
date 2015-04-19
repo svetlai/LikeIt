@@ -18,11 +18,11 @@
 
         [Required]
         [UIHint("MultilineText")]
-        [StringLength(500), MinLength(20)]
+        [StringLength(500), MinLength(10)]
         public string Description { get; set; }
 
         [Required]
-        [UIHint("DropDownList")]
+        //[UIHint("DropDownList")]
         public int CategoryId { get; set; }
 
         //public int Rating { get; set; }

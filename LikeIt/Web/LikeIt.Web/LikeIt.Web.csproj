@@ -372,6 +372,7 @@
     <Content Include="Areas\Private\Views\MyLikes\LikedByMe.cshtml" />
     <Content Include="Areas\Private\Views\MyLikes\DislikedByMe.cshtml" />
     <Content Include="Areas\Private\Views\Comment\MyComments.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Images\default.png" />
     <Content Include="Scripts\bootstrap.js" />

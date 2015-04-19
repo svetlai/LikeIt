@@ -55,7 +55,7 @@
         [HttpPost]
         public ActionResult Destroy([DataSourceRequest]DataSourceRequest request, ViewModel model)
         {
-            if (model != null && ModelState.IsValid)
+            if (model != null) // && ModelState.IsValid
             {
                 this.data.Comments.Delete(model.Id.Value);
                 this.data.SaveChanges();
