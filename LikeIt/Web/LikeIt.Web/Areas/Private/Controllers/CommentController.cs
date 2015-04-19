@@ -51,8 +51,8 @@
         {
             var comments = this.data.Comments.All()
                 .Where(c => c.AuthorId == this.CurrentUser.Id)
-                .OrderBy(c => c.PageId)
-                .ThenByDescending(c => c.CreatedOn)
+                //.OrderBy(c => c.PageId)
+                .OrderByDescending(c => c.CreatedOn)
                 .Project()
                 .To<CommentViewModel>();
 

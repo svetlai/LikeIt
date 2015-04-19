@@ -31,14 +31,18 @@
             <br />
         </p>
         @using (Ajax.BeginForm("Index", "Page", new AjaxOptions
-{
-    HttpMethod = "GET",
-    InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "all-pages",
-}))
+                {
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "all-pages",
+                }))
         {
             @Html.DisplayFor(p => p, "ListPages")
         }
+
+        @*<div class="row text-center" id="all-pages">
+            @Html.Partial("_PagesListPartial", Model)
+        </div>*@
     </div>
 </div>
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount

@@ -28,6 +28,8 @@
     {
         private readonly char[] TagSeparators = new char[] { ' ', ',', ';' };
 
+        private const int PageSize = 6;
+
         private IDropDownListPopulator populator;
         private readonly ISanitizer sanitizer;
         private Random random;
@@ -41,7 +43,7 @@
         }
 
         [HttpGet]
-        public ActionResult Index(string currentFilter, string searchString, int? page)
+        public ActionResult Index(string currentFilter, string searchString, int? CategoryId, int? page)
         {
             if (searchString != null)
             {
@@ -54,10 +56,8 @@
 
             ViewBag.CurrentFilter = searchString;
 
-            var pages = this.data.Pages.All()
-                .OrderByDescending(p => p.Rating)
-                .Project()
-                .To<ListPagesViewModel>();
+            var pages = this.data.Pages.All();
+                
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -65,10 +65,20 @@
                     .Where(p => p.Name.ToLower().Contains(searchString.ToLower()));
             }
 
-            int pageSize = 6;
+            if (CategoryId != null)
+            {
+                pages = this.data.Pages
+                .All()
+                .Where(p => p.CategoryId == CategoryId);
+            }
+
+            var viewModel = pages.OrderByDescending(p => p.Rating)
+                .Project()
+                .To<ListPagesViewModel>();
+
             int pageNumber = (page ?? 1);
 
-            return View(pages.ToPagedList(pageNumber, pageSize));
+            return View(viewModel.ToPagedList(pageNumber, PageSize));
         }
 
         [HttpGet]
@@ -84,6 +94,8 @@
             {
                 return this.HttpNotFound("The page you're looking for wasn't found.");
             }
+
+            page.Comments = page.Comments.OrderByDescending(c => c.CreatedOn).ToList();
 
             return View(page);
         }
@@ -152,8 +164,7 @@
                     });
                 }
 
-                page.Rating = page.Likes.Where(l => !l.IsDeleted).Count() - page.Dislikes.Where(l => !l.IsDeleted).Count();
-
+                page.Rating = this.GetPageRating(page);
                 this.data.SaveChanges();
 
                 return this.RedirectToAction("Details", new { id = page.Id });
@@ -176,18 +187,21 @@
             return View(page);
         }
 
-        // TODO : Fix
-        [HttpPost]
-        public ActionResult FilterByCategory(int categoryId)
-        {
-            var pages = this.data.Pages
-                .All().Where(p => p.CategoryId == categoryId)
-                .Project()
-                .To<ListPagesViewModel>();
+        //// TODO : Fix - Ajax.BeginForm in _CategoriesPartial
+        //[HttpPost]
+        //public ActionResult FilterByCategory(int categoryId)
+        //{
+        //    var pages = this.data.Pages
+        //        .All()
+        //        .Where(p => p.CategoryId == categoryId)
+        //        .OrderByDescending(p => p.Likes)
+        //        .Project()
+        //        .To<ListPagesViewModel>();
 
-            return PartialView("~/Views/Shared/_PagesListPartial.cshtml", pages);
-            //return this.View(pages);
-        }
+        //   // int pageNumber = (page ?? 1);
+        //    return PartialView("_PagesListPartial", pages);
+        //   // return this.View("Index", pages.ToPagedList(pageNumber, PageSize));
+        //}
 
         [HttpGet]
         [ChildActionOnly]
@@ -206,7 +220,7 @@
         {
             var viewModel = new ListCategoriesViewModel
             {
-                Categories = this.populator.GetCategories()
+                Categories = this.populator.GetCategories(),              
             };
 
             return PartialView("~/Views/Shared/_CategoriesPartial.cshtml", viewModel);
@@ -256,6 +270,11 @@
 
                 return image;
             }
+        }
+
+        private int GetPageRating(Page page)
+        {
+            return page.Likes.Where(l => !l.IsDeleted).Count() - page.Dislikes.Where(l => !l.IsDeleted).Count();
         }
     }
 }

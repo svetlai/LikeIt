@@ -32,7 +32,7 @@
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.spacelab.css"));
+                      "~/Content/bootstrap.superhero.css"));
 
             bundles.Add(new StyleBundle("~/Content/custom").Include(
                     "~/Content/site.css"));

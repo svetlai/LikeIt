@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Details";
 }
-<div class="panel panel-default ">
+<div class="panel panel-default details">
     <div class="panel-body details-panel-img" style="background-image: url('@(Model.Image != null ? @Url.Action("Image", "Page", new { id = Model.Image.Id }) : Url.Content("~/Images/default.png"))')">
         <div class="panel panel-default details-panel-title">
             <div class="panel-body">

@@ -1,6 +1,5 @@
 ﻿@model LikeIt.Web.ViewModels.Categories.ListCategoriesViewModel
-
-@using (Ajax.BeginForm("FilterByCategory", "Page",
+@*@using (Ajax.BeginForm("Index", "Page",
         new AjaxOptions
         {
             HttpMethod = "POST",
@@ -8,11 +7,18 @@
             UpdateTargetId = "all-pages",
             //OnFailure = "showCommentRequiredError"
         }))
+{*@
+@using (Html.BeginForm("Index", "Page", new { area = "" }, FormMethod.Get))
 {
-
-    @Html.EditorFor(m => m.Id, new { ListItem = Model.Categories })
-    @Html.Hidden("categoryId", 2)
+        @Html.EditorFor(m => m.CategoryId, new { ListItem = Model.Categories })
 }
+    @*}*@
+
+<script type="text/javascript">
+    $('#categories').change(function () {
+        $(this).parents('form').submit();
+    });
+</script>
 
 @*<script language="JavaScript">
         $('#categories').on('change', function () {

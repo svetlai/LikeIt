@@ -13,7 +13,7 @@
 
     public class HomeController : BaseController
     {
-        private const int likesCount = 3;
+        private const int LikesCount = 3;
         public HomeController(ILikeItData data)
             : base(data)
         {
@@ -37,7 +37,7 @@
         {
             var trendingLikes = this.data.Pages.All()
                 .OrderByDescending(p => p.Rating)
-                .Take(likesCount)
+                .Take(LikesCount)
                 .Project()
                 .To<ListPagesViewModel>();
 
@@ -50,7 +50,7 @@
         {
             var trendingDislikes = this.data.Pages.All()
                .OrderBy(p => p.Rating)
-               .Take(likesCount)
+               .Take(LikesCount)
                .Project()
                .To<ListPagesViewModel>();
 

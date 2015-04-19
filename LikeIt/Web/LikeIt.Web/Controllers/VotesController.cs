@@ -35,7 +35,7 @@
 
             var existingLike = this.data.Likes
                 .All()
-                .Where(d => d.UserId == this.CurrentUser.Id && d.PageId == page.Id && d.IsDeleted != true)
+                .Where(l => l.UserId == this.CurrentUser.Id && l.PageId == page.Id && l.IsDeleted != true)
                 .FirstOrDefault();
 
             var existingDislike = this.data.Dislikes

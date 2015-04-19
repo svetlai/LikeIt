@@ -6,18 +6,17 @@
     {
         <a href="~/Page/Details/@page.Id" title="@page.Name">
             <div class="single-page">
-                <div class="circle">
-                    <span class="rating-count">
-                        @page.Rating
-                    </span>
-                </div>
+        
                 <div class="ratio page-main-content" style="background-image: url('@(page.Image != null ? @Url.Action("Image", "Page", new { id = page.Image.Id }) : Url.Content("~/Images/default.png"))')">
-
+                    <div class="circle">
+                        @*<span class="rating-count">*@
+                        <h2 class="rating-count">@page.Rating</h2>
+                        @*</span>*@
+                    </div>
                     <div class="page-heading">
                         @Html.DisplayFor(p => page.Name, "PageHeading")
                         @Html.DisplayFor(p => page.CategoryName, "CategoryName")
                     </div>
-
                 </div>
             </div>
         </a>

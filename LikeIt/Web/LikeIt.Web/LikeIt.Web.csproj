@@ -368,7 +368,7 @@
     <Content Include="Images\500.jpg" />
     <Content Include="Images\error.png" />
     <Content Include="Images\like-hashtag.jpg" />
-    <Content Include="Areas\Private\Views\Shared\DisplayTemplates\CommentAuthor.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CommentAuthor.cshtml" />
     <Content Include="Areas\Private\Views\MyLikes\LikedByMe.cshtml" />
     <Content Include="Areas\Private\Views\MyLikes\DislikedByMe.cshtml" />
     <Content Include="Areas\Private\Views\Comment\MyComments.cshtml" />
@@ -448,8 +448,8 @@
     <Content Include="Views\Shared\DisplayTemplates\TagName.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PageAuthor.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PageDateCreated.cshtml" />
-    <Content Include="Areas\Private\Views\Shared\DisplayTemplates\CommentDateCreated.cshtml" />
-    <Content Include="Areas\Private\Views\Shared\DisplayTemplates\CommentContent.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CommentDateCreated.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CommentContent.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PageDescription.cshtml" />
     <Content Include="Views\Shared\_CategoriesPartial.cshtml" />
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
