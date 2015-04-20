@@ -35,7 +35,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.TagsString, new { @class = "col-md-1 control-label" })
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.TagsString, new { htmlAttributes = new { @class = "form-control", placeholder = "Add tags, separated by space" } })
+                    @Html.EditorFor(model => model.TagsString, new { htmlAttributes = new { @class = "form-control", placeholder = "Add tags, separated by comma" } })
                     @Html.ValidationMessageFor(model => model.TagsString, "", new { @class = "text-danger" })
                 </div>
             </div>

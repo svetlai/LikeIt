@@ -3,8 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using System.Data.Entity.Migrations;
+    using System.IO;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -13,10 +13,11 @@
     using LikeIt.Data.Contracts;
     using LikeIt.Models;
     using System.Reflection;
-    using System.IO;
 
     public class SeedData
     {
+        public const string DeafultImagePath = "../../Images/default-image.png";
+
         private IRandomGenerator randomGenerator;
 
         public SeedData()
@@ -45,19 +46,21 @@
             {
                 Email = "admin@a.a",
                 UserName = "admin",
+                FirstName = "Adi",
+                LastName = "Minkov"
             };
 
             userManager.Create(admin, "123456");
-            userManager.AddToRole(admin.Id, "Administrator"); //GlobalConstants.AdminRoleName
+            userManager.AddToRole(admin.Id, GlobalConstants.AdminRole);
 
             context.SaveChanges();
         }
 
-        public void SeedUsers(LikeItDbContext context)
+        public void SeedRandomUsers(LikeItDbContext context, int count)
         {
             var userManager = new UserManager<User>(new UserStore<User>(context));
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < count; i++)
             {
                 var user = new User
                 {
@@ -73,7 +76,7 @@
             context.SaveChanges();
         }
 
-        public Category[] GetCategories()
+        public void SeedCategories(LikeItDbContext context)
         {
             var categories = new List<Category>
             {
@@ -85,66 +88,163 @@
                 new Category { Name = "People"},
                 new Category { Name = "Causes"},
                 new Category { Name = "Food"},
+                new Category { Name = "Animals"},
+                new Category { Name = "Hobbies"},
                 new Category { Name = "Other"},
             };
 
-            return categories.ToArray();
+            context.Categories.AddOrUpdate(categories.ToArray());
+            context.SaveChanges();
         }
 
-        public Tag[] GetTags()
+        public void SeedRandomTags(LikeItDbContext context, int count)
         {
             var tags = new List<Tag>();
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < count; i++)
             {
                 tags.Add(new Tag
                 {
-                   Name = this.randomGenerator.RandomString(3, 5)
+                    Name = this.randomGenerator.RandomString(3, 5)
                 });
             }
-            
-            return tags.ToArray();
+
+            context.Tags.AddOrUpdate(tags.ToArray());
+            context.SaveChanges();
         }
 
-        public Page[] GetPages(IList<Category> categories, IEnumerable<Tag> tags, User user, Image image)
+        public void SeedRandomPages(LikeItDbContext context, IList<Category> categories, IList<User> users, int count)
         {
             var pages = new List<Page>();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < count; i++)
             {
                 var page = new Page
                 {
                     Name = this.randomGenerator.RandomString(5, 10),
-                    Category = categories[this.randomGenerator.RandomNumber(0, (categories.Count() - 1))],
+                    Category = categories[this.randomGenerator.RandomNumber(0, (categories.Count - 1))],
                     Description = this.randomGenerator.RandomString(20, 150),
                     CreatedOn = DateTime.Now,
-                    User = user,
-                    Image = image,
-                    Rating = this.randomGenerator.RandomNumber(-5, 15)
+                    User = this.GetRandomUser(users),
+                    Image = this.GetSampleImage(DeafultImagePath),
                 };
 
-                //for (int j = 0; j < 100; i++)
-                //{
-                //    page.Likes.Add(new Like());
-                //}
+                this.AddRandomTagsToPage(page, this.randomGenerator.RandomNumber(1, 5));
+                this.AddInitialRandomLikeDislikeToPage(page);
+
+                this.SeedRandomLikes(page, users, this.randomGenerator.RandomNumber(0, 20));
+                this.SeedRandomDislikes(page, users, this.randomGenerator.RandomNumber(0, 20));
+                this.SeedRandomComments(page, users, this.randomGenerator.RandomNumber(0, 4));
+
+                page.Rating = this.GetPageRating(page);
 
                 pages.Add(page);
             }
 
-            return pages.ToArray();
+            context.Pages.AddOrUpdate(pages.ToArray());
+            context.SaveChanges();
+        }
 
-            //var pages = new List<Page>
-            //{
-            //    new Page 
-            //    {
-            //        Name = "Telerik Academy",
-            //        Category = categories[2],
-            //        Description = "Students Integrated Learning System.",
-            //        CreatedOn = DateTime.Now,
-            //        User = user,
-            //        Image = image,
-            //    },
-            //};
+        public void SeedRandomLikes(Page page, IList<User> users, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                this.AddLike(page, this.GetRandomUser(users));
+            }
+        }
+
+        public void SeedRandomDislikes(Page page, IList<User> users, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                this.AddDislike(page, this.GetRandomUser(users));
+            }
+        }
+
+        public void SeedRandomComments(Page page, IList<User> users, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                this.AddComment(page, this.GetRandomUser(users), this.randomGenerator.RandomString());
+            }
+        }
+
+        public void SeedSinglePage(ILikeItDbContext context, string name, string description, Category category, IList<string> tags, User user, Image image, bool like, string comment = "")
+        {
+            var page = new Page
+            {
+                Name = name,
+                Category = category,
+                Description = description,
+                CreatedOn = DateTime.Now,
+                User = user,
+                Image = image,
+            };
+
+            for (int i = 0; i < tags.Count; i++)
+            {
+                this.AddTag(page, tags[i]);
+            }
+
+            if (like)
+            {
+                this.AddLike(page, page.User);
+            }
+            else
+            {
+                this.AddDislike(page, page.User);
+            }
+
+            page.Rating = this.GetPageRating(page);
+
+            if (!string.IsNullOrEmpty(comment))
+            {
+                this.AddComment(page, page.User, comment);
+            }
+
+            context.Pages.Add(page);
+            context.SaveChanges();
+        }
+
+        public void AddTag(Page page, string tagName)
+        {
+            page.Tags.Add(new Tag
+            {
+                Name = tagName
+            });
+        }
+
+        public void AddLike(Page page, User user)
+        {
+            page.Likes.Add(new Like
+            {
+                PageId = page.Id,
+                UserId = user.Id
+            });
+        }
+
+        public void AddDislike(Page page, User user)
+        {
+            page.Dislikes.Add(new Dislike
+            {
+                PageId = page.Id,
+                UserId = user.Id
+            });
+        }
+
+        public void AddComment(Page page, User user, string content)
+        {
+            page.Comments.Add(new Comment
+            {
+                AuthorId = user.Id,
+                PageId = page.Id,
+                Content = content
+            });
+        }
+
+        public User GetRandomUser(IList<User> users)
+        {
+            return users[this.randomGenerator.RandomNumber(0, users.Count - 1)];
         }
 
         public Image GetSampleImage(string path)
@@ -154,10 +254,35 @@
             var image = new Image
             {
                 Content = file,
-                FileExtension = "jpg"
+                FileExtension = path.Split('.').Last()
             };
 
             return image;
+        }
+
+        public int GetPageRating(Page page)
+        {
+            return page.Likes.Where(l => !l.IsDeleted).Count() - page.Dislikes.Where(l => !l.IsDeleted).Count();
+        }
+
+        private void AddRandomTagsToPage(Page page, int count)
+        {
+            for (int j = 0; j < count; j++)
+            {
+                AddTag(page, this.randomGenerator.RandomString(3, 15));
+            }
+        }
+
+        private void AddInitialRandomLikeDislikeToPage(Page page)
+        {
+            if (this.randomGenerator.RandomNumber(0, 2) == 0)
+            {
+                this.AddLike(page, page.User);
+            }
+            else
+            {
+                this.AddDislike(page, page.User);
+            }
         }
     }
 }

@@ -27,175 +27,127 @@ namespace LikeIt.Data.Migrations
 
         protected override void Seed(LikeItDbContext context)
         {
-            //if (context.Users.Any())
-            //{
-            //    return;
-            //}
+            if (context.Users.Any())
+            {
+                return;
+            }
 
-            //this.seeder.SeedRoles(context);
-            //this.seeder.SeedAdmin(context);
-            //this.seeder.SeedUsers(context);
-            //var categories = this.seeder.GetCategories();
+            this.seeder.SeedRoles(context);
+            this.seeder.SeedAdmin(context);
+            this.seeder.SeedRandomUsers(context, 10);
 
-            //context.Categories.AddOrUpdate(categories);
-            //context.SaveChanges();
-
-            //var tags = this.seeder.GetTags();
-
-            //context.Tags.AddOrUpdate(tags);
-            //context.SaveChanges();
-
-            var defaultPath = "../../Images/default.png";
-            var defaultImage = this.seeder.GetSampleImage(defaultPath);
+            this.seeder.SeedCategories(context);
 
             var users = context.Users.Take(10).ToList();
-            var tagsDb = context.Tags.Take(20).ToList();
-            var categotiesDB = context.Categories.ToList();
+            var categories = context.Categories.ToList();
 
-            //var pages = this.seeder.GetPages(categotiesDB, tagsDb, users[0], defaultImage);
-            //context.Pages.AddOrUpdate(pages);
-            //context.SaveChanges();
+            this.seeder.SeedRandomPages(context, categories, users, 10);
 
-            
+            this.seeder.SeedSinglePage(context,
+                "Telerik Academy",
+                "A free software academy, training hundreds of software engineers per year.",
+                categories.Where(c => c.Name == "Education").FirstOrDefault(),
+                new List<string> { "software", "developer", "web" },
+                users[2],
+                this.seeder.GetSampleImage("../../Images/imgs-seed/telerik-academy.jpg"),
+                true, "Best academy ever.");
 
-            //if (context.Users.Any())
-            //{
-            //    return;
-            //}
+            this.seeder.SeedSinglePage(context,
+                "BMW M3",
+                "A high-performance version of the BMW 3-series.",
+                categories.Where(c => c.Name == "Brands/Products").FirstOrDefault(),
+                new List<string> { "bmw", "car", "fast" },
+                users[4],
+                this.seeder.GetSampleImage("../../Images/imgs-seed/bmw.jpg"),
+                true, "Awesome car");
 
-            ////TODO : refactor 
-            //var roles = new List<IdentityRole>
-            //{
-            //    new IdentityRole(GlobalConstants.UserRole), 
-            //    new IdentityRole(GlobalConstants.AdminRole)
-            //};
+            this.seeder.SeedSinglePage(context,
+                 "Cats",
+                 "A small furry animal.",
+                 categories.Where(c => c.Name == "Animals").FirstOrDefault(),
+                 new List<string> { "bmw", "car", "fast" },
+                 users[4],
+                 this.seeder.GetSampleImage("../../Images/imgs-seed/cat.jpg"),
+                 true);
 
-            //context.Roles.AddOrUpdate(roles.ToArray());
-            //context.SaveChanges();
+            this.seeder.SeedSinglePage(context,
+                 "Traffic",
+                 "Morning traffic in the big city.",
+                 categories.Where(c => c.Name == "Other").FirstOrDefault(),
+                 new List<string> { "traffic", "city" },
+                 users[3],
+                 this.seeder.GetSampleImage("../../Images/imgs-seed/traffic.jpg"),
+                 false);
 
-            //User user = new User()
-            //{
-            //    UserName = "Anonymous"
-            //};
+            this.seeder.SeedSinglePage(context,
+                "Mondays",
+                "Every week starts with it.",
+                categories.Where(c => c.Name == "Other").FirstOrDefault(),
+                new List<string> { "monday", "week" },
+                users[3],
+                this.seeder.GetSampleImage("../../Images/imgs-seed/mondays.jpg"),
+                false, "Grrrrrrr");
 
-            //this.CreateInitialAdmin(context);
+            this.seeder.SeedSinglePage(context,
+                "Slow Computers",
+                "When computers think slowlier than humans.",
+                categories.Where(c => c.Name == "Other").FirstOrDefault(),
+                new List<string> { "computer", "slow", "laptop" },
+                users[3],
+                this.seeder.GetSampleImage("../../Images/imgs-seed/slow-computers.jpg"),
+                false);
 
-            //context.Users.AddOrUpdate(user);
-            //context.SaveChanges();
+            var pages = context.Pages.ToList();
 
-            //var categories = new List<Category>
-            //{
-            //    new Category { Name = "Food"},
-            //    new Category { Name = "People"},
-            //    new Category { Name = "Books"},
-            //    new Category { Name = "Movies"},
-            //    new Category { Name = "Fun"},
-            //    new Category { Name = "Hobby"},
-            //};
+            var customPage = pages.Where(p => p.Name == "Telerik Academy").FirstOrDefault();
+            for (int i = 0; i < 50; i++)
+            {
+                this.seeder.AddLike(customPage, this.seeder.GetRandomUser(users));
+            }
 
-            //context.Categories.AddOrUpdate(categories.ToArray());
-            //context.SaveChanges();
+            customPage.Rating = this.seeder.GetPageRating(customPage);
 
-            //var tags = new List<Tag>
-            //{
-            //    new Tag
-            //    {
-            //        Name = "tag"
-            //    },
-            //    new Tag
-            //    {
-            //        Name = "another"
-            //    }
-            //};
+            customPage = pages.Where(p => p.Name == "BMW M3").FirstOrDefault();
+            for (int i = 0; i < 38; i++)
+            {
+                this.seeder.AddLike(customPage, this.seeder.GetRandomUser(users));
+            }
 
-            //context.Tags.AddOrUpdate(tags.ToArray());
-            //context.SaveChanges();
+            customPage.Rating = this.seeder.GetPageRating(customPage);
 
-            ////var images = new List<Image>
-            ////{
-            ////    new Image 
-            ////    { 
-            ////        Content = File.ReadAllBytes(""),
-            ////        FileExtension = "png",
-            ////        Path = "http://www.metalcuttingtools.eu/sites/default/files/default_images/thumbnail-default.jpg",
-            ////    }
-            ////};
+            customPage = pages.Where(p => p.Name == "Cats").FirstOrDefault();
+            for (int i = 0; i < 25; i++)
+            {
+                this.seeder.AddLike(customPage, this.seeder.GetRandomUser(users));
+            }
 
-            ////context.Images.AddOrUpdate(images.ToArray());
-            ////context.SaveChanges();
+            customPage.Rating = this.seeder.GetPageRating(customPage);
 
-            //var pages = new List<Page>
-            //{
-            //    new Page 
-            //    {
-            //        Name = "Apple",
-            //        Category = categories[0],
-            //        Description = "Best fruit ever!",
-            //        User = user,
-            //    },
-            //                    new Page 
-            //    {
-            //        Name = "Apple",
-            //        Category = categories[0],
-            //        Description = "Best fruit ever!",
-            //        User = user,
-            //    },
-            //                    new Page 
-            //    {
-            //        Name = "Orange",
-            //        Category = categories[0],
-            //        Description = "Best fruit ever!",
-            //        User = user,
-            //    },
-            //                    new Page 
-            //    {
-            //        Name = "Banana",
-            //        Category = categories[0],
-            //        Description = "Best fruit ever!",
-            //        User = user,
-            //    },
-            //                    new Page 
-            //    {
-            //        Name = "Dancing",
-            //        Category = categories[5],
-            //        Description = "Best fruit ever!",
-            //        User = user,
-            //    },
+            customPage = pages.Where(p => p.Name == "Traffic").FirstOrDefault();
+            for (int i = 0; i < 37; i++)
+            {
+                this.seeder.AddDislike(customPage, this.seeder.GetRandomUser(users));
+            }
 
-            //};
+            customPage.Rating = this.seeder.GetPageRating(customPage);
 
-            //context.Pages.AddOrUpdate(pages.ToArray());
-            //context.SaveChanges();
+            customPage = pages.Where(p => p.Name == "Mondays").FirstOrDefault();
+            for (int i = 0; i < 29; i++)
+            {
+                this.seeder.AddDislike(customPage, this.seeder.GetRandomUser(users));
+            }
 
-            //var comments = new List<Comment>
-            //{
-            //    new Comment
-            //    {
-            //        Content = "khahslh lhaljlkajlhl nkh lnlanl lajls jlaldnasldhl na,lhlajlj jlajsld",
-            //        Author = user,
-            //    },
-            //             new Comment
-            //    {
-            //        Content = "khahslh lhaljlkajlhl nkh lnlanl lajls jlaldnasldhl na,lhlajlj jlajsld",
-            //        Author = user,
-            //    },
-            //             new Comment
-            //    {
-            //        Content = "khahslh lhaljlkajlhl nkh lnlanl lajls jlaldnasldhl na,lhlajlj jlajsld",
-            //        Author = user,
-            //    }
-            //};
+            customPage.Rating = this.seeder.GetPageRating(customPage);
 
-            //context.Comments.AddOrUpdate(comments.ToArray());
-            //context.SaveChanges();
+            customPage = pages.Where(p => p.Name == "Slow Computers").FirstOrDefault();
+            for (int i = 0; i < 42; i++)
+            {
+                this.seeder.AddDislike(customPage, this.seeder.GetRandomUser(users));
+            }
 
-            //var detailedPage = context.Pages.FirstOrDefault(p => p.Id == 2);
-            //detailedPage.Tags.Add(tags[0]);
-            //detailedPage.Tags.Add(tags[1]);
-            //detailedPage.Comments.Add(comments[0]);
-            //detailedPage.Comments.Add(comments[1]);
-            //detailedPage.Comments.Add(comments[2]);
-            //context.SaveChanges();
+            customPage.Rating = this.seeder.GetPageRating(customPage);
+
+            context.SaveChanges();
         }
     }
 }

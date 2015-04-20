@@ -6,7 +6,7 @@
             @if (!Request.IsAuthenticated)
             {
                 <div class="unauthenticated glyphicon glyphicon-thumbs-up"></div>
-                <div><span>Log in to vote!</span></div>
+                <div><span>@Html.ActionLink("Log in to vote!", "Login", "Account", null, null)</span></div>
             }
         </div>
     </div>

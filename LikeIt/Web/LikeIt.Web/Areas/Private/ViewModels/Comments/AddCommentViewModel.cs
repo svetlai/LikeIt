@@ -30,8 +30,10 @@
 
         public DateTime CreatedOn { get; set; }
 
+        //[Required]
         public string AuthorId { get; set; }
 
+        //[Required]
         public int PageId { get; set; }
 
         public void CreateMappings(IConfiguration configuration)

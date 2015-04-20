@@ -7,7 +7,7 @@
         <a href="~/Page/Details/@page.Id" title="@page.Name">
             <div class="single-page">
         
-                <div class="ratio page-main-content" style="background-image: url('@(page.Image != null ? @Url.Action("Image", "Page", new { id = page.Image.Id }) : Url.Content("~/Images/default.png"))')">
+                <div class="ratio page-main-content" style="background-image: url('@(page.Image != null ? @Url.Action("Image", "Page", new { id = page.Image.Id, area = "" }) : Url.Content("~/Images/default.png"))')">
                     <div class="circle">
                         @*<span class="rating-count">*@
                         <h2 class="rating-count">@page.Rating</h2>

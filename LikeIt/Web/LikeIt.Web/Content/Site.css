@@ -4,13 +4,13 @@
     background-color: rgba(219,233,247, 0.3);
     /*background-color:#4E5D6C;*/
     position: relative;
-    font-size: 20px;
+    font-size: 16px;
     color: #4E5D6C;
 }
 
 label {
     color: #F3F7FB;
-    font-size: 0.7em;
+    font-size: 1em;
 }
 
 .panel {
@@ -24,7 +24,7 @@ label {
 }
 
     .form-horizontal input[type=file] {
-        font-size: 0.8em;
+        font-size: 1em;
         background-color: #4E5D6C;
         padding: 5px 0;
     }
@@ -34,8 +34,6 @@ label {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-}
-
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -78,14 +76,26 @@ textarea {
     padding: 10px;
 }
 
+#myTabContent {
+    word-wrap: break-word;
+    max-width: 99%;
+}
+
 .page-creator-info {
     padding: 10px;
     border-left: 1px solid #ddd;
 }
 
+/*Comments*/
+#comments .panel {
+    border: 1px solid white;
+    font-size: 0.9em;
+    color: #F3F7FB;
+}
+
 .comment-info {
-    font-size: 0.8em;
-    border-right: 1px solid #ddd;
+    /*font-size: 0.8em;
+    border-right: 1px solid #ddd;*/
 }
 
 .comment-content {
@@ -147,7 +157,7 @@ textarea {
     position: relative;
     margin: 10px 10px;
     margin-bottom: 70px;
-    min-width: 350px;
+    min-width: 345px;
 }
 
 .circle .rating-count {
@@ -202,7 +212,7 @@ body {
 #main-slide {
     /*background-image: url('/Images/like-hashtag.jpg');*/
     /*background-repeat:no-repeat;*/
-    background-color: transparent; 
+    background-color: transparent;
 }
 
 .text-shadow {
@@ -218,7 +228,7 @@ body {
 
 /*Navbar*/
 .navbar-nav a {
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 
 /*Pagination*/
@@ -234,9 +244,4 @@ body {
         color: #df691a;
     }
 
-/*Comments*/
-#comments .panel {
-    border: 1px solid white;
-    font-size: 0.8em;
-    color: #F3F7FB;
-}
+

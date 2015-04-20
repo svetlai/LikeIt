@@ -19,10 +19,12 @@
         [StringLength(150), MinLength(3)]
         public string Content { get; set; }
 
+        //[Required]
         public string AuthorId { get; set; }
 
         public virtual User Author { get; set; }
 
+        //[Required]
         public int PageId { get; set; }
 
         public virtual Page Page { get; set; }

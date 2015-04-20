@@ -26,7 +26,7 @@
 
     public class PageController : BaseController
     {
-        private readonly char[] TagSeparators = new char[] { ' ', ',', ';' };
+        private readonly char[] TagSeparators = new char[] { ',', ';' };
 
         private const int PageSize = 6;
 

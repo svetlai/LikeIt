@@ -5,7 +5,7 @@
 
     public class RandomGenerator : IRandomGenerator
     {
-        private const string Letters = "ABCDEFGHIJKLMNOPQRSTUWXVYZabcdefghijklmnopqrstuwxvyz";
+        private const string Letters = " ABCDEFGHIJKLMNOPQRSTUWXVYZabcdefghijklmnopqrstuwxvyz";
 
         private Random random;
 
