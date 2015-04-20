@@ -226,6 +226,8 @@
     <Compile Include="Areas\Administration\ViewModels\Users\RolesViewModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\Users\UsersViewModel.cs" />
     <Compile Include="Areas\Private\Controllers\CommentController.cs" />
+    <Compile Include="Areas\Private\Controllers\MyPagesController.cs" />
+    <Compile Include="Areas\Private\Controllers\MyDislikesController.cs" />
     <Compile Include="Areas\Private\Controllers\MyLikesController.cs" />
     <Compile Include="Areas\Private\Controllers\Base\PrivateController.cs" />
     <Compile Include="Areas\Private\PrivateAreaRegistration.cs" />
@@ -339,7 +341,7 @@
     <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Private\Views\web.config" />
     <Content Include="Areas\Private\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Private\Views\MyLikes\Index.cshtml" />
+    <Content Include="Areas\Private\Views\MyPages\Index.cshtml" />
     <Content Include="Areas\Private\Views\Shared\_PrivatePartial.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_AdminPartial.cshtml" />
     <Content Include="Areas\Administration\Views\Pages\Index.cshtml" />
@@ -369,8 +371,8 @@
     <Content Include="Images\error.png" />
     <Content Include="Images\like-hashtag.jpg" />
     <Content Include="Views\Shared\DisplayTemplates\CommentAuthor.cshtml" />
-    <Content Include="Areas\Private\Views\MyLikes\LikedByMe.cshtml" />
-    <Content Include="Areas\Private\Views\MyLikes\DislikedByMe.cshtml" />
+    <Content Include="Areas\Private\Views\MyLikes\Index.cshtml" />
+    <Content Include="Areas\Private\Views\MyDislikes\Index.cshtml" />
     <Content Include="Areas\Private\Views\Comment\MyComments.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -460,6 +462,7 @@
     <Content Include="Views\Page\Random.cshtml" />
     <Content Include="Views\Shared\_PagesListPartial.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CreatePageButton.cshtml" />
+    <Content Include="Views\Shared\_PagingPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

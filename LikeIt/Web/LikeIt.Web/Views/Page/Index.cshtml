@@ -13,39 +13,24 @@
 <h2>Likes</h2>
 <div class="panel panel-default">
     <div class="panel-body">
-        <p>
+        <div>
             <div class="pull-right">
                 @Html.DisplayFor(b => b, "CreatePageButton")
             </div>
             <div class="row">
-                @using (Html.BeginForm("Index", "Page", FormMethod.Get))
-                {
-                    @Html.Partial("~/Views/Shared/_SearchPartial.cshtml")
-                }
+                @Html.Partial("~/Views/Shared/_SearchPartial.cshtml")
             </div>
             <div class="row">
-                @*<div class="col-md-1">Sort by:</div>*@
                 @{Html.RenderAction("GetCategoriesPartial");}
             </div>
-
-            <br />
-        </p>
-        @using (Ajax.BeginForm("Index", "Page", new AjaxOptions
-                {
-                    HttpMethod = "GET",
-                    InsertionMode = InsertionMode.Replace,
-                    UpdateTargetId = "all-pages",
-                }))
-        {
-            @Html.DisplayFor(p => p, "ListPages")
-        }
-
-        @*<div class="row text-center" id="all-pages">
+        </div>
+        <div class="row text-center" id="all-pages">
             @Html.Partial("_PagesListPartial", Model)
-        </div>*@
+            @Html.Partial("_PagingPartial", Model)
+        </div>
     </div>
 </div>
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-@Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, currentFilter = ViewBag.CurrentFilter }))
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+    @Scripts.Render("~/bundles/jqueryval")
+}

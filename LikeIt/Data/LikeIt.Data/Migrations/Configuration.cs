@@ -65,7 +65,7 @@ namespace LikeIt.Data.Migrations
                  "Cats",
                  "A small furry animal.",
                  categories.Where(c => c.Name == "Animals").FirstOrDefault(),
-                 new List<string> { "bmw", "car", "fast" },
+                 new List<string> { "cat", "animal", "meow" },
                  users[4],
                  this.seeder.GetSampleImage("../../Images/imgs-seed/cat.jpg"),
                  true);

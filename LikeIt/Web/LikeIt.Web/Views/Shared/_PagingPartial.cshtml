@@ -1,0 +1,4 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<LikeIt.Web.ViewModels.Page.ListPagesViewModel>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))

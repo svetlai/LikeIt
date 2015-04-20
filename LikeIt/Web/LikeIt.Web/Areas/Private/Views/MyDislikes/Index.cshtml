@@ -7,7 +7,7 @@
 }
 
 @{
-    ViewBag.Title = "My Likes";
+    ViewBag.Title = "My Dislikes";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -17,9 +17,9 @@
         <div class="pull-right">
             @Html.DisplayFor(b => b, "CreatePageButton")
         </div>
-        <h4>Liked by Me</h4>
+        <h4>Disliked by Me</h4>
         @Html.ActionLink("Added By Me", "Index", "MyPages", new { }, new { @class = "" }) |
-        @Html.ActionLink("Disliked By Me", "Index", "MyDislikes", new { }, new { @class = "" })
+        @Html.ActionLink("Liked By Me", "Index", "MyLikes", new { }, new { @class = "" })
         <div>
             <div class="row">
                 @Html.Partial("~/Views/Shared/_SearchPartial.cshtml")
@@ -39,7 +39,7 @@
     <div class="row">
         <div class="col-md-12">
             @Html.ActionLink("Added By Me", "Index", "MyPages", new { }, new { @class = "" }) |
-            @Html.ActionLink("Disliked By Me", "Index", "MyDislikes", new { }, new { @class = "" })
+            @Html.ActionLink("Liked By Me", "Index", "MyLikes", new { }, new { @class = "" })
         </div>
     </div>
 }

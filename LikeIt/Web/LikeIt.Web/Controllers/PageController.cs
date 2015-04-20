@@ -43,7 +43,7 @@
         }
 
         [HttpGet]
-        public ActionResult Index(string currentFilter, string searchString, int? CategoryId, int? page)
+        public ActionResult Index(string searchString, string currentFilter, int? page)
         {
             if (searchString != null)
             {
@@ -56,29 +56,31 @@
 
             ViewBag.CurrentFilter = searchString;
 
-            var pages = this.data.Pages.All();
-                
+            var pages = this.data.Pages.All()
+                .OrderByDescending(p => p.Rating)
+                .Project()
+                .To<ListPagesViewModel>();
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
                 pages = pages
                     .Where(p => p.Name.ToLower().Contains(searchString.ToLower()));
             }
 
-            if (CategoryId != null)
-            {
-                pages = this.data.Pages
-                .All()
-                .Where(p => p.CategoryId == CategoryId);
-            }
+            //if (CategoryId != null)
+            //{
+            //    pages = this.data.Pages
+            //    .All()
+            //    .Where(p => p.CategoryId == CategoryId);
+            //}
 
-            var viewModel = pages.OrderByDescending(p => p.Rating)
-                .Project()
-                .To<ListPagesViewModel>();
+            //var viewModel = pages.OrderByDescending(p => p.Rating)
+            //    .Project()
+            //    .To<ListPagesViewModel>();
 
             int pageNumber = (page ?? 1);
 
-            return View(viewModel.ToPagedList(pageNumber, PageSize));
+            return View(pages.ToPagedList(pageNumber, PageSize));
         }
 
         [HttpGet]
@@ -187,21 +189,50 @@
             return View(page);
         }
 
-        //// TODO : Fix - Ajax.BeginForm in _CategoriesPartial
-        //[HttpPost]
-        //public ActionResult FilterByCategory(int categoryId)
-        //{
-        //    var pages = this.data.Pages
-        //        .All()
-        //        .Where(p => p.CategoryId == categoryId)
-        //        .OrderByDescending(p => p.Likes)
-        //        .Project()
-        //        .To<ListPagesViewModel>();
+        [HttpGet]
+        public ActionResult Search(string searchString)
+        {
+            var pages = this.data.Pages
+                .All()
+                .Where(p => p.Name.ToLower().Contains(searchString.ToLower()) || p.Tags.Any(t => t.Name.Contains(searchString.ToLower())))
+                .OrderByDescending(p => p.Rating)
+            .Project()
+            .To<ListPagesViewModel>();
 
-        //   // int pageNumber = (page ?? 1);
-        //    return PartialView("_PagesListPartial", pages);
-        //   // return this.View("Index", pages.ToPagedList(pageNumber, PageSize));
-        //}
+            if (pages.Count() == 0)
+            {
+                return Content("No pages found");
+            }
+
+            return PartialView("_PagesListPartial", pages.ToPagedList(1, int.MaxValue));      
+        }
+
+        [HttpGet]
+        public ActionResult FilterByCategory(int categoryId)
+        {
+           var pages = this.data.Pages
+                .All()
+                .OrderByDescending(p => p.Rating);
+
+            if (categoryId > -1)
+            {
+                pages = this.data.Pages
+               .All()
+               .Where(p => p.CategoryId == categoryId)
+               .OrderByDescending(p => p.Rating);
+            }
+
+            var viewModel = pages
+                .Project()
+                .To<ListPagesViewModel>();
+
+            if (pages.Count() == 0)
+            {
+                return Content("No pages found in this category");
+            }
+
+            return PartialView("_PagesListPartial", viewModel.ToPagedList(1, int.MaxValue));
+        }
 
         [HttpGet]
         [ChildActionOnly]
@@ -220,7 +251,7 @@
         {
             var viewModel = new ListCategoriesViewModel
             {
-                Categories = this.populator.GetCategories(),              
+                Categories = this.populator.GetCategories(),
             };
 
             return PartialView("~/Views/Shared/_CategoriesPartial.cshtml", viewModel);

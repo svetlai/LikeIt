@@ -1,32 +1,19 @@
-﻿@*@using (Html.BeginForm("Index", "Page", new { area = "" }, FormMethod.Get))
-{*@
-        <div class="form-group">
-            @Html.LabelFor(m => m, "Search", htmlAttributes: new { @class = "control-label col-md-1" })
-            <div class="col-md-4">     
-                @Html.EditorFor(m => m, "SearchInput")
-            </div>
-            <div class="col-md-2">
-                <input type="submit" value="Search" class="btn btn-primary" />
-            </div>
+﻿@using (Ajax.BeginForm("Search",
+                            new AjaxOptions
+                            {
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "all-pages",
+                                //OnFailure = "showCommentRequiredError"
+                            }))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m, "Search", htmlAttributes: new { @class = "control-label col-md-1" })
+        <div class="col-md-4">
+            @Html.EditorFor(m => m, "SearchInput")
         </div>
-@*}*@
-
-@*@using (Ajax.BeginForm(
-            new AjaxOptions
-            {
-                HttpMethod = "GET",
-                InsertionMode = InsertionMode.Replace,
-                UpdateTargetId = "all-pages",
-                //OnFailure = "showCommentRequiredError"
-            }))
-    {
-        <div class="form-group">
-            @Html.LabelFor(m => m, "Search", htmlAttributes: new { @class = "control-label col-md-1" })
-            <div class="col-md-4">
-                @Html.EditorFor(m => m, "SearchInput")
-            </div>
-            <div class="col-md-2">
-                <input type="submit" value="Search" class="btn btn-primary" />
-            </div>
+        <div class="col-md-2">
+            <input type="submit" value="Search" class="btn btn-primary" />
         </div>
-    }*@
+    </div>
+}

@@ -1,6 +1,5 @@
 ﻿namespace LikeIt.Web.Areas.Private.Controllers
 {
-    using System;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -9,28 +8,25 @@
     using PagedList;
 
     using LikeIt.Data.Contracts;
-    using LikeIt.Web.Controllers;
-    using LikeIt.Web.ViewModels.Page;
     using LikeIt.Web.Areas.Private.Controllers.Base;
-    using System.Web;
-    using LikeIt.Web.ViewModels.Categories;
     using LikeIt.Web.Infrastructure.Populators;
+    using LikeIt.Web.ViewModels.Page;
 
-    public class MyLikesController : PrivateController
+    public class MyPagesController : PrivateController
     {
         public const int PageSize = 6;
 
-        public MyLikesController(ILikeItData data, IDropDownListPopulator populator)
+        public MyPagesController(ILikeItData data, IDropDownListPopulator populator)
             : base(data, populator)
         {
         }
 
         public ActionResult Index(int? page)
         {
-            var pages = this.data.Likes.All()
-                .Where(l => l.UserId == this.CurrentUser.Id)
-                .Select(l => l.Page)
+            var pages = this.data.Pages.All()
+                .Where(p => p.UserId == this.CurrentUser.Id)
                 .OrderByDescending(p => p.Rating)
+
                 .Project()
                 .To<ListPagesViewModel>();
 
@@ -42,11 +38,9 @@
         [HttpGet]
         public ActionResult Search(string searchString, string likes)
         {
-            var pages = this.data.Likes.All()
-                    .Where(l => l.UserId == this.CurrentUser.Id)
-                    .Select(l => l.Page)
-                    .Where(p => p.Name.ToLower().Contains(searchString.ToLower()) || p.Tags.Any(t => t.Name.Contains(searchString.ToLower())))
-                    .OrderBy(p => p.Rating)
+            var pages = this.data.Pages.All()
+                    .Where(p => p.UserId == this.CurrentUser.Id && (p.Name.ToLower().Contains(searchString.ToLower()) || p.Tags.Any(t => t.Name.Contains(searchString.ToLower()))))
+                    .OrderByDescending(p => p.Rating)
                     .Project()
                     .To<ListPagesViewModel>();
 
@@ -61,18 +55,15 @@
         [HttpGet]
         public ActionResult FilterByCategory(int categoryId)
         {
-            var pages = this.data.Likes.All()
-                    .Where(l => l.UserId == this.CurrentUser.Id)
-                    .Select(l => l.Page)
-                    .OrderBy(p => p.Rating);
+            var pages = this.data.Pages.All()
+                .Where(p => p.UserId == this.CurrentUser.Id)
+                .OrderByDescending(p => p.Rating);
 
             if (categoryId > -1)
             {
-                pages = this.data.Likes.All()
-                   .Where(l => l.UserId == this.CurrentUser.Id)
-                   .Select(l => l.Page)
-                   .Where(p => p.CategoryId == categoryId)
-                   .OrderBy(p => p.Rating);
+                pages = this.data.Pages.All()
+                    .Where(p => p.UserId == this.CurrentUser.Id && p.CategoryId == categoryId)
+                    .OrderByDescending(p => p.Rating);
             }
 
             var viewModel = pages

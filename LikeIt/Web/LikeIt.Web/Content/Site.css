@@ -148,8 +148,7 @@ textarea {
 /*Single page*/
 #all-pages {
     position: relative;
-    text-align: center;
-    margin-top: 75px;
+    margin-top: 30px;
 }
 
 .single-page {

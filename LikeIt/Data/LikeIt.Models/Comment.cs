@@ -16,7 +16,7 @@
         public int Id { get; set; }
 
         [Required]
-        [StringLength(150), MinLength(3)]
+        [StringLength(150), MinLength(2)]
         public string Content { get; set; }
 
         //[Required]

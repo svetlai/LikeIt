@@ -7,7 +7,7 @@
 }
 
 @{
-    ViewBag.Title = "My Likes";
+    ViewBag.Title = "My Pages";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -17,15 +17,17 @@
         <div class="pull-right">
             @Html.DisplayFor(b => b, "CreatePageButton")
         </div>
-        <h4>Liked by Me</h4>
-        @Html.ActionLink("Added By Me", "Index", "MyPages", new { }, new { @class = "" }) |
+        <h4>Added by Me</h4>
+        @Html.ActionLink("Liked By Me", "Index", "MyLikes", new { }, new { @class = "" }) |
         @Html.ActionLink("Disliked By Me", "Index", "MyDislikes", new { }, new { @class = "" })
         <div>
             <div class="row">
                 @Html.Partial("~/Views/Shared/_SearchPartial.cshtml")
             </div>
             <div class="row">
-                @{Html.RenderAction("GetCategoriesPartial");}
+                @{
+                    Html.RenderAction("GetCategoriesPartial");
+                }
             </div>
         </div>
         <div class="row text-center" id="all-pages">
@@ -38,7 +40,7 @@
 @section footer {
     <div class="row">
         <div class="col-md-12">
-            @Html.ActionLink("Added By Me", "Index", "MyPages", new { }, new { @class = "" }) |
+            @Html.ActionLink("Liked By Me", "Index", "MyLikes", new { }, new { @class = "" }) |
             @Html.ActionLink("Disliked By Me", "Index", "MyDislikes", new { }, new { @class = "" })
         </div>
     </div>

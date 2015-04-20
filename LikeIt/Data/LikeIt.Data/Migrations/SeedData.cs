@@ -16,7 +16,7 @@
 
     public class SeedData
     {
-        public const string DeafultImagePath = "../../Images/default-image.png";
+        public const string DeafultImagePath = "../../Images/default.png";
 
         private IRandomGenerator randomGenerator;
 

@@ -23,14 +23,20 @@
             var categories = this.cache.Get<IEnumerable<SelectListItem>>("categories",
                 () =>
                 {
-                    return this.data.Categories
+                    var categoriesList = new List<SelectListItem>
+                    {
+                          { new SelectListItem{ Text="Select category", Value="-1", Selected = true } },
+                    };
+
+                    categoriesList.AddRange(this.data.Categories
                        .All()
                        .Select(c => new SelectListItem
                        {
                            Value = c.Id.ToString(),
                            Text = c.Name
-                       })
-                       .ToList();
+                       }));
+
+                    return categoriesList;
                 });
 
             return categories;
