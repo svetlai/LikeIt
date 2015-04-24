@@ -33,6 +33,9 @@
         [StringLength(1000), MinLength(2)]
         public string Description { get; set; }
 
+        [StringLength(200), MinLength(8)]
+        public string ExternalWebsite { get; set; }
+
         public int Rating { get; set; }
 
         [ForeignKey("User")]
@@ -54,6 +57,7 @@
             {
                 return this.tags;
             }
+
             set
             {
                 this.tags = value;
@@ -66,6 +70,7 @@
             {
                 return this.comments;
             }
+
             set
             {
                 this.comments = value;
@@ -78,6 +83,7 @@
             {
                 return this.likes;
             }
+
             set
             {
                 this.likes = value;
@@ -90,6 +96,7 @@
             {
                 return this.dislikes;
             }
+
             set
             {
                 this.dislikes = value;

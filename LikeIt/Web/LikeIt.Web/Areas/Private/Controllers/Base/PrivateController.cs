@@ -2,10 +2,11 @@
 {
     using System.Web.Mvc;
 
+    using LikeIt.Common;
     using LikeIt.Data.Contracts;
     using LikeIt.Web.Controllers;
-    using LikeIt.Web.ViewModels.Categories;
     using LikeIt.Web.Infrastructure.Populators;
+    using LikeIt.Web.ViewModels.Categories;
 
     [Authorize]
     public abstract class PrivateController : BaseController
@@ -32,7 +33,7 @@
                 Categories = this.populator.GetCategories(),
             };
 
-            return PartialView("~/Views/Shared/_CategoriesPartial.cshtml", viewModel);
+            return this.PartialView(GlobalConstants.CategoriesPartial, viewModel);
         }
     }
 }

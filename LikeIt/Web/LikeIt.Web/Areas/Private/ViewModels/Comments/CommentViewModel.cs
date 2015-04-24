@@ -1,13 +1,13 @@
 ﻿namespace LikeIt.Web.Areas.Private.ViewModels.Comments
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
     using AutoMapper;
 
     using LikeIt.Models;
     using LikeIt.Web.Infrastructure.Mapping;
-    using System.ComponentModel.DataAnnotations;
 
     public class CommentViewModel : IMapFrom<Comment>, IHaveCustomMappings
     {

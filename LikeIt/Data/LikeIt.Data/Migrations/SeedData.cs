@@ -2,9 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Data.Entity.Migrations;
     using System.IO;
+    using System.Linq;
+    using System.Reflection;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -12,7 +13,6 @@
     using LikeIt.Common;
     using LikeIt.Data.Contracts;
     using LikeIt.Models;
-    using System.Reflection;
 
     public class SeedData
     {
@@ -80,17 +80,17 @@
         {
             var categories = new List<Category>
             {
-                new Category { Name = "Places"},
-                new Category { Name = "Business"},
-                new Category { Name = "Education"},
-                new Category { Name = "Brands/Products"},
-                new Category { Name = "Entertainment"},
-                new Category { Name = "People"},
-                new Category { Name = "Causes"},
-                new Category { Name = "Food"},
-                new Category { Name = "Animals"},
-                new Category { Name = "Hobbies"},
-                new Category { Name = "Other"},
+                new Category { Name = "Places" },
+                new Category { Name = "Business" },
+                new Category { Name = "Education" },
+                new Category { Name = "Brands/Products" },
+                new Category { Name = "Entertainment" },
+                new Category { Name = "People" },
+                new Category { Name = "Causes" },
+                new Category { Name = "Food" },
+                new Category { Name = "Animals" },
+                new Category { Name = "Hobbies" },
+                new Category { Name = "Other" },
             };
 
             context.Categories.AddOrUpdate(categories.ToArray());
@@ -122,7 +122,7 @@
                 var page = new Page
                 {
                     Name = this.randomGenerator.RandomString(5, 10),
-                    Category = categories[this.randomGenerator.RandomNumber(0, (categories.Count - 1))],
+                    Category = categories[this.randomGenerator.RandomNumber(0, categories.Count - 1)],
                     Description = this.randomGenerator.RandomString(20, 150),
                     CreatedOn = DateTime.Now,
                     User = this.GetRandomUser(users),
@@ -269,7 +269,7 @@
         {
             for (int j = 0; j < count; j++)
             {
-                AddTag(page, this.randomGenerator.RandomString(3, 15));
+                this.AddTag(page, this.randomGenerator.RandomString(3, 15));
             }
         }
 

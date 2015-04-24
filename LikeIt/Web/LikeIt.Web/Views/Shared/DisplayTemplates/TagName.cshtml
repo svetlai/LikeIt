@@ -1,3 +1,14 @@
 ﻿@model string
 
-<span class="label label-primary">@Model</span>
+@*<span class="label label-primary single-tag">
+    @Ajax.ActionLink(@Model, "GetPagesByTag", "Tag", new { tag = @Model }, new AjaxOptions
+{
+    HttpMethod = "GET",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "pages-with-tag"
+})
+</span>*@
+
+<span class="label label-primary single-tag">
+    @Html.ActionLink(@Model, "Index", "Tag", new { tag = @Model }, new { @class= "" })
+</span>

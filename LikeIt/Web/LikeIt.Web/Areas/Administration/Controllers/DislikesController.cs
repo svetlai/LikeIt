@@ -22,7 +22,7 @@
 
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         protected override IEnumerable GetData()
@@ -43,9 +43,10 @@
             var dbModel = base.Create<Model>(model);          
             if (dbModel != null)
             {
-                dbModel.UserId = base.CurrentUser.Id;
+                dbModel.UserId = this.CurrentUser.Id;
                 model.Id = dbModel.Id;
             }
+
             return this.GridOperation(model, request);
         }
 

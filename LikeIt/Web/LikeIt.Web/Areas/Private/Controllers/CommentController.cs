@@ -7,10 +7,10 @@
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
+    using LikeIt.Common;
     using LikeIt.Data.Contracts;
     using LikeIt.Models;
     using LikeIt.Web.Areas.Private.ViewModels.Comments;
-    using LikeIt.Web.Controllers;
     using LikeIt.Web.ViewModels.Comment;
     using LikeIt.Web.Areas.Private.Controllers.Base;
 
@@ -28,12 +28,12 @@
             if (model != null && ModelState.IsValid)
             {
                 var comment = Mapper.Map<Comment>(model);
-                comment.AuthorId = base.CurrentUser.Id;
+                comment.AuthorId = this.CurrentUser.Id;
 
                 var page = this.data.Pages.Find(model.PageId);
                 if (page == null)
                 {
-                    throw new HttpException(404, "Page not found");
+                    throw new HttpException(404, GlobalConstants.PageNotFound);
                 }
 
                 page.Comments.Add(comment);
@@ -41,22 +41,64 @@
 
                 var viewModel = Mapper.Map<CommentViewModel>(comment);
 
-                return PartialView("~/Areas/Private/Views/Shared/_CommentsPartial.cshtml", viewModel);
+                return this.PartialView(GlobalConstants.SingleCommentPartialPrivate, viewModel);
             }
 
-            throw new HttpException(400, "Invalid comment");
+            throw new HttpException(400, GlobalConstants.InvalidComment);
+        }
+
+        [Authorize]
+        public ActionResult Delete(int id, string userName)
+        {
+            var comment = this.data.Comments.Find(id);
+
+            if (comment != null && comment.AuthorId == this.CurrentUser.Id)
+            {
+                this.data.Comments.Delete(comment);
+                this.data.SaveChanges();
+            }
+            IQueryable<CommentViewModel> comments;
+
+            if (!string.IsNullOrEmpty(userName))
+            {
+                comments = this.GetMyComments();
+                return this.PartialView(GlobalConstants.MyCommentsPartialPrivate, comments);
+            }
+
+            comments = this.GetPageComments(comment.PageId);
+            return this.PartialView(GlobalConstants.PageCommentsPartialPrivate, comments);
         }
 
         public ActionResult MyComments()
         {
-            var comments = this.data.Comments.All()
-                .Where(c => c.AuthorId == this.CurrentUser.Id)
-                //.OrderBy(c => c.PageId)
+            var comments = this.GetMyComments();
+
+            return this.View(comments);
+        }
+
+        public ActionResult GetPageCommentsPartial(int pageId)
+        {
+            var comments = this.GetPageComments(pageId);
+
+            return this.PartialView(GlobalConstants.PageCommentsPartialPrivate, comments);
+        }
+
+        private IQueryable<CommentViewModel> GetPageComments(int pageId)
+        {
+            return this.data.Comments.All()
+                .Where(c => c.PageId == pageId && !c.IsDeleted)
                 .OrderByDescending(c => c.CreatedOn)
                 .Project()
                 .To<CommentViewModel>();
+        }
 
-            return View(comments);
+        private IQueryable<CommentViewModel> GetMyComments()
+        {
+            return this.data.Comments.All()
+                .Where(c => c.AuthorId == this.CurrentUser.Id && !c.IsDeleted)
+                .OrderByDescending(c => c.CreatedOn)
+                .Project()
+                .To<CommentViewModel>();
         }
     }
 }

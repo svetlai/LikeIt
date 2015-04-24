@@ -1,9 +1,11 @@
 ﻿namespace LikeIt.Models
 {
-    using LikeIt.Data.Common.Models;
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+
+    using LikeIt.Data.Common.Models;
 
     public class Image : AuditInfo, IDeletableEntity
     {
@@ -11,11 +13,12 @@
 
         public Image()
         {
+            this.Id = Guid.NewGuid();
             this.pages = new HashSet<Page>();
         }
 
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public byte[] Content { get; set; }
 
@@ -29,6 +32,7 @@
             {
                 return this.pages;
             }
+
             set 
             {
                 this.pages = value;

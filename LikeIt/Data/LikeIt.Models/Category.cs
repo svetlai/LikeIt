@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using LikeIt.Data.Common.Models;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Category : AuditInfo, IDeletableEntity
     {
@@ -28,6 +28,7 @@
             {
                 return this.pages;
             }
+
             set
             {
                 this.pages = value;

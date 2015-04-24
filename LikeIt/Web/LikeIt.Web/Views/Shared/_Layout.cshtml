@@ -41,9 +41,9 @@
         @RenderBody()
         @RenderSection("footer", required: false)
         <hr />
-        <footer>
-
-            <p class="text-center">&copy; @DateTime.Now.Year - LikeIt - An ASP.NET Application Project for Telerik Academy</p>
+        <footer class ="text-center">
+            <span>&copy; @DateTime.Now.Year - LikeIt - An ASP.NET Application Project for Telerik Academy</span>
+            <span class="pull-right"><a href="https://github.com/svetlai/LikeIt/" target="_blank">View the source code</a></span>
         </footer>
     </div>
     @Scripts.Render("~/bundles/bootstrap")

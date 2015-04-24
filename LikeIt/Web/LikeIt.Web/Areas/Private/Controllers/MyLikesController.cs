@@ -1,6 +1,5 @@
 ﻿namespace LikeIt.Web.Areas.Private.Controllers
 {
-    using System;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -8,13 +7,12 @@
 
     using PagedList;
 
+    using LikeIt.Common;
     using LikeIt.Data.Contracts;
-    using LikeIt.Web.Controllers;
     using LikeIt.Web.ViewModels.Page;
     using LikeIt.Web.Areas.Private.Controllers.Base;
-    using System.Web;
-    using LikeIt.Web.ViewModels.Categories;
     using LikeIt.Web.Infrastructure.Populators;
+    using LikeIt.Web.Infrastructure.HtmlHelpers;
 
     public class MyLikesController : PrivateController
     {
@@ -25,37 +23,54 @@
         {
         }
 
-        public ActionResult Index(int? page)
+        public ActionResult Index(string searchString, string currentFilter, int? page)
         {
             var pages = this.data.Likes.All()
-                .Where(l => l.UserId == this.CurrentUser.Id)
-                .Select(l => l.Page)
-                .OrderByDescending(p => p.Rating)
-                .Project()
-                .To<ListPagesViewModel>();
+              .Where(l => l.UserId == this.CurrentUser.Id)
+              .Select(l => l.Page);
 
-            int pageNumber = (page ?? 1);
+            if (string.IsNullOrEmpty(searchString))
+            {
+                searchString = currentFilter;
+            }
+            else
+            {
+                page = 1;             
+            }
 
-            return View(pages.ToPagedList(pageNumber, PageSize));
+            pages = FilterHelper.FilterSearchString(searchString, pages);
+
+            ViewBag.CurrentFilter = searchString;
+
+            var viewModel = pages
+                  .OrderByDescending(p => p.Rating)
+                  .Project()
+                  .To<ListPagesViewModel>();
+
+            int pageNumber = page ?? 1;
+
+            return this.View(viewModel.ToPagedList(pageNumber, PageSize));
         }
 
         [HttpGet]
         public ActionResult Search(string searchString, string likes)
         {
             var pages = this.data.Likes.All()
-                    .Where(l => l.UserId == this.CurrentUser.Id)
-                    .Select(l => l.Page)
-                    .Where(p => p.Name.ToLower().Contains(searchString.ToLower()) || p.Tags.Any(t => t.Name.Contains(searchString.ToLower())))
-                    .OrderBy(p => p.Rating)
-                    .Project()
-                    .To<ListPagesViewModel>();
+                        .Where(l => l.UserId == this.CurrentUser.Id)
+                        .Select(l => l.Page);
+
+            pages = FilterHelper.FilterSearchString(searchString, pages);
 
             if (pages.Count() == 0)
             {
-                return Content("No pages found");
+                return this.Content(GlobalConstants.NoPagesFound);
             }
 
-            return PartialView("_PagesListPartial", pages.ToPagedList(1, int.MaxValue));
+            var viewModel = pages.OrderByDescending(p => p.Rating)
+                      .Project()
+                      .To<ListPagesViewModel>();
+
+            return this.PartialView(GlobalConstants.PagesListPartial, viewModel.ToPagedList(1, int.MaxValue));
         }
 
         [HttpGet]
@@ -63,28 +78,24 @@
         {
             var pages = this.data.Likes.All()
                     .Where(l => l.UserId == this.CurrentUser.Id)
-                    .Select(l => l.Page)
-                    .OrderBy(p => p.Rating);
+                    .Select(l => l.Page);
 
             if (categoryId > -1)
             {
-                pages = this.data.Likes.All()
-                   .Where(l => l.UserId == this.CurrentUser.Id)
-                   .Select(l => l.Page)
-                   .Where(p => p.CategoryId == categoryId)
-                   .OrderBy(p => p.Rating);
+                pages = pages
+                   .Where(p => p.CategoryId == categoryId);                 
             }
 
-            var viewModel = pages
+            var viewModel = pages.OrderBy(p => p.Rating)
                     .Project()
                     .To<ListPagesViewModel>();
 
             if (pages.Count() == 0)
             {
-                return Content("No pages found in this category");
+                return this.Content(GlobalConstants.NoPagesFoundInCategory);
             }
 
-            return PartialView("_PagesListPartial", viewModel.ToPagedList(1, int.MaxValue));
+            return this.PartialView(GlobalConstants.PagesListPartial, viewModel.ToPagedList(1, int.MaxValue));
         }
     }
 }

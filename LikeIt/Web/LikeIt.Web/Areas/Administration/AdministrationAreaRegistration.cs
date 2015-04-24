@@ -1,7 +1,7 @@
-﻿using System.Web.Mvc;
-
-namespace LikeIt.Web.Areas.Administration
+﻿namespace LikeIt.Web.Areas.Administration
 {
+    using System.Web.Mvc;
+
     public class AdministrationAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
@@ -18,8 +18,7 @@ namespace LikeIt.Web.Areas.Administration
                 "Administration_default",
                 "Administration/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
-                new[] { "LikeIt.Web.Areas.Administration.Controllers" }
-            );
+                new[] { "LikeIt.Web.Areas.Administration.Controllers" });
         }
     }
 }

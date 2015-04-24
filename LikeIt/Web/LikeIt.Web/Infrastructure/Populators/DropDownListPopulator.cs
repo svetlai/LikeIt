@@ -20,12 +20,15 @@
 
         public IEnumerable<SelectListItem> GetCategories()
         {
-            var categories = this.cache.Get<IEnumerable<SelectListItem>>("categories",
+            var categories = this.cache.Get<IEnumerable<SelectListItem>>(
+                "categories",
                 () =>
                 {
                     var categoriesList = new List<SelectListItem>
                     {
-                          { new SelectListItem{ Text="Select category", Value="-1", Selected = true } },
+                          { 
+                              new SelectListItem { Text = "Select category", Value = "-1", Selected = true } 
+                          },
                     };
 
                     categoriesList.AddRange(this.data.Categories

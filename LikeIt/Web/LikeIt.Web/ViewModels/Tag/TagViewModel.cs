@@ -1,13 +1,14 @@
 ﻿namespace LikeIt.Web.ViewModels.Tag
 {
-    using LikeIt.Web.Infrastructure.Mapping;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
+
+    using LikeIt.Web.Infrastructure.Mapping;
 
     public class TagViewModel : IMapFrom<LikeIt.Models.Tag>
     {
         [Key]
-        [HiddenInput()]
+        [HiddenInput]
         public int Id { get; set; }
 
         [Required]

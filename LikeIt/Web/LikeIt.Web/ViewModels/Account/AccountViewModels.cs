@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace LikeIt.Web.Models
+﻿namespace LikeIt.Web.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -13,6 +13,7 @@ namespace LikeIt.Web.Models
     public class ExternalLoginListViewModel
     {
         public string Action { get; set; }
+
         public string ReturnUrl { get; set; }
     }
 

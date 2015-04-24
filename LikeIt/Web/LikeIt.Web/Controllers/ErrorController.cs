@@ -1,12 +1,9 @@
-﻿using LikeIt.Data.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace LikeIt.Web.Controllers
+﻿namespace LikeIt.Web.Controllers
 {
+    using System.Web.Mvc;
+
+    using LikeIt.Data.Contracts;
+
     public class ErrorController : BaseController
     {
         public ErrorController(ILikeItData data)
@@ -16,19 +13,19 @@ namespace LikeIt.Web.Controllers
 
         public ViewResult Index()
         {
-            return View("Error");
+            return this.View("Error");
         }
 
         public ViewResult Error404()
         {
             Response.StatusCode = 404;
-            return View();
+            return this.View();
         }
 
         public ViewResult Error500()
         {
             Response.StatusCode = 500;
-            return View();
+            return this.View();
         }
     }
 }

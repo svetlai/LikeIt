@@ -1,13 +1,13 @@
 ﻿namespace LikeIt.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
 
     using AutoMapper;
 
+    using LikeIt.Common;
     using LikeIt.Data.Contracts;
     using LikeIt.Models;
     using LikeIt.Web.ViewModels;
@@ -18,9 +18,10 @@
             : base(data)
         {
         }
+
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
@@ -30,7 +31,7 @@
             var page = this.data.Pages.Find(id);
             if (page == null)
             {
-                throw new HttpException(404, "Page not found");
+                throw new HttpException(404, GlobalConstants.PageNotFound);
             }
 
             var existingLike = this.data.Likes
@@ -54,7 +55,7 @@
             {
                 var like = new Like
                 {
-                    UserId = base.CurrentUser.Id,
+                    UserId = this.CurrentUser.Id,
                     CreatedOn = DateTime.Now
                 };
 
@@ -71,7 +72,7 @@
 
             var viewModel = Mapper.Map<VotesViewModel>(page);
 
-            return PartialView("~/Views/Shared/_VotePartial.cshtml", viewModel);
+            return this.PartialView(GlobalConstants.RatingPartial, viewModel);
         }
 
         [HttpPost]
@@ -81,14 +82,13 @@
             var page = this.data.Pages.Find(id);
             if (page == null)
             {
-                throw new HttpException(404, "Page not found");
+                throw new HttpException(404, GlobalConstants.PageNotFound);
             }
 
             var existingLike = this.data.Likes
                 .All()
                 .Where(d => d.UserId == this.CurrentUser.Id && d.PageId == page.Id && d.IsDeleted != true)
                 .FirstOrDefault();
-
 
             var existingDislike = this.data.Dislikes
                 .All()
@@ -106,7 +106,7 @@
             {
                 var dislike = new Dislike
                 {
-                    UserId = base.CurrentUser.Id,
+                    UserId = this.CurrentUser.Id,
                     CreatedOn = DateTime.Now
                 };
 
@@ -123,7 +123,7 @@
 
             var viewModel = Mapper.Map<VotesViewModel>(page);
 
-            return PartialView("~/Views/Shared/_VotePartial.cshtml", viewModel);
+            return this.PartialView(GlobalConstants.RatingPartial, viewModel);
         }
     }
 }

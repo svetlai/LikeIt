@@ -1,12 +1,11 @@
 ﻿namespace LikeIt.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
-    using AutoMapper.QueryableExtensions;
 
+    using AutoMapper.QueryableExtensions;
+   
+    using LikeIt.Common;
     using LikeIt.Data.Contracts;
     using LikeIt.Web.ViewModels.Home;
     using LikeIt.Web.ViewModels.Page;
@@ -14,12 +13,13 @@
     public class HomeController : BaseController
     {
         private const int LikesCount = 3;
+
         public HomeController(ILikeItData data)
             : base(data)
         {
         }
 
-        //[OutputCache(Duration = 60 * 15)]
+        // [OutputCache(Duration = 60 * 15)]
         public ActionResult Index()
         {
             var likes = this.data.Pages.All()
@@ -28,11 +28,11 @@
                 .Project()
                 .To<IndexPagesViewModel>();
 
-            return View(likes);
+            return this.View(likes);
         }
         
         [ChildActionOnly]
-        //[OutputCache(Duration = 60 * 15)]
+        [OutputCache(Duration = 60 * 15)]
         public ActionResult GetTrendingLikes()
         {
             var trendingLikes = this.data.Pages.All()
@@ -41,11 +41,11 @@
                 .Project()
                 .To<ListPagesViewModel>();
 
-            return PartialView("_TrendingLikes", trendingLikes);
+            return this.PartialView(GlobalConstants.TrendingLikesPartial, trendingLikes);
         }
 
         [ChildActionOnly]
-        //[OutputCache(Duration = 60 * 15)]
+        [OutputCache(Duration = 60 * 15)]
         public ActionResult GetTrendingDislikes()
         {
             var trendingDislikes = this.data.Pages.All()
@@ -54,21 +54,21 @@
                .Project()
                .To<ListPagesViewModel>();
 
-            return PartialView("_TrendingDislikes", trendingDislikes);
+            return this.PartialView(GlobalConstants.TrendingDislikesPartial, trendingDislikes);
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
-            return View();
+            return this.View();
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
+            return this.View();
         }
     }
 }

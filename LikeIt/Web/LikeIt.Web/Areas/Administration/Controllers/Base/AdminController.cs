@@ -2,9 +2,9 @@
 {
     using System.Web.Mvc;
 
+    using LikeIt.Common;
     using LikeIt.Data.Contracts;
     using LikeIt.Web.Controllers;
-    using LikeIt.Common;
 
     [Authorize(Roles = GlobalConstants.AdminRole)]
     public abstract class AdminController : BaseController

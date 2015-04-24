@@ -22,16 +22,17 @@
         @Html.ActionLink("Disliked By Me", "Index", "MyDislikes", new { }, new { @class = "" })
         <div>
             <div class="row">
-                @Html.Partial("~/Views/Shared/_SearchPartial.cshtml")
+                @Html.Partial(LikeIt.Common.GlobalConstants.SearchPartial)
             </div>
             <div class="row">
                 @{Html.RenderAction("GetCategoriesPartial");}
             </div>
         </div>
         <div class="row text-center" id="all-pages">
-            @Html.Partial("_PagesListPartial", Model)
-            @Html.Partial("_PagingPartial", Model)
+            @Html.Partial(LikeIt.Common.GlobalConstants.PagesListPartial, Model)
+            @Html.Partial(LikeIt.Common.GlobalConstants.PagingPartial, Model)
         </div>
+        <div id="ajax-search-results"></div>
     </div>
 </div>
 
@@ -47,4 +48,5 @@
 @section scripts {
     @Scripts.Render("~/bundles/jqueryajax")
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/custom")
 }

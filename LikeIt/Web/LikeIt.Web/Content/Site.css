@@ -29,7 +29,6 @@ label {
         padding: 5px 0;
     }
 
-
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -42,9 +41,22 @@ select,
 textarea {
     /*max-width: 280px;*/
 }
+
+/*Edit Page*/
+.edit-panel-title {
+    background-color: rgba(78,93,108, 0.7);
+    /*margin-top:100px;*/
+    bottom: 0;
+    min-width: 200px;
+}
+
+    .edit-panel-title input[type=file] {
+        background-color: transparent;
+        color: #F3F7FB;
+    }
+
 /*Details Page*/
-.details:hover .details-panel-title,
-.details:hover .votes-container {
+.details:hover .details-panel-title {
     background-color: rgba(255,255,255, 0.9);
 }
 
@@ -61,7 +73,7 @@ textarea {
 
 .details-panel-title {
     background-color: rgba(255,255,255, 0.7);
-    position: absolute;
+    margin-top: 150px;
     bottom: 0;
     min-width: 200px;
 }
@@ -76,14 +88,18 @@ textarea {
     padding: 10px;
 }
 
-#myTabContent {
-    word-wrap: break-word;
-    max-width: 99%;
-}
-
 .page-creator-info {
     padding: 10px;
     border-left: 1px solid #ddd;
+}
+
+    .page-creator-info .btn {
+        padding: 3px 20px;
+    }
+
+#about p {
+    word-wrap: break-word;
+    max-width: 99%;
 }
 
 /*Comments*/
@@ -109,41 +125,60 @@ textarea {
 /*Votes*/
 .votes-container {
     padding: 0;
-    width: 170px;
-    height: 170px;
-    border: 1px solid #ddd;
-    font-size: 0.9em;
-    color: #df691a;
+    color: #F3F7FB;
+    /*height: 170px;   
     background-color: rgba(255,255,255, 0.7);
-    font-weight: 400;
+    border: 1px solid #ddd;*/
 }
 
 .likes-count {
-    font-size: 3.5em;
+    font-size: 4em;
     color: #df691a;
     font-weight: 400;
-    margin-top: -20px;
+    border: 1px solid #df691a;
+    border-radius: 50%;
+    padding: 10px 50px;
+    /*width: 160px;*/
+    margin-right: 10px;
+    background-color: rgba(255,255,255, 0.7);
 }
 
 .votes-container .glyphicon-thumbs-up,
 .votes-container .glyphicon-thumbs-down {
-    font-size: 3em;
+    font-size: 2em;
     text-decoration: none;
+    padding: 5px 25px;
 }
 
-.glyphicon-thumbs-up:hover,
+.glyphicon-thumbs-up:hover {
+    color: yellowgreen;
+}
+
 .glyphicon-thumbs-down:hover {
-    color: #4E5D6C;
+    color: red;
 }
 
-.unauthenticated.glyphicon.glyphicon-thumbs-up {
-    font-size: 3em;
-    color: #4E5D6C;
+.page-vote {
+    display: inline-block;
 }
 
-    .unauthenticated.glyphicon.glyphicon-thumbs-up:hover {
-        color: #4E5D6C;
+    .page-vote .btn {
+        margin: 0 1px;
     }
+
+.like,
+.dislike {
+    margin-top: -65px;
+    color: #df691a;
+}
+
+.like {
+    padding-left: 10px;
+}
+
+.dislike {
+    padding-right: 20px;
+}
 
 /*Single page*/
 #all-pages {
@@ -198,6 +233,7 @@ textarea {
     .page-main-content:hover .page-heading h4 .page-main-content:hover .circle .rating-count {
         background-color: rgba(255,255,255, 0.9);
     }
+
 /*Home Page*/
 body {
     background-image: url('/Images/like-hashtag.jpg');
@@ -218,7 +254,8 @@ body {
     text-shadow: 5px 5px 5px #888888;
 }
 
-.details-panel-img, .page-main-content {
+.details-panel-img,
+.page-main-content {
     background-size: 100%;
     background-size: cover;
     background-position: center center;
@@ -243,4 +280,37 @@ body {
         color: #df691a;
     }
 
+/*Search*/
+div#ajax-search-results {
+    display: none;
+    text-align: center;
+    padding: 10px;
+    /*position:absolute;
+    z-index:2;
+    background-color:#F3F7FB;
+    border: 3px solid #df691a;
+    margin-top: 50px;
+    margin-left: 5px;
+    box-shadow: 10px 10px 5px #888888;*/
+}
 
+/*Tags*/
+#all-tags {
+    padding: 10px;
+    padding-bottom: 20px;
+    margin-left: 0;
+    border-bottom: 1px solid #4E5D6C;
+}
+
+.all-tags a {
+    color: #F3F7FB;
+}
+
+    .all-tags a:hover {
+        text-decoration: none;
+    }
+
+.single-tag {
+    margin: 3px;
+    display: inline-block;
+}

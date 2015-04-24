@@ -1,8 +1,8 @@
 ﻿namespace LikeIt.Web.Areas.Administration.ViewModels.Users
 {
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web.Mvc;
-    using System.ComponentModel.DataAnnotations;
 
     using AutoMapper;
 
@@ -36,13 +36,13 @@
 
         public string PhoneNumber { get; set; }
 
-        //public string Role { get; set; }
+        // public string Role { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {
-            //configuration.CreateMap<LikeIt.Models.User, UsersViewModel>()
+            configuration.CreateMap<LikeIt.Models.User, UsersViewModel>()
             //    .ForMember(m => m.Role, opt => opt.MapFrom(x => x.Roles.FirstOrDefault().RoleId))
-            //    .ReverseMap();
+                .ReverseMap();
         }
     }
 }

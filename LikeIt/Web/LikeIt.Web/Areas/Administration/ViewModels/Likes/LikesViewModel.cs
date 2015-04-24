@@ -1,9 +1,10 @@
 ﻿namespace LikeIt.Web.Areas.Administration.ViewModels.Likes
 {
+    using System.Web.Mvc;
+
     using LikeIt.Models;
     using LikeIt.Web.Areas.Administration.ViewModels.Base;
     using LikeIt.Web.Infrastructure.Mapping;
-    using System.Web.Mvc;
 
     public class LikesViewModel : AdministrationViewModel, IMapFrom<Like>
     {
@@ -14,6 +15,5 @@
 
         [HiddenInput(DisplayValue = false)]
         public string UserId { get; set; }
-
     }
 }

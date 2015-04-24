@@ -1,11 +1,10 @@
 ﻿namespace LikeIt.Data.Common.Repositories
 {
-    using System.Linq;
+    using System;
     using System.Data.Entity;
+    using System.Linq;
 
     using LikeIt.Data.Common.Models;
-    using System;
-
 
     public class DeletableEntityRepository<T> : GenericRepository<T>, IDeletableEntityRepository<T>
         where T : class, IDeletableEntity
@@ -29,7 +28,7 @@
         {
             entity.DeletedOn = DateTime.Now;
             entity.IsDeleted = true;
-            base.ChangeEntityState(entity, EntityState.Modified);
+            this.ChangeEntityState(entity, EntityState.Modified);
             return entity;
         }
 
@@ -38,7 +37,7 @@
             var entity = this.Find(id);
             entity.DeletedOn = DateTime.Now;
             entity.IsDeleted = true;
-            base.ChangeEntityState(entity, EntityState.Modified);
+            this.ChangeEntityState(entity, EntityState.Modified);
             return entity;
         }
     }

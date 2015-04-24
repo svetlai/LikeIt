@@ -56,7 +56,6 @@
             entry.State = EntityState.Detached;
         }
 
-
         public int SaveChanges()
         {
             return this.db.SaveChanges();

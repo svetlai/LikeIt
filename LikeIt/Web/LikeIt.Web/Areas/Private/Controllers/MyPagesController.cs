@@ -7,8 +7,10 @@
 
     using PagedList;
 
+    using LikeIt.Common;
     using LikeIt.Data.Contracts;
     using LikeIt.Web.Areas.Private.Controllers.Base;
+    using LikeIt.Web.Infrastructure.HtmlHelpers;
     using LikeIt.Web.Infrastructure.Populators;
     using LikeIt.Web.ViewModels.Page;
 
@@ -21,35 +23,54 @@
         {
         }
 
-        public ActionResult Index(int? page)
+        public ActionResult Index(string searchString, string currentFilter, int? page)
         {
             var pages = this.data.Pages.All()
-                .Where(p => p.UserId == this.CurrentUser.Id)
-                .OrderByDescending(p => p.Rating)
+                .Where(p => p.UserId == this.CurrentUser.Id);
 
+            if (string.IsNullOrEmpty(searchString))
+            {
+                searchString = currentFilter;
+            }
+            else
+            {
+                page = 1;
+            }
+
+            pages = FilterHelper.FilterSearchString(searchString, pages);
+
+            ViewBag.CurrentFilter = searchString;
+
+            var viewModel = pages
+                .OrderByDescending(p => p.Rating)
                 .Project()
                 .To<ListPagesViewModel>();
 
-            int pageNumber = (page ?? 1);
+            int pageNumber = page ?? 1;
 
-            return View(pages.ToPagedList(pageNumber, PageSize));
+            return this.View(viewModel.ToPagedList(pageNumber, PageSize));
         }
 
         [HttpGet]
         public ActionResult Search(string searchString, string likes)
         {
-            var pages = this.data.Pages.All()
-                    .Where(p => p.UserId == this.CurrentUser.Id && (p.Name.ToLower().Contains(searchString.ToLower()) || p.Tags.Any(t => t.Name.Contains(searchString.ToLower()))))
-                    .OrderByDescending(p => p.Rating)
-                    .Project()
-                    .To<ListPagesViewModel>();
+             var pages = this.data.Pages
+                .All()
+                .Where(p => p.UserId == this.CurrentUser.Id);
 
-            if (pages.Count() == 0)
-            {
-                return Content("No pages found");
-            }
+             pages = FilterHelper.FilterSearchString(searchString, pages);
 
-            return PartialView("_PagesListPartial", pages.ToPagedList(1, int.MaxValue));
+             if (pages.Count() == 0)
+             {
+                 return this.Content(GlobalConstants.NoPagesFound);
+             }
+
+             var viewModel = pages
+                      .OrderByDescending(p => p.Rating)
+                      .Project()
+                      .To<ListPagesViewModel>();
+
+             return this.PartialView(GlobalConstants.PagesListPartial, viewModel.ToPagedList(1, int.MaxValue));
         }
 
         [HttpGet]
@@ -72,10 +93,10 @@
 
             if (pages.Count() == 0)
             {
-                return Content("No pages found in this category");
+                return this.Content(GlobalConstants.NoPagesFoundInCategory);
             }
 
-            return PartialView("_PagesListPartial", viewModel.ToPagedList(1, int.MaxValue));
+            return this.PartialView(GlobalConstants.PagesListPartial, viewModel.ToPagedList(1, int.MaxValue));
         }
     }
 }

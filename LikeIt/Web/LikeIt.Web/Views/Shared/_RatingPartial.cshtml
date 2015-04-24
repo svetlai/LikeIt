@@ -1,0 +1,15 @@
+﻿@model LikeIt.Web.ViewModels.VotesViewModel
+<div id="page-rating">
+    <div class="row">
+        <div class="text-center">
+            @Html.DisplayFor(m => m.Rating, "PageRating")
+        </div>
+        <div class="like pull-left">
+            @Html.DisplayFor(m => m.LikesCount, "LikesCount")
+        </div>
+        <div class="dislike pull-right">
+
+            @Html.DisplayFor(m => m.DislikesCount, "DislikesCount")
+        </div>
+    </div>
+</div>

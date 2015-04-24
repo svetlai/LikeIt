@@ -3,6 +3,7 @@
     using System.Collections;
     using System.Web.Mvc;
 
+    using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
     using Kendo.Mvc.UI;
@@ -12,7 +13,6 @@
 
     using Model = LikeIt.Models.Page;
     using ViewModel = LikeIt.Web.Areas.Administration.ViewModels.Pages.PagesViewModel;
-    using AutoMapper;
 
     public class PagesController : KendoGridAdministrationController
     {
@@ -23,7 +23,7 @@
 
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         protected override IEnumerable GetData()
@@ -42,7 +42,11 @@
         public ActionResult Create([DataSourceRequest]DataSourceRequest request, ViewModel model)
         {
             var dbModel = base.Create<Model>(model);
-            if (dbModel != null) model.Id = dbModel.Id;
+            if (dbModel != null)
+            {
+                model.Id = dbModel.Id;
+            }
+
             return this.GridOperation(model, request);
         }
 
@@ -57,7 +61,7 @@
                 model.Id = dbModel.Id;
             }
      
-            //base.Update<Model, ViewModel>(model, model.Id.Value);
+            // base.Update<Model, ViewModel>(model, model.Id.Value);
             return this.GridOperation(model, request);
         }
 

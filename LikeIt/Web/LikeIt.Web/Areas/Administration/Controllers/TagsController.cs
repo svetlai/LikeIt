@@ -22,7 +22,7 @@
 
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         protected override IEnumerable GetData()
@@ -41,7 +41,11 @@
         public ActionResult Create([DataSourceRequest]DataSourceRequest request, ViewModel model)
         {
             var dbModel = base.Create<Model>(model);
-            if (dbModel != null) model.Id = dbModel.Id;
+            if (dbModel != null)
+            {
+                model.Id = dbModel.Id;
+            }
+
             return this.GridOperation(model, request);
         }
 

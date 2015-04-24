@@ -1,10 +1,38 @@
-﻿@model IEnumerable<LikeIt.Web.ViewModels.Tag.TagViewModel>
+﻿@model LikeIt.Web.ViewModels.Tag.TagsPagesViewModel
 @{
-    ViewBag.Title = "Tags";
+    ViewBag.Title = "All Tags";
 }
 
-<h2>All Tags</h2>
+<h2>@ViewBag.Title</h2>
 
-@Html.Partial("~/Views/Shared/_TagsPartial.cshtml", Model)
+<div class="row all-tags" id="all-tags">
+    <div class="col-md-12 ">
+        @foreach (var tag in Model.Tags)
+        {
+            <span class="label label-primary single-tag">
+                @Ajax.ActionLink(tag.Name, "GetPagesByTag", "Tag", new { tag = tag.Name }, new AjaxOptions
+                {
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "pages-with-tag"
+                }, new { id = "tag" })
+            </span>
+        }
+    </div>
+</div>
 
+<h3 id="current-tag">@ViewBag.CurrentTag</h3>
+<div id="pages-with-tag">
+
+    @if (Model.Pages != null)
+    {
+        @Html.Partial(LikeIt.Common.GlobalConstants.PagesListPartial, Model.Pages)
+    }
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/custom")
+}
 

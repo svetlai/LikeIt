@@ -11,9 +11,9 @@
     using Microsoft.Owin.Security.Google;
     using Owin;
     
-    using LikeIt.Web.Models;
     using LikeIt.Data;
     using LikeIt.Models;
+    using LikeIt.Web.Models;
 
     public partial class Startup
     {

@@ -10,13 +10,3 @@
 {
     @Html.EditorFor(m => m.CategoryId, new { ListItem = Model.Categories })
 }
-
-@*@section scripts {*@
-<script type="text/javascript">
-    $('#categories').change(function () {
-        $(this).parents('form').submit();
-    });
-</script>
-@*}*@
-
-

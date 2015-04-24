@@ -4,9 +4,10 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
+    using AutoMapper;
+
     using LikeIt.Models;
     using LikeIt.Web.Infrastructure.Mapping;
-    using AutoMapper;
 
     public class AddCommentViewModel : IMapFrom<Comment>, IHaveCustomMappings
     {
@@ -30,10 +31,10 @@
 
         public DateTime CreatedOn { get; set; }
 
-        //[Required]
+        // [Required]
         public string AuthorId { get; set; }
 
-        //[Required]
+        // [Required]
         public int PageId { get; set; }
 
         public void CreateMappings(IConfiguration configuration)

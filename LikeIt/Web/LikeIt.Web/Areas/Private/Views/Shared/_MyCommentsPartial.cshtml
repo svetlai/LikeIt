@@ -1,0 +1,13 @@
+﻿@model IEnumerable<LikeIt.Web.Areas.Private.ViewModels.Comments.CommentViewModel>
+
+<div id="comments">
+    @foreach (var comment in Model)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <h2><a href="~/Page/Details/@comment.PageId" title="@comment.PageTitle">@comment.PageTitle</a></h2>
+                @Html.Partial(LikeIt.Common.GlobalConstants.SingleCommentPartialPrivate, comment)
+            </div>
+        </div>
+    }
+</div>

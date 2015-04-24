@@ -2,9 +2,9 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using LikeIt.Data.Common.Models;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Comment : AuditInfo, IDeletableEntity
     {
@@ -19,12 +19,12 @@
         [StringLength(150), MinLength(2)]
         public string Content { get; set; }
 
-        //[Required]
+        // [Required]
         public string AuthorId { get; set; }
 
         public virtual User Author { get; set; }
 
-        //[Required]
+        // [Required]
         public int PageId { get; set; }
 
         public virtual Page Page { get; set; }

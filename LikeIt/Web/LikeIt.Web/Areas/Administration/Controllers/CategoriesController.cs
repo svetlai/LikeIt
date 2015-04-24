@@ -30,7 +30,7 @@
 
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         protected override IEnumerable GetData()
@@ -51,7 +51,11 @@
         public ActionResult Create([DataSourceRequest]DataSourceRequest request, ViewModel model)
         {
             var dbModel = base.Create<Model>(model);
-            if (dbModel != null) model.Id = dbModel.Id;
+            if (dbModel != null)
+            {
+                model.Id = dbModel.Id;
+            }
+
             this.ClearCategoryCache();
             return this.GridOperation(model, request);
         }
@@ -67,7 +71,7 @@
         [HttpPost]
         public ActionResult Destroy([DataSourceRequest]DataSourceRequest request, ViewModel model)
         {
-            if (model != null) //&& ModelState.IsValid
+            if (model != null) // && ModelState.IsValid
             {
                 var category = this.data.Categories.Find(model.Id.Value);
 

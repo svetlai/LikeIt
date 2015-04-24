@@ -1,0 +1,21 @@
+﻿@if (User.Identity.IsAuthenticated && User.Identity.Name == Model.AuthorName)
+{
+    object routeValues = new { };
+    if (Request.Url.AbsolutePath.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries).Skip(1).First() == "Comment")
+    {
+        routeValues = new { id = Model.Id, userName = this.User.Identity.Name };
+    }
+    else
+    {
+        routeValues = new { id = Model.Id };
+    }
+    
+    @Ajax.ActionLink("Delete", "Delete", "Comment", routeValues, new AjaxOptions
+                {
+                    HttpMethod = "GET",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "comments"
+                }, new { @class = "pull-right btn btn-default btn-md" })
+
+    @*@Html.ActionLink("Delete", "Delete", "Comment", new { area = "Private", id = Model.Id }, new { @class = "pull-right btn btn-default btn-md" })*@
+}

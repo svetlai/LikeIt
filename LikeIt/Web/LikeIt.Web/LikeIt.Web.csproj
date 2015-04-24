@@ -232,6 +232,7 @@
     <Compile Include="Areas\Private\Controllers\Base\PrivateController.cs" />
     <Compile Include="Areas\Private\PrivateAreaRegistration.cs" />
     <Compile Include="Areas\Private\ViewModels\Comments\CommentViewModel.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\VotesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -244,6 +245,8 @@
     </Compile>
     <Compile Include="Infrastructure\Caching\ICacheService.cs" />
     <Compile Include="Infrastructure\Caching\InMemoryCache.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\FilterHelper.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\HtmlHelpers\KendoHelpers.cs" />
     <Compile Include="Infrastructure\Populators\DropDownListPopulator.cs" />
     <Compile Include="Infrastructure\Populators\IDropDownListPopulator.cs" />
@@ -253,10 +256,13 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Areas\Private\ViewModels\Comments\AddCommentViewModel.cs" />
     <Compile Include="ViewModels\Categories\ListCategoriesViewModel.cs" />
+    <Compile Include="ViewModels\Contracts\IHaveImage.cs" />
     <Compile Include="ViewModels\Home\IndexPagesViewModel.cs" />
+    <Compile Include="ViewModels\Page\EditPageViewModel.cs" />
     <Compile Include="ViewModels\Page\ListPagesViewModel.cs" />
     <Compile Include="ViewModels\Page\DetailsPageViewModel.cs" />
     <Compile Include="ViewModels\Page\AddPageViewModel.cs" />
+    <Compile Include="ViewModels\Tag\TagsPagesViewModel.cs" />
     <Compile Include="ViewModels\Tag\TagViewModel.cs" />
     <Compile Include="ViewModels\Votes\VotesViewModel.cs" />
   </ItemGroup>
@@ -345,7 +351,7 @@
     <Content Include="Areas\Private\Views\Shared\_PrivatePartial.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_AdminPartial.cshtml" />
     <Content Include="Areas\Administration\Views\Pages\Index.cshtml" />
-    <Content Include="Areas\Private\Views\Shared\_CommentsPartial.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\_SingleCommentPartial.cshtml" />
     <Content Include="Areas\Private\Views\Shared\_AddCommentPartial.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\Currency.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\EditorTemplates\Date.cshtml" />
@@ -370,11 +376,15 @@
     <Content Include="Images\500.jpg" />
     <Content Include="Images\error.png" />
     <Content Include="Images\like-hashtag.jpg" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Views\Shared\DisplayTemplates\CommentAuthor.cshtml" />
     <Content Include="Areas\Private\Views\MyLikes\Index.cshtml" />
     <Content Include="Areas\Private\Views\MyDislikes\Index.cshtml" />
     <Content Include="Areas\Private\Views\Comment\MyComments.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\_MyCommentsPartial.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\_PageCommentsPartial.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\_DeleteCommentPartial.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Images\default.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -463,6 +473,14 @@
     <Content Include="Views\Shared\_PagesListPartial.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CreatePageButton.cshtml" />
     <Content Include="Views\Shared\_PagingPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DeletePageButton.cshtml" />
+    <Content Include="Views\Page\Edit.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\LikePageButton.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DislikePageButton.cshtml" />
+    <Content Include="Views\Shared\_RatingPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\EditPageButton.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PageWebsite.cshtml" />
+    <Content Include="Views\Shared\_PageDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -472,6 +490,7 @@
     <Folder Include="Areas\Private\Views\Private\" />
     <Folder Include="Helpers\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Image\" />
     <Folder Include="Views\Votes\" />
   </ItemGroup>
   <ItemGroup>

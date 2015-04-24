@@ -1,9 +1,6 @@
 ﻿namespace LikeIt.Web.ViewModels.Page
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
 
     using LikeIt.Models;

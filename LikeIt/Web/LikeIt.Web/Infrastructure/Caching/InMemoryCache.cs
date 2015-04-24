@@ -13,6 +13,7 @@
                 item = getItemCallback();
                 HttpContext.Current.Cache.Insert(cacheID, item);
             }
+
             return item;
         }
 

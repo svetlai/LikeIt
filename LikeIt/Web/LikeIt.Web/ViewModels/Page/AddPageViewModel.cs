@@ -9,10 +9,11 @@
     using AutoMapper;
 
     using LikeIt.Web.Infrastructure.Mapping;
+    using LikeIt.Web.ViewModels.Contracts;
 
-    public class AddPageViewModel : IMapFrom<LikeIt.Models.Page>, IHaveCustomMappings
+    public class AddPageViewModel : IMapFrom<LikeIt.Models.Page>, IHaveCustomMappings, IHaveImage
     {
-        [HiddenInput()]
+        [HiddenInput]
         public int Id { get; set; }
 
         [AllowHtml]
@@ -23,8 +24,12 @@
         [AllowHtml]
         [UIHint("MultiLineText")]
         [Required]
-        [StringLength(100), MinLength(10)]
+        [StringLength(1000), MinLength(10)]
         public string Description { get; set; }
+
+        [UIHint("Website")]
+        [StringLength(200), MinLength(8)]
+        public string ExternalWebsite { get; set; }
 
         public DateTime CreatedOn { get; set; }
 

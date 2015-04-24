@@ -1,6 +1,8 @@
 ﻿@model LikeIt.Web.Areas.Private.ViewModels.Comments.CommentViewModel
 
 <div class="panel panel-default ">
+    @Html.Partial(LikeIt.Common.GlobalConstants.DeleteCommentPartialPrivate)
+
     <div class="panel-body">
         @Html.DisplayFor(m => m.AuthorName, "CommentAuthor")
         @Html.DisplayFor(m => m.Content, "CommentContent")

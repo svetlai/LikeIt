@@ -2,28 +2,28 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
     using System.ComponentModel.DataAnnotations;
 
     using AutoMapper;
 
     using LikeIt.Models;
-    using LikeIt.Web.Infrastructure.Mapping;
-    using LikeIt.Web.ViewModels.Comment;
-    using LikeIt.Web.ViewModels.Tag;
     using LikeIt.Web.Areas.Private.ViewModels.Comments;
+    using LikeIt.Web.Infrastructure.Mapping;
+    using LikeIt.Web.ViewModels.Tag;
 
     public class DetailsPageViewModel : IMapFrom<Page>, IHaveCustomMappings
     {
-        [HiddenInput()]
+        [HiddenInput]
         public int Id { get; set; }
 
         [UIHint("PageName")]
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        [UIHint("Website")]
+        public string ExternalWebsite { get; set; }
 
         public int Rating { get; set; }
 

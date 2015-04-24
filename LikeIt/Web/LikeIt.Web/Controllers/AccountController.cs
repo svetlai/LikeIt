@@ -14,9 +14,9 @@
     using Microsoft.Owin.Security;
     using Owin;
 
-    using LikeIt.Web.Models;
-    using LikeIt.Models;
     using LikeIt.Common;
+    using LikeIt.Models;
+    using LikeIt.Web.Models;
 
     [Authorize]
     public class AccountController : Controller
@@ -29,14 +29,16 @@
 
         public AccountController(ApplicationUserManager userManager)
         {
-            UserManager = userManager;
+            this.UserManager = userManager;
         }
 
-        public ApplicationUserManager UserManager {
+        public ApplicationUserManager UserManager 
+        {
             get
             {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
+
             private set
             {
                 _userManager = value;
@@ -49,7 +51,7 @@
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return this.View();
         }
 
         //
@@ -74,7 +76,7 @@
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
         //
@@ -82,7 +84,7 @@
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return this.View();
         }
 
         //
@@ -94,7 +96,7 @@
         {
             if (ModelState.IsValid)
             {
-                //TODO: Improve
+                // TODO: Improve
                 var existingUserName = await UserManager.FindByNameAsync(model.Username);
                 var existingEmail = await UserManager.FindByEmailAsync(model.Email);
 
@@ -118,7 +120,7 @@
                     IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
                     var userRole = GlobalConstants.UserRole;
-                    UserManager.AddToRole(user.Id, userRole);
+                    this.UserManager.AddToRole(user.Id, userRole);
 
                     if (result.Succeeded)
                     {
@@ -137,11 +139,10 @@
                         AddErrors(result);
                     }
                 }
-                
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
         //Remote validation
@@ -161,18 +162,18 @@
         {
             if (userId == null || code == null) 
             {
-                return View("Error");
+                return this.View("Error");
             }
 
-            IdentityResult result = await UserManager.ConfirmEmailAsync(userId, code);
+            IdentityResult result = await this.UserManager.ConfirmEmailAsync(userId, code);
             if (result.Succeeded)
             {
-                return View("ConfirmEmail");
+                return this.View("ConfirmEmail");
             }
             else
             {
                 AddErrors(result);
-                return View();
+                return this.View();
             }
         }
 
@@ -181,7 +182,7 @@
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
-            return View();
+            return this.View();
         }
 
         //
@@ -193,11 +194,11 @@
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var user = await this.UserManager.FindByNameAsync(model.Email);
+                if (user == null || !(await this.UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     ModelState.AddModelError("", "The user either does not exist or is not confirmed.");
-                    return View();
+                    return this.View();
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -209,7 +210,7 @@
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
         //
@@ -217,7 +218,7 @@
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
-            return View();
+            return this.View();
         }
 	
         //
@@ -227,9 +228,10 @@
         {
             if (code == null) 
             {
-                return View("Error");
+                return this.View("Error");
             }
-            return View();
+
+            return this.View();
         }
 
         //
@@ -241,13 +243,14 @@
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await this.UserManager.FindByNameAsync(model.Email);
                 if (user == null)
                 {
                     ModelState.AddModelError("", "No user found.");
-                    return View();
+                    return this.View();
                 }
-                IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+
+                IdentityResult result = await this.UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("ResetPasswordConfirmation", "Account");
@@ -255,12 +258,12 @@
                 else
                 {
                     AddErrors(result);
-                    return View();
+                    return this.View();
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
         //
@@ -268,7 +271,7 @@
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
-            return View();
+            return this.View();
         }
 
         //
@@ -278,10 +281,10 @@
         public async Task<ActionResult> Disassociate(string loginProvider, string providerKey)
         {
             ManageMessageId? message = null;
-            IdentityResult result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
+            IdentityResult result = await this.UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
             if (result.Succeeded)
             {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                var user = await this.UserManager.FindByIdAsync(User.Identity.GetUserId());
                 await SignInAsync(user, isPersistent: false);
                 message = ManageMessageId.RemoveLoginSuccess;
             }
@@ -289,6 +292,7 @@
             {
                 message = ManageMessageId.Error;
             }
+
             return RedirectToAction("Manage", new { Message = message });
         }
 
@@ -304,7 +308,7 @@
                 : "";
             ViewBag.HasLocalPassword = HasPassword();
             ViewBag.ReturnUrl = Url.Action("Manage");
-            return View();
+            return this.View();
         }
 
         //
@@ -320,10 +324,10 @@
             {
                 if (ModelState.IsValid)
                 {
-                    IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+                    IdentityResult result = await this.UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
                     if (result.Succeeded)
                     {
-                        var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                        var user = await this.UserManager.FindByIdAsync(User.Identity.GetUserId());
                         await SignInAsync(user, isPersistent: false);
                         return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
@@ -344,7 +348,7 @@
 
                 if (ModelState.IsValid)
                 {
-                    IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+                    IdentityResult result = await this.UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
                     if (result.Succeeded)
                     {
                         return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
@@ -357,7 +361,7 @@
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
         //
@@ -383,7 +387,7 @@
             }
 
             // Sign in the user with this external login provider if the user already has a login
-            var user = await UserManager.FindAsync(loginInfo.Login);
+            var user = await this.UserManager.FindAsync(loginInfo.Login);
             if (user != null)
             {
                 await SignInAsync(user, isPersistent: false);
@@ -394,7 +398,7 @@
                 // If the user does not have an account, then prompt the user to create an account
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                return this.View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
 
@@ -417,11 +421,13 @@
             {
                 return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
             }
-            IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
+
+            IdentityResult result = await this.UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             if (result.Succeeded)
             {
                 return RedirectToAction("Manage");
             }
+
             return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
         }
 
@@ -443,13 +449,13 @@
                 var info = await AuthenticationManager.GetExternalLoginInfoAsync();
                 if (info == null)
                 {
-                    return View("ExternalLoginFailure");
+                    return this.View("ExternalLoginFailure");
                 }
                 var user = new User() { UserName = model.Email, Email = model.Email };
                 IdentityResult result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
-                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    result = await this.UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
                         await SignInAsync(user, isPersistent: false);
@@ -463,11 +469,12 @@
                         return RedirectToLocal(returnUrl);
                     }
                 }
+
                 AddErrors(result);
             }
 
             ViewBag.ReturnUrl = returnUrl;
-            return View(model);
+            return this.View(model);
         }
 
         //
@@ -485,13 +492,13 @@
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
-            return View();
+            return this.View();
         }
 
         [ChildActionOnly]
         public ActionResult RemoveAccountList()
         {
-            var linkedAccounts = UserManager.GetLogins(User.Identity.GetUserId());
+            var linkedAccounts = this.UserManager.GetLogins(User.Identity.GetUserId());
             ViewBag.ShowRemoveButton = HasPassword() || linkedAccounts.Count > 1;
             return (ActionResult)PartialView("_RemoveAccountPartial", linkedAccounts);
         }
@@ -503,6 +510,7 @@
                 UserManager.Dispose();
                 UserManager = null;
             }
+
             base.Dispose(disposing);
         }
 
@@ -539,6 +547,7 @@
             {
                 return user.PasswordHash != null;
             }
+
             return false;
         }
 
@@ -581,7 +590,9 @@
             }
 
             public string LoginProvider { get; set; }
+
             public string RedirectUri { get; set; }
+
             public string UserId { get; set; }
 
             public override void ExecuteResult(ControllerContext context)

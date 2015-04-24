@@ -14,17 +14,17 @@
     public abstract class BaseController : Controller
     {
         protected ILikeItData data;
-
-        protected User CurrentUser { get; private set; }
-        
+       
         public BaseController(ILikeItData data)
         {
             this.data = data;
         }
 
+        protected User CurrentUser { get; private set; }
+
         protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
         {
-            this.CurrentUser = data.Users.All().Where(u => u.UserName == requestContext.HttpContext.User.Identity.Name).FirstOrDefault();
+            this.CurrentUser = this.data.Users.All().Where(u => u.UserName == requestContext.HttpContext.User.Identity.Name).FirstOrDefault();
             return base.BeginExecute(requestContext, callback, state);
         }
     }

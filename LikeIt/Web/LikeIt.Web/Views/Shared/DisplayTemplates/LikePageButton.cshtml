@@ -1,0 +1,8 @@
+﻿@model LikeIt.Web.ViewModels.VotesViewModel
+@Ajax.ActionLink(" ", "Like", "Votes", new { id = Model.PageId },
+            new AjaxOptions
+           {
+               HttpMethod = "POST",
+               InsertionMode = InsertionMode.Replace,
+               UpdateTargetId = "page-rating"
+           }, new { @class = "glyphicon glyphicon-thumbs-up pull-left btn btn-primary btn-lg" })

@@ -12,8 +12,8 @@ namespace LikeIt.Web.App_Start
     using Ninject;
     using Ninject.Web.Common;
 
-    using LikeIt.Data.Contracts;
     using LikeIt.Data;
+    using LikeIt.Data.Contracts;
     using LikeIt.Data.Common.Repositories;
     using LikeIt.Web.Infrastructure.Populators;
     using LikeIt.Web.Infrastructure.Caching;
