@@ -6,17 +6,19 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LikeIt.Web;
 using LikeIt.Web.Controllers;
+using LikeIt.Data.Contracts;
 
 namespace LikeIt.Web.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
     {
+        private ILikeItData data;
         [TestMethod]
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController controller = new HomeController(data);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -29,7 +31,7 @@ namespace LikeIt.Web.Tests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController controller = new HomeController(data);
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -42,7 +44,7 @@ namespace LikeIt.Web.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController controller = new HomeController(data);
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;

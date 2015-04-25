@@ -93,6 +93,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Data\LikeIt.Data\LikeIt.Data.csproj">
+      <Project>{8a09b32e-2943-4042-bcef-56f645902a9b}</Project>
+      <Name>LikeIt.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Web\LikeIt.Web\LikeIt.Web.csproj">
       <Project>{AAEA92D3-6486-48D9-A5EE-3A7B47C73A0C}</Project>
       <Name>LikeIt.Web</Name>
