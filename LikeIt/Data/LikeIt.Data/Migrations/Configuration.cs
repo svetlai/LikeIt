@@ -98,13 +98,23 @@ namespace LikeIt.Data.Migrations
 
             this.seeder.SeedSinglePage(
                 context,
-                "Slow Computers",
-                "When computers think slowlier than humans.",
+                "Slow Software",
+                "When software thinks slowlier than humans.",
                 categories.Where(c => c.Name == "Other").FirstOrDefault(),
-                new List<string> { "computer", "slow", "laptop" },
+                new List<string> { "software", "slow", "laptop", "computer" },
                 users[3],
                 this.seeder.GetSampleImage("../../Images/imgs-seed/slow-computers.jpg"),
                 false);
+
+            this.seeder.SeedSinglePage(
+                context,
+                "Unity 3D",
+                "A development platform for creating 2D and 3D games.",
+                categories.Where(c => c.Name == "Entertainment").FirstOrDefault(),
+                new List<string> { "unity", "games", "development" },
+                users[3],
+                null,
+                true);
 
             var pages = context.Pages.ToList();
 
@@ -148,7 +158,7 @@ namespace LikeIt.Data.Migrations
 
             customPage.Rating = this.seeder.GetPageRating(customPage);
 
-            customPage = pages.Where(p => p.Name == "Slow Computers").FirstOrDefault();
+            customPage = pages.Where(p => p.Name == "Slow Software").FirstOrDefault();
             for (int i = 0; i < 42; i++)
             {
                 this.seeder.AddDislike(customPage, this.seeder.GetRandomUser(users));
