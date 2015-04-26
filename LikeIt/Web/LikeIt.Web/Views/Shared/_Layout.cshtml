@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - LikeIt</title>
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/kendo")
@@ -46,7 +47,6 @@
             <span class="pull-right"><a href="https://github.com/svetlai/LikeIt/" target="_blank">View the source code</a></span>
         </footer>
     </div>
-    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/kendo")
     @RenderSection("scripts", required: false)
 </body>
