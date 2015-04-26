@@ -27,7 +27,7 @@ namespace LikeIt.Data.Migrations
 
         protected override void Seed(LikeItDbContext context)
         {
-            if (context.Users.Any())
+            if (context.Pages.Any())
             {
                 return;
             }
