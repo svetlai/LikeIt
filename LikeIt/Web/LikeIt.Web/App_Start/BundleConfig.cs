@@ -37,7 +37,7 @@
             bundles.Add(new StyleBundle("~/bundles/bootstrap-css").Include(
                       "~/Content/bootstrap.superhero.css"));
 
-            bundles.Add(new StyleBundle("~/bundles/custom").Include(
+            bundles.Add(new StyleBundle("~/bundles/custom-css").Include(
                     "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/bundles/kendo-css").Include(
