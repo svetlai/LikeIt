@@ -378,6 +378,12 @@
     <Content Include="Images\404.jpg" />
     <Content Include="Images\500.jpg" />
     <Content Include="Images\error.png" />
+    <Content Include="Images\imgs-seed\bmw-m3.jpg" />
+    <Content Include="Images\imgs-seed\cat.jpg" />
+    <Content Include="Images\imgs-seed\mondays.jpg" />
+    <Content Include="Images\imgs-seed\slow-computers.jpg" />
+    <Content Include="Images\imgs-seed\telerik-academy.jpg" />
+    <Content Include="Images\imgs-seed\traffic.jpg" />
     <Content Include="Images\like-hashtag.jpg" />
     <Content Include="Scripts\site.js" />
     <Content Include="Views\Shared\DisplayTemplates\CommentAuthor.cshtml" />
