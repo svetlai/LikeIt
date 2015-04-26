@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - LikeIt</title>
     @Scripts.Render("~/bundles/jquery")
-    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/bundles/bootstrap-css")
     @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("~/Content/kendo")
+    @Styles.Render("~/bundles/kendo-css")
     @RenderSection("styles", required: false)
-    @Styles.Render("~/Content/custom")
+    @Styles.Render("~/bundles/custom-css")
 
 </head>
 <body>
@@ -46,7 +47,6 @@
             <p class="text-center">&copy; @DateTime.Now.Year - LikeIt - An ASP.NET Application Project for Telerik Academy</p>
         </footer>
     </div>
-    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/kendo")
     @RenderSection("scripts", required: false)
 </body>
