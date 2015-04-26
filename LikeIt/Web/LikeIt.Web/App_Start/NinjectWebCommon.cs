@@ -4,14 +4,13 @@
 namespace LikeIt.Web.App_Start
 {
     using System;
-    using System.Data.Entity;
     using System.Web;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
     using Ninject.Web.Common;
-
+    using System.Data.Entity;
     using LikeIt.Data;
     using LikeIt.Data.Contracts;
     using LikeIt.Data.Common.Repositories;
@@ -82,6 +81,7 @@ namespace LikeIt.Web.App_Start
             kernel.Bind<ICacheService>().To<InMemoryCache>();
 
             kernel.Bind<ISanitizer>().To<HtmlSanitizerAdapter>();
+
         }        
     }
 }
