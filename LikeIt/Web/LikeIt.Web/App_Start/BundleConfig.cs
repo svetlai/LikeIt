@@ -34,18 +34,18 @@
             bundles.Add(new ScriptBundle("~/bundles/custom")
                .Include("~/Scripts/site.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/bundles/css").Include(
                       "~/Content/bootstrap.superhero.css"));
 
-            bundles.Add(new StyleBundle("~/Content/custom").Include(
+            bundles.Add(new StyleBundle("~/bundles/custom").Include(
                     "~/Content/site.css"));
 
-            bundles.Add(new StyleBundle("~/Content/kendo").Include(
+            bundles.Add(new StyleBundle("~/bundles/kendo").Include(
                 "~/Content/Kendo/kendo.common.min.css",
                 "~/Content/Kendo/kendo.common-bootstrap.min.css",
                 "~/Content/Kendo/kendo.flat.min.css"));
 
-            bundles.Add(new StyleBundle("~/Content/pagedlist").Include(
+            bundles.Add(new StyleBundle("~/bundles/pagedlist").Include(
                      "~/Content/PagedList.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
