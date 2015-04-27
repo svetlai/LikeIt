@@ -74,11 +74,10 @@ textarea {
 .details-panel-title {
     background-color: rgba(255,255,255, 0.7);
     /*margin-top: 150px;*/
-    position:absolute;
+    position: absolute;
     bottom: 0;
     min-width: 98%;
     margin-right: 10px;
-   
 }
 
     .details-panel-title h1,
@@ -186,7 +185,8 @@ textarea {
 /*Single page*/
 #all-pages {
     position: relative;
-    margin-top: 30px;
+    margin-top: 60px;
+    width:100%;
 }
 
 .single-page {
@@ -194,14 +194,9 @@ textarea {
     position: relative;
     margin: 10px 10px;
     margin-bottom: 70px;
-    width: 250px;
-}
-/*only screen*/
-@media all and (min-width : 320px) {
-/* Styles */
-.single-page {
-    width: 345px;
-}
+    /*width: 345px;*/
+    width:31%;
+    min-width:300px;
 }
 
 .circle .rating-count {
@@ -214,8 +209,7 @@ textarea {
 .circle {
 }
 
-.single-page 
-.page-heading {
+.single-page .page-heading {
     padding-top: 120px;
 }
 
@@ -227,9 +221,8 @@ textarea {
     font-weight: 400;
 }
 
-.single-page 
-.page-main-content {
-    min-height: 350px;
+.single-page .page-main-content {
+    min-height: 300px;
     max-width: 350px;
     border: 1px solid #ddd;
     opacity: 0.8;

@@ -24,10 +24,8 @@
                 @{Html.RenderAction("GetCategoriesPartial");}
             </div>
         </div>
-        <div class="row text-center" id="all-pages">
             @Html.Partial(LikeIt.Common.GlobalConstants.PagesListPartial, Model)
             @Html.Partial(LikeIt.Common.GlobalConstants.PagingPartial, Model)
-        </div>
         <div id="ajax-search-results"></div>
     </div>
 </div>

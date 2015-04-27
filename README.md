@@ -22,6 +22,6 @@ Additionally, you can:
 
 Check out a simple **[Demo](http://likeit.apphb.com/)**
 
-<p align="center"><img src="https://raw.githubusercontent.com/svetlai/LikeIt/master/LikeIt/Web/LikeIt.Web/Imagese/screenshot.png"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/svetlai/LikeIt/master/LikeIt/Web/LikeIt.Web/Images/screenshot.png"></p>
 
 *The project is still a work in progress.*
