@@ -1,6 +1,7 @@
 ﻿namespace LikeIt.Web.Areas.Administration.Controllers
 {
     using System.Collections;
+    using System.Data.Entity;
     using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
@@ -28,6 +29,7 @@
         protected override IEnumerable GetData()
         {
             return this.data.Users.All()
+                .Include(u => u.Roles)
                 .Project()
                 .To<ViewModel>();
         }
