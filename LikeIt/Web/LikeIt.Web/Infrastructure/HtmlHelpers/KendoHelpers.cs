@@ -15,7 +15,7 @@
             {
                 columns = cols =>
                 {
-                    cols.AutoGenerate(true);
+                    cols.AutoGenerate(true); //.HeaderHtmlAttributes(new { style = "overflow: visible; white-space: normal" });
                     cols.Command(c => c.Edit());
                     cols.Command(c => c.Destroy());
                 };
@@ -28,6 +28,7 @@
                 .ColumnMenu()
                 .Pageable(page => page.Refresh(true))
                 .Sortable()
+                .Scrollable()
                 .Groupable()
                 .Filterable()
                 .Editable(edit => edit.Mode(GridEditMode.PopUp))

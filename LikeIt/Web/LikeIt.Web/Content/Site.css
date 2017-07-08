@@ -186,7 +186,7 @@ textarea {
 #all-pages {
     position: relative;
     margin-top: 60px;
-    width:100%;
+    width: 100%;
 }
 
 .single-page {
@@ -195,8 +195,8 @@ textarea {
     margin: 10px 10px;
     margin-bottom: 70px;
     /*width: 345px;*/
-    width:31%;
-    min-width:300px;
+    width: 31%;
+    min-width: 300px;
 }
 
 .circle .rating-count {
@@ -318,4 +318,11 @@ div#ajax-search-results {
 .single-tag {
     margin: 3px;
     display: inline-block;
+}
+
+/* Admin Area */
+/* override k-grid's style */
+.k-grid-header th.k-header {
+    overflow: visible;
+    white-space: normal;
 }
